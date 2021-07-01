@@ -1,0 +1,99 @@
+name: CI/CD
+
+on:
+  push:
+
+  pull_request:
+    branches:
+#      - development
+#      - pre-production
+      - production
+      - master
+
+jobs:
+  build-test:
+    name: Base test
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 12.x ]
+
+    outputs:
+      output1: ${{ steps.installed_dependencies.outputs }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-dependencies-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run the tests and generate coverage report
+        run: npm run test-coverage
+
+#      - name: Upload coverage to Codecov
+#        uses: codecov/codecov-action@v1
+#        if: github.ref == 'refs/heads/production'
+#        with:
+#          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+
+      - name: Build
+        run: npm run build
+
+#      - name: Set tag name output
+#        id: set_tag_name
+#        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+#
+#      - name: Get version and push tag
+#        id: tag_version
+#        uses: mathieudutour/github-tag-action@v5.5
+#        if: github.ref == 'refs/heads/development'
+#          || github.ref == 'refs/heads/pre-production'
+#          || github.ref == 'refs/heads/production'
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Create a GitHub release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        if: github.ref == 'refs/heads/production'
+#        with:
+#          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+#          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
+#          body: ${{ steps.tag_version.outputs.changelog }}
+#
+#      - name: Deploy
+#        if: github.ref == 'refs/heads/production'
+#        run: |
+#          git config --global user.name $user_name
+#          git config --global user.email $user_email
+#          git remote set-url origin https://${github_token}@github.com/${repository}
+#          npm run deploy
+#        env:
+#          user_name: 'github-actions[bot]'
+#          user_email: 'github-actions[bot]@users.noreply.github.com'
+#          github_token: ${{ secrets.ACTIONS_DEPLOY_ACCESS_TOKEN }}
+#          repository: ${{ github.repository }}
