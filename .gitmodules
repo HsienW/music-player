@@ -1,6 +1,0 @@
-[submodule "music-player-portal"]
-	path = music-player-portal
-	url = git@github.com:HsienW/music-player-portal.git
-[submodule "music-player-search"]
-	path = music-player-search
-	url = git@github.com:HsienW/music-player-search.git

@@ -63,7 +63,8 @@ module.exports = merge(baseWebpackConfig, {
     devServer: {
         port: '3000',
         compress: true,
-        hot: true
+        hot: true,
+        historyApiFallback: true
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -71,13 +72,14 @@ module.exports = merge(baseWebpackConfig, {
             filename: 'index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].css'
+            filename: `${packageName}-[name].css`
         }),
         new CompressionPlugin({
             test: /\.js(\?.*)?$/i
         }),
         new Dotenv({
-            path: isDev ? './.env.config.dev' : './.env.config.prod'
+            path: './.env.config.dev',
+            systemvars: true
         }),
         new HardSourceWebpackPlugin(),
         new CleanWebpackPlugin()
