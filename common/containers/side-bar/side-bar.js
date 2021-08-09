@@ -36,11 +36,11 @@ class SideBar extends HTMLElement {
 
         this.sideBarUl.setAttribute('id', 'side-bar');
 
-        this.sideBarPortalLi.setAttribute('active-rule', '/sub-app-portal');
-        this.sideBarReact1Li.setAttribute('active-rule', '/sub-app-react1');
+        this.sideBarPortalLi.setAttribute('active-rule', '/portal');
+        this.sideBarReact1Li.setAttribute('active-rule', '/search');
 
-        this.sideBarPortalLink.setAttribute('active-rule', '/sub-app-portal');
-        this.sideBarReact1Link.setAttribute('active-rule', '/sub-app-react1');
+        this.sideBarPortalLink.setAttribute('active-rule', '/portal');
+        this.sideBarReact1Link.setAttribute('active-rule', '/search');
 
         this.shadow.appendChild(this.sideBarBody);
         this.sideBarBody.appendChild(this.sideBarUl);
