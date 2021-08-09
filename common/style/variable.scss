@@ -1,0 +1,60 @@
+// The basic settings of the variables refer to ant.design (https://ant.design/docs/spec/introduce-cn)
+
+// Color
+$background-color: #ffffff;
+$primary-color: #1890ff;
+$link-color: #1890ff;
+$success-color: #52c41a;
+$warning-color: #faad14;
+$error-color: #f5222d;
+$heading-color: rgba(0, 0, 0, 0.85); // 標題色
+$text-color: rgba(0, 0, 0, 0.65); // 主字體色
+$text-color-secondary: rgba(0, 0, 0, 0.45); // 次字體色
+$disabled-color: rgba(0, 0, 0, 0.25); // 禁用色
+$border-color-base: #d9d9d9; // 邊框色
+
+// Font
+$font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI', Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji';
+
+$font-size-base: 14px;
+$font-size-s: 16px;
+$font-size-m: 20px;
+$font-size-l: 24px;
+$font-size-xl: 30px;
+$font-size-2xl: 38px;
+$font-weight-m: 400;
+$font-weight-l: 500;
+$font-weight-xl: 600;
+$font-weight-2xl: 700;
+
+// Line Height
+$line-height-base: 22px;
+$line-height-s: 24px;
+$line-height-m: 28px;
+$line-height-l: 32px;
+$line-height-xl: 46px;
+$line-height-2xl: 54px;
+
+// Border
+$border-size-base: 1px;
+$border-size-s: 2px;
+$border-size-m: 3px;
+$border-size-l: 4px;
+$border-radius-base: 2px; // 元件圓角
+
+// Shadow
+$box-shadow-base:
+    0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05); // 元件陰影
