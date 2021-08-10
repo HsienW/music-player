@@ -7,6 +7,8 @@ import './public-path';
 
 function renderPortalRoot(props) {
     const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
+    const authRedirectURL = `${routerBase}/home`;
+    sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     ReactDOM.render(
         <PortalRootDom
             routerBase={routerBase}
@@ -29,12 +31,14 @@ function renderSinglePortalRoot(props) {
 
     ReactDOM.render(
         <>
+            <auth-container/>
+            <loading-spin-container/>
             <div className="main-layout">
                 <div className="side-layout">
-                    <side-bar-container></side-bar-container>
+                    <side-bar-container/>
                 </div>
                 <div className="header-layout">
-                    <header-bar-container></header-bar-container>
+                    <header-bar-container/>
                 </div>
                 <div className="content-layout">
                     <PortalRootDom
@@ -45,10 +49,9 @@ function renderSinglePortalRoot(props) {
                     />
                 </div>
                 <div className="footer-layout">
-                    <player-bar-container></player-bar-container>
+                    <player-bar-container/>
                 </div>
             </div>
-            <loading-spin-container></loading-spin-container>
         </>,
         container ? container.querySelector('#portal-root') : document.querySelector('#portal-root')
     );
@@ -57,10 +60,12 @@ function renderSinglePortalRoot(props) {
 if (!window.__POWERED_BY_QIANKUN__) {
     console.log('portal 我自己運行了');
 
-    const routerBase = '/sub-app-portal';
+    const routerBase = '/portal';
+    const authRedirectURL = `${routerBase}/home`;
     const { getGlobalState, setGlobalState } = singleAppGlobalState;
     const props = { routerBase, getGlobalState, setGlobalState };
 
+    sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'portal 我自己運行了');
     globalActiveListener.initAllAction();
 

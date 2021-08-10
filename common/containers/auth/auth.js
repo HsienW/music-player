@@ -83,7 +83,34 @@ class Auth extends HTMLElement {
             token: 'default-token'
         };
         sessionStorage.setItem('user-info', JSON.stringify(userInfo));
-        routeNavigation('/portal/home');
+
+        const authOriginURL = window.location.origin;
+        const authRedirectURL = JSON.parse(sessionStorage.getItem('auth-redirect-url'));
+        const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${authOriginURL}${authRedirectURL}&response_type=token`;
+
+        console.log('vvvvvvvvvvvvvvvvvvv');
+        console.log(process.env.AUTH_CLIENT_ID);
+        console.log(window.location.origin);
+        console.log(window.location);
+        console.log(authURL);
+        console.log(authRedirectURL);
+
+        const spotifyAuth = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
+
+        const getAuth = setInterval(() => {
+            const token = spotifyAuth.window.location.hash.substring(14);
+
+            console.log('驗證成功驗證成功驗證成功驗證成功驗證成功');
+            console.log(token);
+
+            if (token !== undefined && token !== null) {
+                // WebStorage.setSessionStorage(WebStorageKeys.TOKEN, token);
+                spotifyAuth.close();
+                clearInterval(getAuth);
+            }
+        }, 500);
+
+        routeNavigation(authRedirectURL);
     }
 }
 

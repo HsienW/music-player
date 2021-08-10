@@ -1,13 +1,17 @@
 const authStyle = `
+   .hidden {
+        display: none;
+   }
+   
     .auth-backdrop {
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 4;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(51, 51, 51, 0.95);
-        }
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 4;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(51, 51, 51, 0.95);
+    }
         
     .auth-page {
          width: 420px;

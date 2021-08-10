@@ -18,6 +18,7 @@ function renderSearchRoot(props) {
 }
 
 function renderSingleSearchRoot(props) {
+    import ('../../common/containers/auth/auth');
     import ('../../common/containers/loading-spin/loading-spin');
     import ('../../common/containers/side-bar/side-bar');
     import ('../../common/containers/header-bar/header-bar');
@@ -28,12 +29,14 @@ function renderSingleSearchRoot(props) {
 
     ReactDOM.render(
         <>
+            <auth-container/>
+            <loading-spin-container/>
             <div className="main-layout">
                 <div className="side-layout">
-                    <side-bar-container></side-bar-container>
+                    <side-bar-container/>
                 </div>
                 <div className="header-layout">
-                    <header-bar-container></header-bar-container>
+                    <header-bar-container/>
                 </div>
                 <div className="content-layout">
                     <SearchRootDom
@@ -44,22 +47,23 @@ function renderSingleSearchRoot(props) {
                     />
                 </div>
                 <div className="footer-layout">
-                    <player-bar-container></player-bar-container>
+                    <player-bar-container/>
                 </div>
             </div>
-            <loading-spin-container></loading-spin-container>
         </>,
-        container ? container.querySelector('#Search-root') : document.querySelector('#Search-root')
+        container ? container.querySelector('#search-root') : document.querySelector('#search-root')
     );
 }
 
 if (!window.__POWERED_BY_QIANKUN__) {
     console.log('search 我自己運行了');
 
-    const routerBase = '/sub-app-Search';
+    const routerBase = '/search';
+    const authRedirectURL = `${routerBase}/search-page1`;
     const { getGlobalState, setGlobalState } = singleAppGlobalState;
     const props = { routerBase, getGlobalState, setGlobalState };
 
+    sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'search 我自己運行了');
     globalActiveListener.initAllAction();
 

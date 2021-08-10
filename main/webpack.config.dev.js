@@ -30,7 +30,7 @@ module.exports = merge(baseWebpackConfig, {
             {
                 test: /\.(sc|c)ss$/,
                 use: [
-                    'cache-loader',
+                    // 'cache-loader',
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
