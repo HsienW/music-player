@@ -2,10 +2,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const baseWebpackConfig = require('../common/webpack/webpack.config.base');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { merge } = require('webpack-merge');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {merge} = require('webpack-merge');
 const path = require('path');
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -67,7 +67,7 @@ module.exports = merge(baseWebpackConfig, {
             filename: 'index.html'
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].css'
+            filename: `${packageName}-[name].css`
         }),
         new CompressionPlugin({
             test: /\.js(\?.*)?$/i
@@ -76,7 +76,14 @@ module.exports = merge(baseWebpackConfig, {
             path: './.env.config.prod',
             systemvars: true
         }),
-        new HardSourceWebpackPlugin(),
+        // new HardSourceWebpackPlugin.ExcludeModulePlugin([
+        //     {
+        //         test: /mini-css-extract-plugin[\\/]dist[\\/]loader/,
+        //     },
+        //     {
+        //         test: /dotenv-webpack[\\/]dist[\\/]loader/,
+        //     }
+        // ]),
         new CleanWebpackPlugin(),
     ]
 });

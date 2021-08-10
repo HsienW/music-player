@@ -83,17 +83,7 @@ class Auth extends HTMLElement {
             token: 'default-token'
         };
         sessionStorage.setItem('user-info', JSON.stringify(userInfo));
-
-
-        const authURL = 'https://accounts.spotify.com/authorize?client_id=1c74ad8d2483424ca84efade725329c1&redirect_uri=http://localhost:8080/auth&response_type=token';
-
-
-        console.log('vvvvvvvvvvvvvvvvvvv');
-        console.log(process.env.SPOTIFY_CLIENT_ID);
-        console.log(window.location.origin);
-
-
-        // routeNavigation('/portal/home');
+        routeNavigation('/portal/home');
     }
 }
 
