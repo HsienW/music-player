@@ -74,43 +74,27 @@ class Auth extends HTMLElement {
     }
 
     login() {
-        console.log(this.querySelector('#input-account').value);
-        console.log(this.querySelector('#input-password').value);
         const account = this.querySelector('#input-account').value;
         const userInfo = {
             account: account ? account : 'default',
             userName: account ? account : 'default',
-            token: 'default-token'
         };
-        sessionStorage.setItem('user-info', JSON.stringify(userInfo));
-
         const authOriginURL = window.location.origin;
         const authRedirectURL = JSON.parse(sessionStorage.getItem('auth-redirect-url'));
         const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${authOriginURL}${authRedirectURL}&response_type=token`;
-
-        console.log('vvvvvvvvvvvvvvvvvvv');
-        console.log(process.env.AUTH_CLIENT_ID);
-        console.log(window.location.origin);
-        console.log(window.location);
-        console.log(authURL);
-        console.log(authRedirectURL);
-
-        const spotifyAuth = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
+        const authSpotify = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
 
         const getAuth = setInterval(() => {
-            const token = spotifyAuth.window.location.hash.substring(14);
-
-            console.log('驗證成功驗證成功驗證成功驗證成功驗證成功');
-            console.log(token);
+            const token = authSpotify.window.location.hash.substring(14);
 
             if (token !== undefined && token !== null) {
-                // WebStorage.setSessionStorage(WebStorageKeys.TOKEN, token);
-                spotifyAuth.close();
+                sessionStorage.setItem('user-info', JSON.stringify(userInfo));
+                sessionStorage.setItem('user-token', JSON.stringify(token));
+                authSpotify.close();
+                routeNavigation(authRedirectURL);
                 clearInterval(getAuth);
             }
         }, 500);
-
-        routeNavigation(authRedirectURL);
     }
 }
 
