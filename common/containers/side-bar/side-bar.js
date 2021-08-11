@@ -1,5 +1,6 @@
 import {routeNavigation} from '../../util/route-navigation';
 import {pubSub} from '../../pub-sub/pub-sub';
+import {pubSubCommonKey} from '../../pub-sub/pub-sub-key';
 import {sideBarStyle} from './side-bar-style';
 // import {subAppInfo} from '../../../main/src/config-sub-app-info';
 
@@ -10,8 +11,8 @@ class SideBar extends HTMLElement {
         this.domStyling();
         this.domRender();
         this.domEventInit();
-        pubSub.doSubscribe('onload', this.updateDomActiveStyle.bind(this));
-        pubSub.doSubscribe('route-change', this.updateDomActiveStyle.bind(this));
+        pubSub.doSubscribe(pubSubCommonKey.windowOnload, this.updateDomActiveStyle.bind(this));
+        pubSub.doSubscribe(pubSubCommonKey.routeChange, this.updateDomActiveStyle.bind(this));
     }
 
     domStyling() {
@@ -31,15 +32,15 @@ class SideBar extends HTMLElement {
         this.sideBarBody.className = 'side-bar';
         this.sideBarUl.className = 'side-bar-menu';
 
-        this.sideBarPortalLink.textContent = 'Portal';
+        this.sideBarPortalLink.textContent = 'Home';
         this.sideBarReact1Link.textContent = 'React1';
 
         this.sideBarUl.setAttribute('id', 'side-bar');
 
-        this.sideBarPortalLi.setAttribute('active-rule', '/portal');
+        this.sideBarPortalLi.setAttribute('active-rule', '/portal/home');
         this.sideBarReact1Li.setAttribute('active-rule', '/search');
 
-        this.sideBarPortalLink.setAttribute('active-rule', '/portal');
+        this.sideBarPortalLink.setAttribute('active-rule', '/portal/home');
         this.sideBarReact1Link.setAttribute('active-rule', '/search');
 
         this.shadow.appendChild(this.sideBarBody);
