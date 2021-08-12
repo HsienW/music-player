@@ -94,7 +94,7 @@ class Auth extends HTMLElement {
                 routeNavigation(authRedirectURL);
                 clearInterval(getAuth);
             }
-        }, 500);
+        }, 2500);
     }
 }
 

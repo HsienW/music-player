@@ -10,10 +10,10 @@ function SubAppViewport(props) {
     const {loading} = props;
 
     return (
-        <div>
+        <>
             {loading ? <h4>Loading...</h4> : null}
             <div id='sub-app-viewport'/>
-        </div>
+        </>
     );
 }
 

@@ -21,7 +21,6 @@ export const CardItem = (props) => {
                 width: 190,
                 height: 250,
                 margin: '6px 20px',
-                float: 'left'
             }}
         >
             <Meta
