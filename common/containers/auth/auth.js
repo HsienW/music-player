@@ -82,19 +82,41 @@ class Auth extends HTMLElement {
         const authOriginURL = window.location.origin;
         const authRedirectURL = JSON.parse(sessionStorage.getItem('auth-redirect-url'));
         const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${authOriginURL}${authRedirectURL}&response_type=token`;
-        const authSpotify = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
 
-        const getAuth = setInterval(() => {
-            const token = authSpotify.window.location.hash.substring(14);
+        const getSpotifyToken = (authURL) => {
+            return new Promise((resolve, reject) => {
+                const authSpotify = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
+                const token = authSpotify.window.location.hash.substring(14);
 
-            if (token !== undefined && token !== null) {
-                sessionStorage.setItem('user-info', JSON.stringify(userInfo));
-                sessionStorage.setItem('user-token', JSON.stringify(token));
+                console.log('ccccccccccccccccc');
+                console.log(token);
+
+                if (token !== null || token !== undefined) {
+                    sessionStorage.setItem('user-info', JSON.stringify(userInfo));
+                    sessionStorage.setItem('user-token', JSON.stringify(token));
+                    resolve([true, authSpotify]);
+                } else {
+                    reject(false);
+                }
+            });
+        };
+
+        async function getAuth() {
+            try {
+                const [token, authSpotify] = await getSpotifyToken(authURL);
+                // sessionStorage.setItem('user-info', JSON.stringify(userInfo));
+                // sessionStorage.setItem('user-token', JSON.stringify(token));
+
+                console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
+                console.log(token);
+                console.log(authSpotify);
                 authSpotify.close();
                 routeNavigation(authRedirectURL);
-                clearInterval(getAuth);
+            } catch (error) {
+                console.log(error)
             }
-        }, 2500);
+        }
+        getAuth();
     }
 }
 
