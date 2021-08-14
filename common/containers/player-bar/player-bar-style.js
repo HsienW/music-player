@@ -38,7 +38,7 @@ const playerBarStyle = `
         grid-area: song-name;
         grid-row-start: 3;
         width: calc(100% - 64px);
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
         padding: 0 10px;
         color: #1890ff;

@@ -9,7 +9,7 @@ module.exports = {
                 // styles 權重設置為最高, 不然可能其他的 cacheGroups 會提前打包一部分 style 文件
                 styles: {
                     name: 'styles',
-                    priority: 25,
+                    priority: 30,
                     test: /.css$/,
                     chunks: 'all',
                     enforce: true,
@@ -17,7 +17,7 @@ module.exports = {
                 // 拆分 react 核心
                 reactDll: {
                     name: 'react-dll',
-                    priority: 10, // 權重要大於 vendor & 其他套件
+                    priority: 20, // 權重要大於 vendor & 其他套件
                     test: (module) => {
                         return /react|react-dom|prop-types/.test(module.context);
                     },

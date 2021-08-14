@@ -23,7 +23,7 @@ function renderSingleSearchRoot(props) {
     import ('../../common/containers/side-bar/side-bar');
     import ('../../common/containers/header-bar/header-bar');
     import ('../../common/containers/player-bar/player-bar');
-    import ('./style/music-player-search-main.scss');
+    import ('./root/root.scss');
 
     const { container, routerBase, setGlobalState, getGlobalState, onStateChange } = props;
 

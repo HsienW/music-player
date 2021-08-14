@@ -12,7 +12,7 @@ function SubAppViewport(props) {
     return (
         <>
             {loading ? <h4>Loading...</h4> : null}
-            <div id='sub-app-viewport'/>
+            <div id='sub-app-viewport' className={'sub-app-display-container'}/>
         </>
     );
 }

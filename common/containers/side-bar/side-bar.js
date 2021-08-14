@@ -33,7 +33,7 @@ class SideBar extends HTMLElement {
         this.sideBarUl.className = 'side-bar-menu';
 
         this.sideBarPortalLink.textContent = 'Home';
-        this.sideBarReact1Link.textContent = 'React1';
+        this.sideBarReact1Link.textContent = 'Search';
 
         this.sideBarUl.setAttribute('id', 'side-bar');
 

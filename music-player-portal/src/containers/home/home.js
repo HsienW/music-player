@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {getNewReleaseAlbum} from '../../api/home/new-release';
 import {CardItem} from '../../components';
-
+import './home.scss';
 
 const test = {
     'albums': {
@@ -21,186 +21,7 @@ const test = {
                         'uri': 'spotify:artist:1Xyo4u8uXC1ZmMpatF05PJ'
                     }
                 ],
-                'available_markets': [
-                    'AD',
-                    'AE',
-                    'AG',
-                    'AL',
-                    'AM',
-                    'AO',
-                    'AR',
-                    'AT',
-                    'AU',
-                    'AZ',
-                    'BA',
-                    'BB',
-                    'BD',
-                    'BE',
-                    'BF',
-                    'BG',
-                    'BH',
-                    'BI',
-                    'BJ',
-                    'BN',
-                    'BO',
-                    'BR',
-                    'BS',
-                    'BT',
-                    'BW',
-                    'BY',
-                    'BZ',
-                    'CA',
-                    'CH',
-                    'CI',
-                    'CL',
-                    'CM',
-                    'CO',
-                    'CR',
-                    'CV',
-                    'CW',
-                    'CY',
-                    'CZ',
-                    'DE',
-                    'DJ',
-                    'DK',
-                    'DM',
-                    'DO',
-                    'DZ',
-                    'EC',
-                    'EE',
-                    'EG',
-                    'ES',
-                    'FI',
-                    'FJ',
-                    'FM',
-                    'FR',
-                    'GA',
-                    'GB',
-                    'GD',
-                    'GE',
-                    'GH',
-                    'GM',
-                    'GN',
-                    'GQ',
-                    'GR',
-                    'GT',
-                    'GW',
-                    'GY',
-                    'HK',
-                    'HN',
-                    'HR',
-                    'HT',
-                    'HU',
-                    'ID',
-                    'IE',
-                    'IL',
-                    'IN',
-                    'IS',
-                    'IT',
-                    'JM',
-                    'JO',
-                    'JP',
-                    'KE',
-                    'KG',
-                    'KH',
-                    'KI',
-                    'KM',
-                    'KN',
-                    'KR',
-                    'KW',
-                    'KZ',
-                    'LA',
-                    'LB',
-                    'LC',
-                    'LI',
-                    'LK',
-                    'LR',
-                    'LS',
-                    'LT',
-                    'LU',
-                    'LV',
-                    'MA',
-                    'MC',
-                    'MD',
-                    'ME',
-                    'MG',
-                    'MH',
-                    'MK',
-                    'ML',
-                    'MN',
-                    'MO',
-                    'MR',
-                    'MT',
-                    'MU',
-                    'MV',
-                    'MW',
-                    'MX',
-                    'MY',
-                    'MZ',
-                    'NA',
-                    'NE',
-                    'NG',
-                    'NI',
-                    'NL',
-                    'NO',
-                    'NP',
-                    'NR',
-                    'NZ',
-                    'OM',
-                    'PA',
-                    'PE',
-                    'PG',
-                    'PH',
-                    'PK',
-                    'PL',
-                    'PS',
-                    'PT',
-                    'PW',
-                    'PY',
-                    'QA',
-                    'RO',
-                    'RS',
-                    'RU',
-                    'RW',
-                    'SA',
-                    'SB',
-                    'SC',
-                    'SE',
-                    'SG',
-                    'SI',
-                    'SK',
-                    'SL',
-                    'SM',
-                    'SN',
-                    'SR',
-                    'ST',
-                    'SV',
-                    'SZ',
-                    'TD',
-                    'TG',
-                    'TH',
-                    'TL',
-                    'TN',
-                    'TO',
-                    'TR',
-                    'TT',
-                    'TV',
-                    'TW',
-                    'TZ',
-                    'UA',
-                    'UG',
-                    'US',
-                    'UY',
-                    'UZ',
-                    'VC',
-                    'VN',
-                    'VU',
-                    'WS',
-                    'XK',
-                    'ZA',
-                    'ZM',
-                    'ZW'
-                ],
+                'available_markets': [],
                 'external_urls': {
                     'spotify': 'https://open.spotify.com/album/6DmXKM13nNgIIby2FdK0f8'
                 },
@@ -242,9 +63,8 @@ export const Home = () => {
     useEffect(() => {
         getNewReleaseAlbum()
             .then((respond) => {
-                console.log('拿到拿到拿到拿到拿到');
                 // console.log(respond);
-                changeListContent(test['albums']['items']);
+                changeListContent(respond['albums']['items']);
                 changeGetApiState(true);
             })
             .catch((error) => {
@@ -252,10 +72,10 @@ export const Home = () => {
                 console.log(error);
                 changeGetApiState(false);
             });
-    });
+    }, [changeListContent]);
 
     return (
-        <>
+        <div className={'home-container'}>
             {
                 getApiState
                     ? <>
@@ -276,6 +96,6 @@ export const Home = () => {
                     </>
                     : <div>Loading...</div>
             }
-        </>
+        </div>
     );
 };

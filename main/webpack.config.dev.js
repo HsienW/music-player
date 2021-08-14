@@ -9,7 +9,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const {merge} = require('webpack-merge');
 const path = require('path');
 
-const isDev = process.env.NODE_ENV === 'development';
+// const isDev = process.env.NODE_ENV === 'development';
 const packageName = require('./package.json').name;
 
 module.exports = merge(baseWebpackConfig, {
@@ -28,22 +28,31 @@ module.exports = merge(baseWebpackConfig, {
                 use: ['cache-loader', 'babel-loader']
             },
             {
-                test: /\.(sc|c)ss$/,
+                test: /\.(css|scss)$/,
                 use: [
-                    // 'cache-loader',
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hmr: isDev,
-                            reloadAll: true
-                        }
-                    },
-                    'css-loader', {
-                        loader: 'postcss-loader'
-                    }, 'sass-loader'
-                ],
-                include: [path.resolve(__dirname, 'src')]
+                    {loader: MiniCssExtractPlugin.loader},
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ]
             },
+            // {
+            //     test: /\.(css|scss)$/,
+            //     use: [
+            //         // 'cache-loader',
+            //         {
+            //             loader: MiniCssExtractPlugin.loader,
+            //             options: {
+            //                 hmr: isDev,
+            //                 reloadAll: true
+            //             }
+            //         },
+            //         'css-loader', {
+            //             loader: 'postcss-loader'
+            //         }, 'sass-loader'
+            //     ],
+            //     include: [path.resolve(__dirname, 'src')]
+            // },
             {
                 test: /\.(png|jpg|gif|jpeg|webp|svg|eot|ttf|woff|woff2)$/,
                 use: [

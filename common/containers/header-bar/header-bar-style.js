@@ -68,7 +68,8 @@ const headerBarStyle = `
         display: inline-block;
         position: relative;
         font-size: 14px;
-        color: #8c8c8c
+        color: #8c8c8c;
+        z-index: 4;
    }
         
    .user-setting-dropdown>.button {
