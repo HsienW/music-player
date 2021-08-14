@@ -12,6 +12,13 @@ const subAppInfo = [
         entry: process.env.REACT_APP_SEARCH_ENV,
         activeRule: '/search',
         container: '#search-root',
+    },
+    {
+        name: 'music-player-playlist',
+        displayName: 'Playlist',
+        entry: process.env.REACT_APP_PLAYLIST_ENV,
+        activeRule: '/playlist',
+        container: '#playlist-root',
     }
 ];
 
