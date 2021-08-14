@@ -2,7 +2,16 @@
 
 // Color
 $background-color: #ffffff;
-$primary-color: #1890ff;
+$primary-color-lv-1: #e6f7ff;
+$primary-color-lv-2: #bae7ff;
+$primary-color-lv-3: #91d5ff;
+$primary-color-lv-4: #69c0ff;
+$primary-color-lv-5: #40a9ff;
+$primary-color-lv-6: #1890ff;
+$primary-color-lv-7: #096dd9;
+$primary-color-lv-8: #0050b3;
+$primary-color-lv-9: #003a8c;
+$primary-color-lv-10: #002766;
 $link-color: #1890ff;
 $success-color: #52c41a;
 $warning-color: #faad14;
@@ -58,3 +67,7 @@ $box-shadow-base:
     0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 6px 16px 0 rgba(0, 0, 0, 0.08),
     0 9px 28px 8px rgba(0, 0, 0, 0.05); // 元件陰影
+
+// Padding
+$padding-size-base: 10px;
+$padding-size-s: 24px;

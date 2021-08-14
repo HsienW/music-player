@@ -94,7 +94,27 @@ class Auth extends HTMLElement {
                 routeNavigation(authRedirectURL);
                 clearInterval(getAuth);
             }
-        }, 500);
+        }, 1500);
+
+        // const getSpotifyToken = (authURL) => {
+        //     return new Promise((resolve, reject) => {
+        //         const authSpotify = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
+        //         const token = authSpotify.window.location.hash.substring(14);
+        //         return [token, authSpotify];
+        //     });
+        // };
+        //
+        // (async function getAuth() {
+        //     try {
+        //         const [token, authSpotify] = await getSpotifyToken(authURL);
+        //         sessionStorage.setItem('user-info', JSON.stringify(userInfo));
+        //         sessionStorage.setItem('user-token', JSON.stringify(token));
+        //         authSpotify.close();
+        //         routeNavigation(authRedirectURL);
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // })();
     }
 }
 
