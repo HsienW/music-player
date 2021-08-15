@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {getNewReleaseAlbum} from '../../api/home/new-release';
-import {CardItem} from '../../components';
+import React, { useState, useEffect } from 'react';
+import { getNewReleaseAlbum } from '../../api/home/new-release';
+import { createParamRoute, navigationRoute } from '../../../../common/util/route';
+import { CardItem } from '../../components';
 import './home.scss';
 
 const test = {
@@ -55,8 +56,19 @@ const test = {
     }
 };
 
-export const Home = () => {
+const homeAlbumItemClick = (albumItemInfo) => {
+    let newRouteURL = createParamRoute(
+        '/playlist/album',
+        {
+            id: albumItemInfo.itemId,
+            name: albumItemInfo.itemName,
+            image: albumItemInfo.imageURL,
+            artist: albumItemInfo.itemArtist
+        });
+    navigationRoute(newRouteURL);
+};
 
+export const Home = () => {
     let [getApiState, changeGetApiState] = useState(false);
     let [newReleaseAlbumList, changeListContent] = useState([]);
 
@@ -86,8 +98,11 @@ export const Home = () => {
                                         key={item.id}
                                         itemId={item.id}
                                         itemName={item.name}
+                                        itemHoverable={true}
+                                        itemArtist={item.artists[0].name}
                                         imageURL={item.images[0].url}
-                                        artistName={item.artists[0].name}
+                                        itemClickAction={homeAlbumItemClick}
+                                        itemStyle={{width: 180}}
                                     >
                                     </CardItem>
                                 );

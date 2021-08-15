@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Album } from '../containers/album/album';
+import React, {useState} from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Album} from '../containers/album/album';
 import './root.scss';
 
 export const PlaylistRootDom = (props) => {
@@ -16,15 +16,12 @@ export const PlaylistRootDom = (props) => {
     };
 
     return (
-        <>
-            <div className='playlist-root-title'>Playlist root dom is working!</div>
-            <BrowserRouter>
-                <Switch>
-                    <Route path={`${routerBase}/album`}>
-                        <Album/>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
-        </>
+        <BrowserRouter>
+            <Switch>
+                <Route path={`${routerBase}/album`}>
+                    <Album/>
+                </Route>
+            </Switch>
+        </BrowserRouter>
     );
 };

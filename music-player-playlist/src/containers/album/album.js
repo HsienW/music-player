@@ -1,78 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import { getAlbumSongs } from '../../api/album/album';
-// import { CardItem } from '../../components';
+import React, {useState, useEffect} from 'react';
+import {getAlbumSongs} from '../../api/album/album';
+import {CardItem, CustomList} from '../../components';
+import queryString from 'query-string';
 import './album.scss';
 
 const test = {
-    'href': 'https://api.spotify.com/v1/albums/6akEvsycLGftJxYudPjmqK/tracks?offset=0&limit=2',
-    'items': [ {
-        'artists': [ {
-            'external_urls': {
-                'spotify': 'https://open.spotify.com/artist/08td7MxkoHQkXnWAYD8d6Q'
+    'href': 'https://api.spotify.com/v1/albums/2TvfE8CY37OQIPVGcWYpEA/tracks?offset=0&limit=20',
+    'items': [{
+        'artists': [
+            {
+                'external_urls': {
+                    'spotify': 'https://open.spotify.com/artist/2o5jDhtHVPhrJdv3cEQ99Z'
+                },
+                'href': 'https://api.spotify.com/v1/artists/2o5jDhtHVPhrJdv3cEQ99Z',
+                'id': '2o5jDhtHVPhrJdv3cEQ99Z',
+                'name': 'Tiësto',
+                'type': 'artist',
+                'uri': 'spotify:artist:2o5jDhtHVPhrJdv3cEQ99Z'
             },
-            'href': 'https://api.spotify.com/v1/artists/08td7MxkoHQkXnWAYD8d6Q',
-            'id': '08td7MxkoHQkXnWAYD8d6Q',
-            'name': 'Tania Bowra',
-            'type': 'artist',
-            'uri': 'spotify:artist:08td7MxkoHQkXnWAYD8d6Q'
-        } ],
-        'available_markets': [ 'AD', 'AR', 'AT', 'AU', 'BE', 'BG', 'BO', 'BR', 'CA', 'CH', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DE', 'DK', 'DO', 'EC', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'GT', 'HK', 'HN', 'HU', 'IE', 'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MC', 'MT', 'MX', 'MY', 'NI', 'NL', 'NO', 'NZ', 'PA', 'PE', 'PH', 'PL', 'PT', 'PY', 'RO', 'SE', 'SG', 'SI', 'SK', 'SV', 'TR', 'TW', 'US', 'UY' ],
+            {
+                'external_urls': {
+                    'spotify': 'https://open.spotify.com/artist/790FomKkXshlbRYZFtlgla'
+                },
+                'href': 'https://api.spotify.com/v1/artists/790FomKkXshlbRYZFtlgla',
+                'id': '790FomKkXshlbRYZFtlgla',
+                'name': 'KAROL G',
+                'type': 'artist',
+                'uri': 'spotify:artist:790FomKkXshlbRYZFtlgla'
+            }
+        ],
+        'available_markets': ['AD', 'AE', 'AG', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN', 'BO', 'BR', 'BS', 'BT', 'BW', 'BY', 'BZ', 'CA', 'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ES', 'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GE', 'GH', 'GM', 'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IN', 'IS', 'IT', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'MA', 'MC', 'MD', 'ME', 'MG', 'MH', 'MK', 'ML', 'MN', 'MO', 'MR', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NZ', 'OM', 'PA', 'PE', 'PG', 'PH', 'PK', 'PL', 'PS', 'PT', 'PW', 'PY', 'QA', 'RO', 'RS', 'RU', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SI', 'SK', 'SL', 'SM', 'SN', 'SR', 'ST', 'SV', 'SZ', 'TD', 'TG', 'TH', 'TL', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY', 'UZ', 'VC', 'VN', 'VU', 'WS', 'XK', 'ZA', 'ZM', 'ZW'],
         'disc_number': 1,
-        'duration_ms': 276773,
+        'duration_ms': 140500,
         'explicit': false,
         'external_urls': {
-            'spotify': 'https://open.spotify.com/track/2TpxZ7JUBn3uw46aR7qd6V'
+            'spotify': 'https://open.spotify.com/track/0bI7K9Becu2dtXK1Q3cZNB'
         },
-        'href': 'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V',
-        'id': '2TpxZ7JUBn3uw46aR7qd6V',
-        'name': 'All I Want',
-        'preview_url': 'https://p.scdn.co/mp3-preview/6d00206e32194d15df329d4770e4fa1f2ced3f57',
+        'href': 'https://api.spotify.com/v1/tracks/0bI7K9Becu2dtXK1Q3cZNB',
+        'id': '0bI7K9Becu2dtXK1Q3cZNB',
+        'is_local': false,
+        'name': "Don't Be Shy",
+        'preview_url': 'https://p.scdn.co/mp3-preview/54889f56ba255f24b2d7ecbca72fee9bff699332?cid=1c74ad8d2483424ca84efade725329c1',
         'track_number': 1,
         'type': 'track',
-        'uri': 'spotify:track:2TpxZ7JUBn3uw46aR7qd6V'
-    }, {
-        'artists': [ {
-            'external_urls': {
-                'spotify': 'https://open.spotify.com/artist/08td7MxkoHQkXnWAYD8d6Q'
-            },
-            'href': 'https://api.spotify.com/v1/artists/08td7MxkoHQkXnWAYD8d6Q',
-            'id': '08td7MxkoHQkXnWAYD8d6Q',
-            'name': 'Tania Bowra',
-            'type': 'artist',
-            'uri': 'spotify:artist:08td7MxkoHQkXnWAYD8d6Q'
-        } ],
-        'available_markets': [ 'AD', 'AR', 'AT', 'AU', 'BE', 'BG', 'BO', 'BR', 'CA', 'CH', 'CL', 'CO', 'CR', 'CY', 'CZ', 'DE', 'DK', 'DO', 'EC', 'EE', 'ES', 'FI', 'FR', 'GB', 'GR', 'GT', 'HK', 'HN', 'HU', 'IE', 'IS', 'IT', 'LI', 'LT', 'LU', 'LV', 'MC', 'MT', 'MX', 'MY', 'NI', 'NL', 'NO', 'NZ', 'PA', 'PE', 'PH', 'PL', 'PT', 'PY', 'RO', 'SE', 'SG', 'SI', 'SK', 'SV', 'TR', 'TW', 'US', 'UY' ],
-        'disc_number': 1,
-        'duration_ms': 247680,
-        'explicit': false,
-        'external_urls': {
-            'spotify': 'https://open.spotify.com/track/4PjcfyZZVE10TFd9EKA72r'
-        },
-        'href': 'https://api.spotify.com/v1/tracks/4PjcfyZZVE10TFd9EKA72r',
-        'id': '4PjcfyZZVE10TFd9EKA72r',
-        'name': 'Someday',
-        'preview_url': 'https://p.scdn.co/mp3-preview/2b15de922bf4f4b8cfe09c8448079b8ff7a45a5f',
-        'track_number': 2,
-        'type': 'track',
-        'uri': 'spotify:track:4PjcfyZZVE10TFd9EKA72r'
-    } ],
-    'limit': 2,
-    'next': 'https://api.spotify.com/v1/albums/6akEvsycLGftJxYudPjmqK/tracks?offset=2&limit=2',
+        'uri': 'spotify:track:0bI7K9Becu2dtXK1Q3cZNB'
+    }
+
+
+    ],
+    'limit': 20,
+    'next': null,
     'offset': 0,
     'previous': null,
-    'total': 11
+    'total': 1
+};
+
+const cardItemClick = () => {
+    console.log('xxxxxxxxxxx');
+    return;
+};
+
+const albumSongItemClick = (songItemInfo) => {
+    console.log('有喔有喔有喔有喔有喔');
+    console.log(songItemInfo);
 };
 
 export const Album = () => {
 
     let [getApiState, changeGetApiState] = useState(false);
+    let [albumSongInfo, changeSongInfo] = useState(null);
     let [albumSongList, changeListContent] = useState([]);
 
     useEffect(() => {
-        getAlbumSongs('2TvfE8CY37OQIPVGcWYpEA')
+        const songInfo = queryString.parse(location.search);
+
+        getAlbumSongs(songInfo.id)
             .then((respond) => {
                 // console.log(respond);
-                changeListContent(test['items']);
+                changeSongInfo(songInfo);
+                changeListContent(respond['items']);
                 changeGetApiState(true);
             })
             .catch((error) => {
@@ -80,13 +86,28 @@ export const Album = () => {
                 console.log(error);
                 changeGetApiState(false);
             });
-    }, [changeListContent]);
+    }, [changeSongInfo, changeListContent]);
 
     return (
         <div className={'album-container'}>
             {
                 getApiState
-                    ? <>album info</>
+                    ? <>
+                        <CardItem
+                            key={albumSongInfo.id}
+                            itemId={albumSongInfo.id}
+                            itemName={albumSongInfo.name}
+                            itemHoverable={false}
+                            itemArtistName={albumSongInfo.artist}
+                            imageURL={albumSongInfo.image}
+                            itemClickAction={cardItemClick}
+                            itemStyle={{width: 300}}
+                        />
+                        <CustomList
+                            listData={albumSongList}
+                            itemClickAction={albumSongItemClick}
+                        />
+                    </>
                     : <div>Loading...</div>
             }
         </div>
