@@ -1,4 +1,4 @@
-import {routeNavigation} from '../../util/route-navigation';
+import {navigationRoute} from '../../util/route';
 import {pubSub} from '../../pub-sub/pub-sub';
 import {pubSubCommonKey} from '../../pub-sub/pub-sub-key';
 import {sideBarStyle} from './side-bar-style';
@@ -64,7 +64,7 @@ class SideBar extends HTMLElement {
 
     sideBarItemClick(event) {
         let targetActive = event.target.getAttribute('active-rule');
-        routeNavigation(targetActive);
+        navigationRoute(targetActive);
     }
 
     updateDomActiveStyle() {

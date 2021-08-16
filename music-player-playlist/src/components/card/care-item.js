@@ -6,7 +6,7 @@ import './card-item.scss';
 const { Meta } = Card;
 
 export const CardItem = (props) => {
-    const { itemName, itemHoverable, imageURL, itemStyle, itemClickAction } = {...props};
+    const { itemName, itemArtistName, itemHoverable, imageURL, itemStyle, itemClickAction } = {...props};
 
     const itemClick = () => {
         itemClickAction(props);
@@ -22,6 +22,7 @@ export const CardItem = (props) => {
         >
             <Meta
                 title={itemName}
+                description={itemArtistName}
             />
         </Card>
     );
@@ -30,8 +31,8 @@ export const CardItem = (props) => {
 CardItem.propTypes = {
     itemId: PropTypes.string.isRequired,
     itemName: PropTypes.string.isRequired,
+    itemArtistName: PropTypes.string.isRequired,
     itemHoverable: PropTypes.bool.isRequired,
-    itemArtist: PropTypes.array.isRequired,
     imageURL: PropTypes.string.isRequired,
     itemClickAction: PropTypes.func.isRequired,
     itemStyle: PropTypes.object.isRequired,

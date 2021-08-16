@@ -1,4 +1,4 @@
-import {routeNavigation} from '../../util/route-navigation';
+import {navigationRoute} from '../../util/route';
 import {authStyle} from './auth-style';
 
 class Auth extends HTMLElement {
@@ -91,7 +91,7 @@ class Auth extends HTMLElement {
                 sessionStorage.setItem('user-info', JSON.stringify(userInfo));
                 sessionStorage.setItem('user-token', JSON.stringify(token));
                 authSpotify.close();
-                routeNavigation(authRedirectURL);
+                navigationRoute(authRedirectURL);
                 clearInterval(getAuth);
             }
         }, 1500);
@@ -110,7 +110,7 @@ class Auth extends HTMLElement {
         //         sessionStorage.setItem('user-info', JSON.stringify(userInfo));
         //         sessionStorage.setItem('user-token', JSON.stringify(token));
         //         authSpotify.close();
-        //         routeNavigation(authRedirectURL);
+        //         navigationRoute(authRedirectURL);
         //     } catch (error) {
         //         console.log(error)
         //     }
