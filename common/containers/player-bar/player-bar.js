@@ -1,5 +1,7 @@
 import amplitude from 'amplitudejs';
 import {playerBarStyle} from './player-bar-style';
+import {pubSub} from '../../pub-sub/pub-sub';
+import {pubSubCommonKey} from '../../pub-sub/pub-sub-key';
 
 class PlayerBar extends HTMLElement {
     constructor() {
@@ -10,6 +12,7 @@ class PlayerBar extends HTMLElement {
         this.domRender();
         this.domEventInit();
         this.playerConfigInit();
+        pubSub.doSubscribe(pubSubCommonKey.playSong, this.playSong.bind(this));
     }
 
     domStyling() {
@@ -304,6 +307,10 @@ class PlayerBar extends HTMLElement {
     updateProgressBarTime(playedTime, totalTime) {
         this.progressPlayedSeconds.textContent = new Date(playedTime * 1000).toISOString().substr(14, 5);
         this.progressSongSeconds.textContent = new Date(totalTime * 1000).toISOString().substr(14, 5);
+    }
+
+    playSong(playSongList) {
+        console.log('收到收到收到收到收到收到');
     }
 }
 

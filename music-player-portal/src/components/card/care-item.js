@@ -31,7 +31,7 @@ CardItem.propTypes = {
     itemId: PropTypes.string.isRequired,
     itemName: PropTypes.string.isRequired,
     itemHoverable: PropTypes.bool.isRequired,
-    itemArtist: PropTypes.array.isRequired,
+    itemArtist: PropTypes.string.isRequired,
     imageURL: PropTypes.string.isRequired,
     itemClickAction: PropTypes.func.isRequired,
     itemStyle: PropTypes.object.isRequired,

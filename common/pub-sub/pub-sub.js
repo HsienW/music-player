@@ -11,14 +11,26 @@ const pubSub = (function () {
     }
 
     const doPublish = function () {
+
         const key = Array.prototype.shift.call(arguments);
+
+        console.log('iiiiiiiiiiiiiiiiii');
+        console.log(key);
+        console.log(this);
+
+
         const callbacks = subscriberList[key];
 
+        console.log(subscriberList);
+        console.log(callbacks);
+
         if (!callbacks || callbacks.length === 0) {
+            console.log('zzzzzzzzzzzzzzz');
             return false;
         }
 
         for (let i = 0; i < callbacks.length; i++) {
+            console.log('wwwwwwwwwwww');
             callbacks[i](arguments);
         }
     }
