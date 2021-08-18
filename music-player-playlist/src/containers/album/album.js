@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAlbumSongs } from '../../api/album/album';
 import { CardItem, CustomList } from '../../components';
-import { singleAppGlobalState } from '../../../../common/state/single-app-global-state';
 import queryString from 'query-string';
 import './album.scss';
-import {pubSub} from '../../../../common/pub-sub/pub-sub';
-import {pubSubCommonKey} from '../../../../common/pub-sub/pub-sub-key';
 
 const test = {
     'href': 'https://api.spotify.com/v1/albums/2TvfE8CY37OQIPVGcWYpEA/tracks?offset=0&limit=20',
@@ -135,18 +132,8 @@ const test = {
     'total': 1
 };
 
-const cardItemClick = () => {
-    console.log('xxxxxxxxxxx');
-    return;
-};
-
-const albumSongItemClick = (songItemInfo) => {
-    console.log('有喔有喔有喔有喔有喔');
-    console.log(songItemInfo);
-    pubSub.doPublish(pubSubCommonKey.playSong);
-};
-
-export const Album = () => {
+export const Album = (props) => {
+    const { pubSub, pubSubKey, setGlobalState, getGlobalState } = {...props};
 
     let [getApiState, changeGetApiState] = useState(false);
     let [albumSongInfo, changeSongInfo] = useState(null);
@@ -157,11 +144,13 @@ export const Album = () => {
 
         getAlbumSongs(songInfo.id)
             .then((respond) => {
-                // console.log(respond);
-
                 console.log('8888888888888');
+                // setGlobalState('current-album-songs', respond);
 
-                singleAppGlobalState.setGlobalState('albumSongList', respond);
+                sessionStorage.setItem('current-album-songs', JSON.stringify(respond));
+
+                // console.log(setGlobalState);
+                // console.log(getGlobalState('current-album-songs'));
 
                 changeSongInfo(songInfo);
                 changeListContent(respond['items']);
@@ -173,6 +162,19 @@ export const Album = () => {
                 changeGetApiState(false);
             });
     }, [changeSongInfo, changeListContent]);
+
+    const cardItemClick = () => {
+        console.log('click');
+    };
+
+    const albumSongItemClick = (songItemInfo) => {
+        const currentAlbumSongs = JSON.parse(sessionStorage.getItem('current-album-songs'));
+        console.log('有喔有喔有喔有喔有喔');
+        console.log(songItemInfo);
+        console.log(pubSubKey.common.playSong);
+        pubSub.doPublish(pubSubKey.common.playSong, songItemInfo, currentAlbumSongs);
+    };
+
 
     return (
         <div className={'album-container'}>

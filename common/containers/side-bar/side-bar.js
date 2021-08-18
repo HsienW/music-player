@@ -1,6 +1,6 @@
 import {navigationRoute} from '../../util/route';
 import {pubSub} from '../../pub-sub/pub-sub';
-import {pubSubCommonKey} from '../../pub-sub/pub-sub-key';
+import {pubSubKey} from '../../pub-sub/pub-sub-key';
 import {sideBarStyle} from './side-bar-style';
 // import {subAppInfo} from '../../../main/src/config-sub-app-info';
 
@@ -11,8 +11,8 @@ class SideBar extends HTMLElement {
         this.domStyling();
         this.domRender();
         this.domEventInit();
-        pubSub.doSubscribe(pubSubCommonKey.windowOnload, this.updateDomActiveStyle.bind(this));
-        pubSub.doSubscribe(pubSubCommonKey.routeChange, this.updateDomActiveStyle.bind(this));
+        pubSub.doSubscribe(pubSubKey.common.windowOnload, this.updateDomActiveStyle.bind(this));
+        pubSub.doSubscribe(pubSubKey.common.routeChange, this.updateDomActiveStyle.bind(this));
     }
 
     domStyling() {

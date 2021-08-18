@@ -1,7 +1,7 @@
 import amplitude from 'amplitudejs';
 import {playerBarStyle} from './player-bar-style';
 import {pubSub} from '../../pub-sub/pub-sub';
-import {pubSubCommonKey} from '../../pub-sub/pub-sub-key';
+import {pubSubKey} from '../../pub-sub/pub-sub-key';
 
 class PlayerBar extends HTMLElement {
     constructor() {
@@ -12,7 +12,7 @@ class PlayerBar extends HTMLElement {
         this.domRender();
         this.domEventInit();
         this.playerConfigInit();
-        pubSub.doSubscribe(pubSubCommonKey.playSong, this.playSong.bind(this));
+        pubSub.doSubscribe(pubSubKey.common.playSong, this.playSong.bind(this));
     }
 
     domStyling() {
@@ -33,7 +33,7 @@ class PlayerBar extends HTMLElement {
 
         this.controlArea = document.createElement('div');
         this.controlAreaButtons = document.createElement('div');
-        this.controlFakeAddPlay = document.createElement('img');
+        // this.controlFakeAddPlay = document.createElement('img');
         this.controlRepeat = document.createElement('img');
         this.controlShuffle = document.createElement('img');
         this.controlPrev = document.createElement('img');
@@ -58,7 +58,7 @@ class PlayerBar extends HTMLElement {
 
         this.controlArea.className = 'controls-area';
         this.controlAreaButtons.className = 'buttons';
-        this.controlFakeAddPlay.className = 'icon repeat';
+        // this.controlFakeAddPlay.className = 'icon repeat';
         this.controlRepeat.className = 'icon repeat';
         this.controlShuffle.className = 'icon shuffle';
         this.controlPrev.className = 'icon prev';
@@ -91,7 +91,7 @@ class PlayerBar extends HTMLElement {
         this.volumeRangeBar.setAttribute('step', '1');
         this.volumeRangeBar.setAttribute('value', '50');
 
-        this.controlFakeAddPlay.setAttribute('src', '');
+        // this.controlFakeAddPlay.setAttribute('src', '');
         this.controlRepeat.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/repeat.svg');
         this.controlPrev.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/prev.svg');
         this.controlPlay.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/play.svg');
@@ -114,7 +114,7 @@ class PlayerBar extends HTMLElement {
 
         this.playerBarBody.appendChild(this.controlArea);
         this.controlArea.appendChild(this.controlAreaButtons);
-        this.controlAreaButtons.appendChild(this.controlFakeAddPlay);
+        // this.controlAreaButtons.appendChild(this.controlFakeAddPlay);
         this.controlAreaButtons.appendChild(this.controlRepeat);
         this.controlAreaButtons.appendChild(this.controlPrev);
         this.controlAreaButtons.appendChild(this.controlPlay);
@@ -206,19 +206,19 @@ class PlayerBar extends HTMLElement {
     }
 
     domEventInit() {
-        this.controlFakeAddPlay.addEventListener('click', () => {
-            console.log("增加播放")
-
-            this.amplitude.addSong(
-                {
-                    "name": "Anthem",
-                    "artist": "Emancipator",
-                    "album": "Soon It Will Be Cold Enough",
-                    "url": "https://521dimensions.com/songs/Anthem-Emancipator.mp3",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg"
-                }
-            );
-        }, false);
+        // this.controlFakeAddPlay.addEventListener('click', () => {
+        //     console.log("增加播放")
+        //
+        //     this.amplitude.addSong(
+        //         {
+        //             "name": "Anthem",
+        //             "artist": "Emancipator",
+        //             "album": "Soon It Will Be Cold Enough",
+        //             "url": "https://521dimensions.com/songs/Anthem-Emancipator.mp3",
+        //             "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg"
+        //         }
+        //     );
+        // }, false);
 
         this.controlRepeat.addEventListener('click', () => {
             console.log("單曲循環");
@@ -309,8 +309,10 @@ class PlayerBar extends HTMLElement {
         this.progressSongSeconds.textContent = new Date(totalTime * 1000).toISOString().substr(14, 5);
     }
 
-    playSong(playSongList) {
+    playSong() {
+        let normalArray = Array.prototype.shift.call(arguments);
         console.log('收到收到收到收到收到收到');
+        console.log(normalArray);
     }
 }
 
