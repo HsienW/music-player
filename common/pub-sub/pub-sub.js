@@ -8,11 +8,21 @@ const pubSub = (function () {
             subscriberList[key] = [];
         }
         subscriberList[key].push(callback);
+
+        console.log('sssssssssss');
+        console.log(key);
+        console.log(subscriberList);
+
     }
 
     const doPublish = function () {
         const key = Array.prototype.shift.call(arguments);
         const callbacks = subscriberList[key];
+
+        console.log('00000000000000000');
+        console.log(key);
+        console.log(subscriberList);
+        console.log(callbacks);
 
         if (!callbacks || callbacks.length === 0) {
             return false;

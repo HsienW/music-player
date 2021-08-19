@@ -1,7 +1,6 @@
 import amplitude from 'amplitudejs';
 import {playerBarStyle} from './player-bar-style';
-import {pubSub} from '../../pub-sub/pub-sub';
-import {pubSubKey} from '../../pub-sub/pub-sub-key';
+import {pubSub, pubSubKey} from '../../pub-sub';
 
 class PlayerBar extends HTMLElement {
     constructor() {
@@ -136,34 +135,14 @@ class PlayerBar extends HTMLElement {
         this.amplitude.init({
             songs: [
                 {
-                    "name": "Risin' High (feat Raashan Ahmad)",
-                    "artist": "Ancient Astronauts",
-                    "album": "We Are to Answer",
-                    "url": "https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
-                },
-                {
-                    "name": "Money Changes Everything",
-                    "artist": "Cyndi Lauper",
-                    "album": "She's So Unusual",
-                    "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
-                    "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
-                },
-                {
-                    "name": "Pyttefolk och tigerstekar i hängmattan",
-                    "artist": "Bronsåldersstadens kollaps",
-                    "album": "Hot Fuss",
-                    "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
-                },
-                {
-                    "name": "Run Away With Me",
-                    "artist": "Carly Rae Jepsen",
-                    "album": "Emotion (Deluxe)",
-                    "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
-                    "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
+                    "name": "Anthem",
+                    "artist": "Emancipator",
+                    "album": "Soon It Will Be Cold Enough",
+                    "url": "https://521dimensions.com/songs/Anthem-Emancipator.mp3",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg"
                 }
             ],
+            // starting_playlist: 'current_playing_list',
             callbacks: {
                 timeupdate: () => {
                     const initTime = 0;
@@ -178,7 +157,7 @@ class PlayerBar extends HTMLElement {
                     this.updateDomDisplayStyle(this.controlPlay, this.controlPause, 'hidden');
                 },
                 play: () => {
-                    console.log("播放111111");
+                    console.log("播放11111111111111111111111");
                     // 播放後切換顯示歌曲資訊
                     const songMetaData = this.amplitude.getActiveSongMetadata();
                     this.updateDomImgDisplay(this.detailSongImage, songMetaData.cover_art_url);
@@ -235,6 +214,8 @@ class PlayerBar extends HTMLElement {
         }, false);
 
         this.controlPlay.addEventListener('click', () => {
+            console.log("播放播放播放播放播放");
+
             this.amplitude.play();
         }, false);
 
@@ -276,6 +257,10 @@ class PlayerBar extends HTMLElement {
             this.amplitude.setVolume(event.target.value);
             this.updateInputBarDisplay(this.volumeRangeBar, target.min, target.max, target.value);
         }, false);
+
+        console.log('看看看看看看看看看看看看看看看看看看看看看');
+        console.log(this.test);
+
     }
 
     updateDomDisplayStyle(addStyleTarget, removeStyleTarget, styleName) {
@@ -310,9 +295,145 @@ class PlayerBar extends HTMLElement {
     }
 
     playSong() {
-        let normalArray = Array.prototype.shift.call(arguments);
+
         console.log('收到收到收到收到收到收到');
-        console.log(normalArray);
+
+        let clickAlbumSongsData = Array.prototype.slice.call(arguments)[0][0];
+
+        console.log(clickAlbumSongsData);
+
+        this.amplitude.addPlaylist(
+            'current_playing_list',
+            {
+                name: 'current',
+                title: 'title',
+                author: 'test'
+            },
+            [
+                {
+                    "name": "Money Changes Everything",
+                    "artist": "Cyndi Lauper",
+                    "album": "She's So Unusual",
+                    "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
+                    "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
+                },
+                {
+                    "name": "Pyttefolk och tigerstekar i hängmattan",
+                    "artist": "Bronsåldersstadens kollaps",
+                    "album": "Hot Fuss",
+                    "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
+                },
+                {
+                    "name": "Run Away With Me",
+                    "artist": "Carly Rae Jepsen",
+                    "album": "Emotion (Deluxe)",
+                    "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
+                    "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
+                }
+            ]
+        );
+
+        // this.songList.push(
+        //     {
+        //         "name": "Risin' High (feat Raashan Ahmad)",
+        //         "artist": "Ancient Astronauts",
+        //         "album": "We Are to Answer",
+        //         "url": "https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9",
+        //         "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
+        //     }
+        // );
+
+        // this.amplitude.addSong({
+        //     "name": "Risin' High (feat Raashan Ahmad)",
+        //     "artist": "Ancient Astronauts",
+        //     "album": "We Are to Answer",
+        //     "url": "https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9",
+        //     "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
+        // });
+
+        // this.amplitude.addSongToPlaylist(
+        //     {
+        //         "name": "Risin' High (feat Raashan Ahmad)",
+        //         "artist": "Ancient Astronauts",
+        //         "album": "We Are to Answer",
+        //         "url": "https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9",
+        //         "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
+        //     },
+        //     'current_playing_list'
+        // );
+
+        // this.amplitude.addPlaylist(
+        //     'current_starting_playlist',
+        //     [
+        //         {
+        //             "name": "Money Changes Everything",
+        //             "artist": "Cyndi Lauper",
+        //             "album": "She's So Unusual",
+        //             "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
+        //             "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
+        //         },
+        //         {
+        //             "name": "Pyttefolk och tigerstekar i hängmattan",
+        //             "artist": "Bronsåldersstadens kollaps",
+        //             "album": "Hot Fuss",
+        //             "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
+        //             "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
+        //         },
+        //         {
+        //             "name": "Run Away With Me",
+        //             "artist": "Carly Rae Jepsen",
+        //             "album": "Emotion (Deluxe)",
+        //             "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
+        //             "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
+        //         }
+        //     ],
+        //     {
+        //         "name": "Risin' High (feat Raashan Ahmad)",
+        //         "artist": "Ancient Astronauts",
+        //         "album": "We Are to Answer",
+        //         "url": "https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9",
+        //         "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
+        //     });
+
+        // this.amplitude.bindNewElements();
+
+        this.amplitude.play();
+
+        console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,');
+        console.log(this.amplitude.getConfig());
+        console.log(this.test);
+        // console.log(this.amplitude.getActivePlaylistMetadata());
+        // console.log(this.amplitude.getActiveSongMetadata());
+        // console.log(this.amplitude.getPlayerState());
+
+
+        // this.amplitude.playPlaylistSongAtIndex(0, 'current_starting_playlist');
+
+        // this.amplitude.addSong(clickAlbumSongsData.albumSongs);
+        // this.amplitude.play();
+
+
+        // artists: (2) [{…}, {…}]
+        // available_markets: (178) ["AD", "AE", "AG", "AL", "AM", "AO", "AR", "AT", "AU", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BN", "BO", "BR", "BS", "BT", "BW", "BY", "BZ", "CA", "CH", "CI", "CL", "CM", "CO", "CR", "CV", "CW", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FJ", "FM", "FR", "GA", "GB", "GD", "GE", "GH", "GM", "GN", "GQ", "GR", "GT", "GW", "GY", "HK", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KR", "KW", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "MA", "MC", "MD", …]
+        // disc_number: 1
+        // duration_ms: 140500
+        // explicit: false
+        // external_urls: {spotify: "https://open.spotify.com/track/0bI7K9Becu2dtXK1Q3cZNB"}
+        // href: "https://api.spotify.com/v1/tracks/0bI7K9Becu2dtXK1Q3cZNB"
+        // id: "0bI7K9Becu2dtXK1Q3cZNB"
+        // is_local: false
+        // name: "Don't Be Shy"
+        // preview_url: "https://p.scdn.co/mp3-preview/54889f56ba255f24b2d7ecbca72fee9bff699332?cid=1c74ad8d2483424ca84efade725329c1"
+        // track_number: 1
+        // type: "track"
+        // uri: "spotify:track:0bI7K9Becu2dtXK1Q3cZNB"
+
+
+        // songInfo: songItemInfo,
+        //     albumSongs: JSON.parse(sessionStorage.getItem('current-album-songs'))
+        //
+
     }
 }
 

@@ -147,7 +147,7 @@ export const Album = (props) => {
                 console.log('8888888888888');
                 // setGlobalState('current-album-songs', respond);
 
-                sessionStorage.setItem('current-album-songs', JSON.stringify(respond));
+                sessionStorage.setItem('current-album-songs', JSON.stringify(respond['items']));
 
                 // console.log(setGlobalState);
                 // console.log(getGlobalState('current-album-songs'));
@@ -168,11 +168,12 @@ export const Album = (props) => {
     };
 
     const albumSongItemClick = (songItemInfo) => {
-        const currentAlbumSongs = JSON.parse(sessionStorage.getItem('current-album-songs'));
-        console.log('有喔有喔有喔有喔有喔');
-        console.log(songItemInfo);
-        console.log(pubSubKey.common.playSong);
-        pubSub.doPublish(pubSubKey.common.playSong, songItemInfo, currentAlbumSongs);
+        let clickAlbumSongsData = {
+            songInfo: songItemInfo,
+            albumSongs: JSON.parse(sessionStorage.getItem('current-album-songs'))
+        };
+        console.log('=================');
+        pubSub.doPublish(pubSubKey.common.playSong, clickAlbumSongsData);
     };
 
 
