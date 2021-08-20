@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getNewReleaseAlbum } from '../../api/home/new-release';
 import { createParamRoute, navigationRoute } from '../../../../common/util/route';
 import { CardItem } from '../../components';
+import { Divider } from 'antd';
 import './home.scss';
 
 const test = {
@@ -87,30 +88,35 @@ export const Home = () => {
     }, [changeListContent]);
 
     return (
-        <div className={'home-container'}>
+        <>
             {
                 getApiState
                     ? <>
-                        {
-                            newReleaseAlbumList.map((item) => {
-                                return (
-                                    <CardItem
-                                        key={item.id}
-                                        itemId={item.id}
-                                        itemName={item.name}
-                                        itemHoverable={true}
-                                        itemArtist={item.artists[0].name}
-                                        imageURL={item.images[0].url}
-                                        itemClickAction={homeAlbumItemClick}
-                                        itemStyle={{width: 180}}
-                                    >
-                                    </CardItem>
-                                );
-                            })
-                        }
+                        <div className={'home-container-title'}>New Release</div>
+                        <Divider style={{margin: '20 0'}}/>
+                        <div className={'home-container-content'}>
+                            {
+                                newReleaseAlbumList.map((item) => {
+                                    return (
+                                        <CardItem
+                                            key={item.id}
+                                            itemId={item.id}
+                                            itemName={item.name}
+                                            itemHoverable={true}
+                                            itemArtist={item.artists[0].name}
+                                            imageURL={item.images[0].url}
+                                            itemClickAction={homeAlbumItemClick}
+                                            itemStyle={{width: 180}}
+                                        >
+                                        </CardItem>
+                                    );
+                                })
+                            }
+                        </div>
                     </>
                     : <div>Loading...</div>
             }
-        </div>
+        </>
     );
 };
+
