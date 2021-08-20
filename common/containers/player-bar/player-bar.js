@@ -138,14 +138,6 @@ class PlayerBar extends HTMLElement {
                     url: ""
                 }
             ],
-            playlists: {
-                "current_starting_playlist": {
-                    songs: [],
-                    title: 'current starting playlist'
-                },
-            },
-            starting_playlist: 'current_starting_playlist',
-            starting_playlist_song: 0,
             callbacks: {
                 timeupdate: () => {
                     const initTime = 0;

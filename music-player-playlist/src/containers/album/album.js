@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { getAlbumSongs } from '../../api/album/album';
-import { CardItem, CustomList } from '../../components';
+import React, {useState, useEffect} from 'react';
+import {getAlbumSongs} from '../../api/album/album';
+import {CardItem, CustomList} from '../../components';
+import {millisToMinutesAndSeconds} from '../../../../common/util/time';
 import queryString from 'query-string';
 import './album.scss';
 
@@ -133,7 +134,7 @@ const test = {
 };
 
 export const Album = (props) => {
-    const { pubSub, pubSubKey, setGlobalState, getGlobalState } = {...props};
+    const {pubSub, pubSubKey, setGlobalState, getGlobalState} = {...props};
 
     let [getApiState, changeGetApiState] = useState(false);
     let [albumSongInfo, changeSongInfo] = useState(null);
@@ -173,6 +174,9 @@ export const Album = (props) => {
             albumSongs: JSON.parse(sessionStorage.getItem('current-album-songs'))
         };
         console.log('=================');
+
+        console.log(millisToMinutesAndSeconds(140500));
+
         pubSub.doPublish(pubSubKey.common.playSong, clickAlbumSongsData);
     };
 
@@ -190,15 +194,17 @@ export const Album = (props) => {
                             itemArtistName={albumSongInfo.artist}
                             imageURL={albumSongInfo.image}
                             itemClickAction={cardItemClick}
-                            itemStyle={{width: 300}}
+                            itemStyle={{width: 300, height: 400}}
                         />
                         <CustomList
                             listData={albumSongList}
                             itemClickAction={albumSongItemClick}
+                            listStyle={{width: '100%'}}
                         />
                     </>
                     : <div>Loading...</div>
             }
         </div>
     );
-};
+}
+;
