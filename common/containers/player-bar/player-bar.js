@@ -135,14 +135,17 @@ class PlayerBar extends HTMLElement {
         this.amplitude.init({
             songs: [
                 {
-                    "name": "Anthem",
-                    "artist": "Emancipator",
-                    "album": "Soon It Will Be Cold Enough",
-                    "url": "https://521dimensions.com/songs/Anthem-Emancipator.mp3",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg"
+                    url: ""
                 }
             ],
-            // starting_playlist: 'current_playing_list',
+            playlists: {
+                "current_starting_playlist": {
+                    songs: [],
+                    title: 'current starting playlist'
+                },
+            },
+            starting_playlist: 'current_starting_playlist',
+            starting_playlist_song: 0,
             callbacks: {
                 timeupdate: () => {
                     const initTime = 0;
@@ -158,6 +161,7 @@ class PlayerBar extends HTMLElement {
                 },
                 play: () => {
                     console.log("播放11111111111111111111111");
+                    console.log(this);
                     // 播放後切換顯示歌曲資訊
                     const songMetaData = this.amplitude.getActiveSongMetadata();
                     this.updateDomImgDisplay(this.detailSongImage, songMetaData.cover_art_url);
@@ -302,37 +306,90 @@ class PlayerBar extends HTMLElement {
 
         console.log(clickAlbumSongsData);
 
-        this.amplitude.addPlaylist(
-            'current_playing_list',
-            {
-                name: 'current',
-                title: 'title',
-                author: 'test'
-            },
-            [
-                {
-                    "name": "Money Changes Everything",
-                    "artist": "Cyndi Lauper",
-                    "album": "She's So Unusual",
-                    "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
-                    "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
-                },
-                {
-                    "name": "Pyttefolk och tigerstekar i hängmattan",
-                    "artist": "Bronsåldersstadens kollaps",
-                    "album": "Hot Fuss",
-                    "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
-                },
-                {
-                    "name": "Run Away With Me",
-                    "artist": "Carly Rae Jepsen",
-                    "album": "Emotion (Deluxe)",
-                    "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
-                    "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
-                }
-            ]
-        );
+
+        // let anode = this.amplitude.getAnalyser();
+        // if (anode) {
+        //     this.amplitude.pause();
+        //     anode.context.close().then(() => {
+        //         this.amplitude.init([
+        //             {
+        //                 "name": "Money Changes Everything",
+        //                 "artist": "Cyndi Lauper",
+        //                 "album": "She's So Unusual",
+        //                 "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
+        //                 "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
+        //             },
+        //             {
+        //                 "name": "Pyttefolk och tigerstekar i hängmattan",
+        //                 "artist": "Bronsåldersstadens kollaps",
+        //                 "album": "Hot Fuss",
+        //                 "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
+        //                 "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
+        //             },
+        //             {
+        //                 "name": "Run Away With Me",
+        //                 "artist": "Carly Rae Jepsen",
+        //                 "album": "Emotion (Deluxe)",
+        //                 "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
+        //                 "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
+        //             }
+        //         ]);
+        //     });
+        // } else {
+        //     this.amplitude.init([
+        //         {
+        //             "name": "Money Changes Everything",
+        //             "artist": "Cyndi Lauper",
+        //             "album": "She's So Unusual",
+        //             "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
+        //             "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
+        //         },
+        //         {
+        //             "name": "Pyttefolk och tigerstekar i hängmattan",
+        //             "artist": "Bronsåldersstadens kollaps",
+        //             "album": "Hot Fuss",
+        //             "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
+        //             "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
+        //         },
+        //         {
+        //             "name": "Run Away With Me",
+        //             "artist": "Carly Rae Jepsen",
+        //             "album": "Emotion (Deluxe)",
+        //             "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
+        //             "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
+        //         }
+        //     ]);
+        // }
+
+
+
+        //
+        // this.amplitude.setPlaylistMetaData(
+        //     'current_playing_list',
+        //     [
+        //         {
+        //             "name": "Money Changes Everything",
+        //             "artist": "Cyndi Lauper",
+        //             "album": "She's So Unusual",
+        //             "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
+        //             "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
+        //         },
+        //         {
+        //             "name": "Pyttefolk och tigerstekar i hängmattan",
+        //             "artist": "Bronsåldersstadens kollaps",
+        //             "album": "Hot Fuss",
+        //             "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
+        //             "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
+        //         },
+        //         {
+        //             "name": "Run Away With Me",
+        //             "artist": "Carly Rae Jepsen",
+        //             "album": "Emotion (Deluxe)",
+        //             "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
+        //             "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
+        //         }
+        //     ]
+        // );
 
         // this.songList.push(
         //     {
@@ -363,45 +420,42 @@ class PlayerBar extends HTMLElement {
         //     'current_playing_list'
         // );
 
-        // this.amplitude.addPlaylist(
-        //     'current_starting_playlist',
-        //     [
-        //         {
-        //             "name": "Money Changes Everything",
-        //             "artist": "Cyndi Lauper",
-        //             "album": "She's So Unusual",
-        //             "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
-        //             "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
-        //         },
-        //         {
-        //             "name": "Pyttefolk och tigerstekar i hängmattan",
-        //             "artist": "Bronsåldersstadens kollaps",
-        //             "album": "Hot Fuss",
-        //             "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
-        //             "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
-        //         },
-        //         {
-        //             "name": "Run Away With Me",
-        //             "artist": "Carly Rae Jepsen",
-        //             "album": "Emotion (Deluxe)",
-        //             "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
-        //             "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
-        //         }
-        //     ],
-        //     {
-        //         "name": "Risin' High (feat Raashan Ahmad)",
-        //         "artist": "Ancient Astronauts",
-        //         "album": "We Are to Answer",
-        //         "url": "https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9",
-        //         "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
-        //     });
+        this.amplitude.addPlaylist(
+            'current_starting_playlist',
+            {
+                name: 'test',
+                title: 'title',
+                author: '123'
+            },
+            [
+                {
+                    "name": "Money Changes Everything",
+                    "artist": "Cyndi Lauper",
+                    "album": "She's So Unusual",
+                    "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
+                    "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
+                },
+                {
+                    "name": "Pyttefolk och tigerstekar i hängmattan",
+                    "artist": "Bronsåldersstadens kollaps",
+                    "album": "Hot Fuss",
+                    "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
+                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
+                },
+                {
+                    "name": "Run Away With Me",
+                    "artist": "Carly Rae Jepsen",
+                    "album": "Emotion (Deluxe)",
+                    "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
+                    "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
+                }
+            ]);
 
         // this.amplitude.bindNewElements();
 
         this.amplitude.play();
 
         console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,');
-        console.log(this.amplitude.getConfig());
         console.log(this.test);
         // console.log(this.amplitude.getActivePlaylistMetadata());
         // console.log(this.amplitude.getActiveSongMetadata());
