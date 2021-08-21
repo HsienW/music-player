@@ -38,9 +38,11 @@ class Auth extends HTMLElement {
         this.authLoginButton.className = 'button';
         this.authDescription.className = 'description';
         this.authLoginButton.innerHTML = 'Login';
-        this.authFormTitle.textContent = 'React Micro Starter'
-        this.authFormSubtitle.textContent = 'You can enter any account and password!'
-        this.authDescription.textContent = 'This description'
+        this.authFormTitle.textContent = 'Music Player Demo'
+        this.authFormSubtitle.textContent = 'If you don\'t have spotify auth, can use \n' +
+            'account:  yke89039@eoopy.com\n' +
+            'password:  demo123456'
+        this.authDescription.textContent = 'This app only for demo, non-commercial use'
 
         this.authInputAccount.setAttribute('type', 'text');
         this.authInputPassword.setAttribute('type', 'password');

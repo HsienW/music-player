@@ -134,11 +134,20 @@ const playerBarStyle = `
         transition: background 0.1s ease-in-out;
     }
         
-    .progress-area>input[type=range]::-webkit-slider-runnable-track  {
+    .progress-area>input[type=range]::-webkit-slider-runnable-track {
         -webkit-appearance: none;
         box-shadow: none;
         border: none;
         background: transparent;
+    }
+    
+    .progress-area>input[type=range]::-moz-range-thumb {
+         -webkit-appearance: none;
+        height: 0px;
+        width: 0px;
+        cursor: pointer;
+        box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+        transition: background 0.1s ease-in-out;
     }
         
     .progress-area>.progress-second {

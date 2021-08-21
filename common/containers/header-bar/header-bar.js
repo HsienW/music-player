@@ -43,7 +43,7 @@ class HeaderBar extends HTMLElement {
         this.userDropdownButton.className = 'user-setting-icon button';
         this.userDropdownUl.className = 'menu hidden';
 
-        this.logoText.textContent = 'LOGO';
+        this.logoText.textContent = 'Music Player';
         this.userName.textContent = 'Default User';
 
         this.userDropdownSettingLink.textContent = 'Setting';
