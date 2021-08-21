@@ -40,13 +40,13 @@ class SideBar extends HTMLElement {
 
         this.sideBarUl.setAttribute('id', 'side-bar');
 
-        this.sideBarPortalLi.setAttribute('active-rule', '/portal/home');
+        this.sideBarPortalLi.setAttribute('active-rule', '/portal');
         this.sideBarSearchLi.setAttribute('active-rule', '/search');
-        this.sideBarPlaylistLi.setAttribute('active-rule', '/playlist/album');
+        this.sideBarPlaylistLi.setAttribute('active-rule', '/playlist');
 
         this.sideBarPortalLink.setAttribute('active-rule', '/portal/home');
         this.sideBarSearchLink.setAttribute('active-rule', '/search');
-        this.sideBarPlaylistLink.setAttribute('active-rule', '/playlist/album');
+        this.sideBarPlaylistLink.setAttribute('active-rule', '/playlist/categories');
 
         this.shadow.appendChild(this.sideBarBody);
         this.sideBarBody.appendChild(this.sideBarUl);
