@@ -3,6 +3,10 @@
 @import '../../../common/style/variable';
 @import '~antd/dist/antd.css';
 
+#playlist-root {
+  padding: $padding-size-s;
+}
+
 .playlist-root-title {
   font-size: $font-size-xl;
   line-height: $line-height-xl;

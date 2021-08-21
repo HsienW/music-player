@@ -137,8 +137,8 @@ export const Album = (props) => {
     const {pubSub, pubSubKey, setGlobalState, getGlobalState} = {...props};
 
     let [getApiState, changeGetApiState] = useState(false);
-    let [albumSongInfo, changeSongInfo] = useState(null);
-    let [albumSongList, changeListContent] = useState([]);
+    let [albumInfo, changeAlbumInfo] = useState(null);
+    let [albumSongList, changeAlbumSongList] = useState([]);
 
     useEffect(() => {
         const songInfo = queryString.parse(location.search);
@@ -148,13 +148,13 @@ export const Album = (props) => {
                 console.log('8888888888888');
                 // setGlobalState('current-album-songs', respond);
 
-                sessionStorage.setItem('current-album-songs', JSON.stringify(respond['items']));
+                // sessionStorage.setItem('current-album-songs', JSON.stringify(respond['items']));
 
                 // console.log(setGlobalState);
                 // console.log(getGlobalState('current-album-songs'));
 
-                changeSongInfo(songInfo);
-                changeListContent(respond['items']);
+                changeAlbumInfo(songInfo);
+                changeAlbumSongList(respond['items']);
                 changeGetApiState(true);
             })
             .catch((error) => {
@@ -162,7 +162,7 @@ export const Album = (props) => {
                 console.log(error);
                 changeGetApiState(false);
             });
-    }, [changeSongInfo, changeListContent]);
+    }, [changeAlbumInfo, changeAlbumSongList]);
 
     const cardItemClick = () => {
         console.log('click');
@@ -171,12 +171,9 @@ export const Album = (props) => {
     const albumSongItemClick = (songItemInfo) => {
         let clickAlbumSongsData = {
             songInfo: songItemInfo,
-            albumSongs: JSON.parse(sessionStorage.getItem('current-album-songs'))
+            albumInfo: albumInfo,
+            albumSongList: albumSongList
         };
-        console.log('=================');
-
-        console.log(millisToMinutesAndSeconds(140500));
-
         pubSub.doPublish(pubSubKey.common.playSong, clickAlbumSongsData);
     };
 
@@ -187,12 +184,12 @@ export const Album = (props) => {
                 getApiState
                     ? <>
                         <CardItem
-                            key={albumSongInfo.id}
-                            itemId={albumSongInfo.id}
-                            itemName={albumSongInfo.name}
+                            key={albumInfo.id}
+                            itemId={albumInfo.id}
+                            itemName={albumInfo.name}
                             itemHoverable={false}
-                            itemArtistName={albumSongInfo.artist}
-                            imageURL={albumSongInfo.image}
+                            itemArtistName={albumInfo.artist}
+                            imageURL={albumInfo.image}
                             itemClickAction={cardItemClick}
                             itemStyle={{width: 300, height: 400}}
                         />

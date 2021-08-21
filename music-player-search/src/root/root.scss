@@ -3,6 +3,10 @@
 @import '../../../common/style/variable';
 @import '~antd/dist/antd.css';
 
+#search-root {
+  padding: $padding-size-s;
+}
+
 .search-root-title {
   font-size: $font-size-xl;
   line-height: $line-height-xl;
