@@ -1,15 +1,19 @@
 import amplitude from 'amplitudejs';
 import {playerBarStyle} from './player-bar-style';
+import {pubSub, pubSubKey} from '../../pub-sub';
+import {formatAlbumSongList, getSongInPlayListIndex} from '../../util';
 
 class PlayerBar extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
         this.amplitude = amplitude;
+        this.playList = [{'url': ''}];
         this.domStyling();
         this.domRender();
         this.domEventInit();
-        this.playerConfigInit();
+        this.playerConfig();
+        pubSub.doSubscribe(pubSubKey.common.playSong, this.playSong.bind(this));
     }
 
     domStyling() {
@@ -30,7 +34,7 @@ class PlayerBar extends HTMLElement {
 
         this.controlArea = document.createElement('div');
         this.controlAreaButtons = document.createElement('div');
-        this.controlFakeAddPlay = document.createElement('img');
+        // this.controlFakeAddPlay = document.createElement('img');
         this.controlRepeat = document.createElement('img');
         this.controlShuffle = document.createElement('img');
         this.controlPrev = document.createElement('img');
@@ -55,7 +59,7 @@ class PlayerBar extends HTMLElement {
 
         this.controlArea.className = 'controls-area';
         this.controlAreaButtons.className = 'buttons';
-        this.controlFakeAddPlay.className = 'icon repeat';
+        // this.controlFakeAddPlay.className = 'icon repeat';
         this.controlRepeat.className = 'icon repeat';
         this.controlShuffle.className = 'icon shuffle';
         this.controlPrev.className = 'icon prev';
@@ -88,7 +92,7 @@ class PlayerBar extends HTMLElement {
         this.volumeRangeBar.setAttribute('step', '1');
         this.volumeRangeBar.setAttribute('value', '50');
 
-        this.controlFakeAddPlay.setAttribute('src', '');
+        // this.controlFakeAddPlay.setAttribute('src', '');
         this.controlRepeat.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/repeat.svg');
         this.controlPrev.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/prev.svg');
         this.controlPlay.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/play.svg');
@@ -111,7 +115,7 @@ class PlayerBar extends HTMLElement {
 
         this.playerBarBody.appendChild(this.controlArea);
         this.controlArea.appendChild(this.controlAreaButtons);
-        this.controlAreaButtons.appendChild(this.controlFakeAddPlay);
+        // this.controlAreaButtons.appendChild(this.controlFakeAddPlay);
         this.controlAreaButtons.appendChild(this.controlRepeat);
         this.controlAreaButtons.appendChild(this.controlPrev);
         this.controlAreaButtons.appendChild(this.controlPlay);
@@ -129,38 +133,9 @@ class PlayerBar extends HTMLElement {
         this.volumeArea.appendChild(this.volumeRangeBar);
     }
 
-    playerConfigInit() {
+    playerConfig() {
         this.amplitude.init({
-            songs: [
-                {
-                    "name": "Risin' High (feat Raashan Ahmad)",
-                    "artist": "Ancient Astronauts",
-                    "album": "We Are to Answer",
-                    "url": "https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/we-are-to-answer.jpg"
-                },
-                {
-                    "name": "Money Changes Everything",
-                    "artist": "Cyndi Lauper",
-                    "album": "She's So Unusual",
-                    "url": "https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06",
-                    "cover_art_url": "https://i.scdn.co/image/54b3222c8aaa77890d1ac37b3aaaa1fc9ba630ae"
-                },
-                {
-                    "name": "Pyttefolk och tigerstekar i hängmattan",
-                    "artist": "Bronsåldersstadens kollaps",
-                    "album": "Hot Fuss",
-                    "url": "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/guidance.jpg"
-                },
-                {
-                    "name": "Run Away With Me",
-                    "artist": "Carly Rae Jepsen",
-                    "album": "Emotion (Deluxe)",
-                    "url": "https://p.scdn.co/mp3-preview/3e05f5ed147ca075c7ae77c01f2cc0e14cfad78d?cid=774b29d4f13844c495f206cafdad9c86",
-                    "cover_art_url": "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49"
-                }
-            ],
+            songs: this.playList,
             callbacks: {
                 timeupdate: () => {
                     const initTime = 0;
@@ -175,7 +150,8 @@ class PlayerBar extends HTMLElement {
                     this.updateDomDisplayStyle(this.controlPlay, this.controlPause, 'hidden');
                 },
                 play: () => {
-                    console.log("播放111111");
+                    console.log("播放11111111111111111111111");
+                    console.log(this);
                     // 播放後切換顯示歌曲資訊
                     const songMetaData = this.amplitude.getActiveSongMetadata();
                     this.updateDomImgDisplay(this.detailSongImage, songMetaData.cover_art_url);
@@ -203,20 +179,6 @@ class PlayerBar extends HTMLElement {
     }
 
     domEventInit() {
-        this.controlFakeAddPlay.addEventListener('click', () => {
-            console.log("增加播放")
-
-            this.amplitude.addSong(
-                {
-                    "name": "Anthem",
-                    "artist": "Emancipator",
-                    "album": "Soon It Will Be Cold Enough",
-                    "url": "https://521dimensions.com/songs/Anthem-Emancipator.mp3",
-                    "cover_art_url": "https://521dimensions.com/img/open-source/amplitudejs/album-art/soon-it-will-be-cold-enough.jpg"
-                }
-            );
-        }, false);
-
         this.controlRepeat.addEventListener('click', () => {
             console.log("單曲循環");
             // 開啟單曲循環
@@ -232,6 +194,8 @@ class PlayerBar extends HTMLElement {
         }, false);
 
         this.controlPlay.addEventListener('click', () => {
+            console.log("播放播放播放播放播放");
+
             this.amplitude.play();
         }, false);
 
@@ -304,6 +268,24 @@ class PlayerBar extends HTMLElement {
     updateProgressBarTime(playedTime, totalTime) {
         this.progressPlayedSeconds.textContent = new Date(playedTime * 1000).toISOString().substr(14, 5);
         this.progressSongSeconds.textContent = new Date(totalTime * 1000).toISOString().substr(14, 5);
+    }
+
+    updatePlayList(playList) {
+        this.playList.length = 0;
+        this.playList.push(...playList);
+    }
+
+    playSong() {
+        let clickAlbumSongsInfo = Array.prototype.slice.call(arguments)[0][0];
+        let currentAlbumSongList = formatAlbumSongList(clickAlbumSongsInfo);
+        let currentSongInListIndex = currentAlbumSongList.findIndex(getSongInPlayListIndex(clickAlbumSongsInfo.songInfo.itemId));
+
+        this.amplitude.stop();
+        this.amplitude.pause();
+        this.updatePlayList(currentAlbumSongList);
+        this.playerConfig();
+
+        this.amplitude.playSongAtIndex(currentSongInListIndex);
     }
 }
 

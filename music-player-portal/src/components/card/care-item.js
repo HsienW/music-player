@@ -6,7 +6,7 @@ import './card-item.scss';
 const { Meta } = Card;
 
 export const CardItem = (props) => {
-    const { itemName, itemHoverable, imageURL, itemStyle, itemClickAction } = {...props};
+    const { itemTitle, itemHoverable, imageURL, itemStyle, itemClickAction, itemImageClass } = {...props};
 
     const itemClick = () => {
         itemClickAction(props);
@@ -14,14 +14,14 @@ export const CardItem = (props) => {
 
     return (
         <Card
-            className='custom-card-body'
+            className={itemImageClass}
             hoverable={itemHoverable}
             onClick={itemClick}
             cover={<img src={imageURL}/>}
             style={itemStyle}
         >
             <Meta
-                title={itemName}
+                title={itemTitle}
             />
         </Card>
     );
@@ -29,11 +29,12 @@ export const CardItem = (props) => {
 
 CardItem.propTypes = {
     itemId: PropTypes.string.isRequired,
-    itemName: PropTypes.string.isRequired,
+    itemTitle: PropTypes.string.isRequired,
     itemHoverable: PropTypes.bool.isRequired,
-    itemArtist: PropTypes.array.isRequired,
+    itemSubtitle: PropTypes.string.isRequired,
     imageURL: PropTypes.string.isRequired,
     itemClickAction: PropTypes.func.isRequired,
     itemStyle: PropTypes.object.isRequired,
+    itemImageClass: PropTypes.string.isRequired,
 };
 

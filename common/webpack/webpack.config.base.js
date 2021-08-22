@@ -7,13 +7,13 @@ module.exports = {
             // cacheGroups 用途是定義 chunks 所屬的 cache 組
             cacheGroups: {
                 // styles 權重設置為最高, 不然可能其他的 cacheGroups 會提前打包一部分 style 文件
-                styles: {
-                    name: 'styles',
-                    priority: 30,
-                    test: /.css$/,
-                    chunks: 'all',
-                    enforce: true,
-                },
+                // styles: {
+                //     name: 'styles',
+                //     priority: 30,
+                //     test: /.css$/,
+                //     chunks: 'all',
+                //     enforce: true,
+                // },
                 // 拆分 react 核心
                 reactDll: {
                     name: 'react-dll',

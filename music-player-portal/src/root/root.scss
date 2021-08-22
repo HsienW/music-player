@@ -3,6 +3,11 @@
 @import '../../../common/style/variable';
 @import '~antd/dist/antd.css';
 
+
+#portal-root {
+  padding: $padding-size-s;
+}
+
 .portal-root-title {
   font-size: $font-size-xl;
   line-height: $line-height-xl;

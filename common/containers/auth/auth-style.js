@@ -28,7 +28,6 @@ const authStyle = `
          max-width: 420px;
          margin: 0 auto 0;
          padding: 45px;
-         text-align: center;
          box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
          border-radius: 4px
     }
@@ -70,6 +69,7 @@ const authStyle = `
         color: #595959;
         font-size: 1.75rem;
         font-weight: 700;
+        text-align: center;
     }
         
     .form .form-sub-title {
@@ -82,6 +82,7 @@ const authStyle = `
          margin: 0.8rem; 0 0;
          color: #bfbfbf;
          font-size: 0.75rem;
+         text-align: center;
     }
         
     .form .description a {

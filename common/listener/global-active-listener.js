@@ -1,7 +1,7 @@
 /** Actively listener when the app is running **/
 
-import {pubSub} from '../pub-sub/pub-sub';
-import {pubSubCommonKey} from '../pub-sub/pub-sub-key';
+import {pubSub} from '../pub-sub';
+import {pubSubKey} from '../pub-sub';
 
 const globalActiveListener = (function () {
 
@@ -9,13 +9,13 @@ const globalActiveListener = (function () {
 
     operations.initOnloadListener = function () {
         window.addEventListener('load', () => {
-            pubSub.doPublish(pubSubCommonKey.windowOnload);
+            pubSub.doPublish(pubSubKey.common.windowOnload);
         }, false);
     }
 
     operations.initRouteChangeListener = function () {
         window.addEventListener('popstate', () => {
-            pubSub.doPublish(pubSubCommonKey.routeChange);
+            pubSub.doPublish(pubSubKey.common.routeChange);
         }, false);
     }
 

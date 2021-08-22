@@ -2,17 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { singleAppGlobalState } from '../../common/state/single-app-global-state';
 import { globalActiveListener } from '../../common/listener/global-active-listener';
+import { pubSub, pubSubKey } from '../../common/pub-sub';
 import { PlaylistRootDom } from './root/root';
 import './public-path';
 
 function renderPlaylistRoot(props) {
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
+    const { container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey } = props;
     ReactDOM.render(
         <PlaylistRootDom
             routerBase={routerBase}
             setGlobalState={setGlobalState}
             getGlobalState={getGlobalState}
             onStateChange={onStateChange}
+            pubSub={pubSub}
+            pubSubKey={pubSubKey}
         />,
         container ? container.querySelector('#playlist-root') : document.querySelector('#playlist-root')
     );
@@ -25,7 +28,7 @@ function renderSinglePlaylistRoot(props) {
     import ('../../common/containers/player-bar/player-bar');
     import ('./root/root.scss');
 
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
+    const { container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
 
     ReactDOM.render(
         <>
@@ -44,6 +47,8 @@ function renderSinglePlaylistRoot(props) {
                         setGlobalState={setGlobalState}
                         getGlobalState={getGlobalState}
                         onStateChange={onStateChange}
+                        pubSub={pubSub}
+                        pubSubKey={pubSubKey}
                     />
                 </div>
                 <div className="footer-layout">
@@ -61,7 +66,7 @@ if (!window.__POWERED_BY_QIANKUN__) {
     const routerBase = '/playlist';
     const authRedirectURL = `${routerBase}/album`;
     const { getGlobalState, setGlobalState } = singleAppGlobalState;
-    const props = { routerBase, getGlobalState, setGlobalState };
+    const props = { routerBase, getGlobalState, setGlobalState, pubSub, pubSubKey };
 
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'playlist 我自己運行了');

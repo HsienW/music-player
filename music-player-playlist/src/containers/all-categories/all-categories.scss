@@ -1,12 +1,12 @@
 @import '../../../../common/style/variable';
 
-.home-container-title {
+.all-categories-container-title {
   font-size: $font-size-l;
   font-weight: $font-weight-xl;
   color: $heading-color
 }
 
-.home-container-content {
+.all-categories-container-content {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
