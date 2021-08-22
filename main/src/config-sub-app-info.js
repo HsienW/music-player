@@ -14,11 +14,11 @@ const subAppInfo = [
         container: '#search-root',
     },
     {
-        name: 'music-player-playlist',
-        displayName: 'Playlist',
-        entry: process.env.REACT_APP_PLAYLIST_ENV,
-        activeRule: '/playlist',
-        container: '#playlist-root',
+        name: 'music-player-collection',
+        displayName: 'Collection',
+        entry: process.env.REACT_APP_COLLECTION_ENV,
+        activeRule: '/collection',
+        container: '#collection-root',
     }
 ];
 

@@ -6,7 +6,6 @@ const pubSubKey = {
         routeChange: '[common] route-change',
         playSong: '[common] play-song',
     }
-
 }
 
 export {

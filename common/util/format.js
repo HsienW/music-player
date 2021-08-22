@@ -10,11 +10,24 @@ const formatAlbumSongList = function (data) {
     });
 }
 
+const formatPlaylistSongList = function (data) {
+    return data.map((item) => {
+        if (item.track === null || item.track === undefined) {
+            return
+        }
+        return {
+            ...item,
+            ...item.track
+        };
+    });
+}
+
 const getSongInPlayListIndex = function (songId) {
-    return (item) => item.id  === songId;
+    return (item) => item.id === songId;
 }
 
 export {
     formatAlbumSongList,
-    getSongInPlayListIndex
+    getSongInPlayListIndex,
+    formatPlaylistSongList
 }

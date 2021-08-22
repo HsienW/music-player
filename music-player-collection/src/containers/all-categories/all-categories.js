@@ -1,29 +1,36 @@
 import React, {useState, useEffect} from 'react';
-import {getCategoryPlaylist} from '../../api';
+import {getAllCategories} from '../../api';
 import {CardItem} from '../../components';
 import {Divider} from 'antd';
-import queryString from 'query-string';
-import './categories-detail.scss';
+import {createParamRoute, navigationRoute} from '../../../../common/util';
+import './all-categories.scss';
 
-export const CategoriesDetail = (props) => {
+export const AllCategories = (props) => {
     // const {pubSub, pubSubKey} = {...props};
-    const categoryInfo = queryString.parse(location.search);
+
     let [getApiState, changeGetApiState] = useState(false);
-    let [categoriesPlayList, changeCategoriesPlayList] = useState([]);
+    let [allCategoriesList, changeAllCategoriesList] = useState([]);
 
     useEffect(() => {
-        getCategoryPlaylist(categoryInfo.id)
+        getAllCategories()
             .then((respond) => {
-                changeCategoriesPlayList(respond['playlists']['items']);
+                changeAllCategoriesList(respond['categories']['items']);
                 changeGetApiState(true);
             })
             .catch((error) => {
                 console.log(error);
                 changeGetApiState(false);
             });
-    }, [changeCategoriesPlayList]);
+    }, [changeAllCategoriesList]);
 
-    const categoriesPlaylistItemClick = (categoriesItemInfo) => {
+    const categoriesItemClick = (categoriesItemInfo) => {
+        let newRouteURL = createParamRoute(
+            '/collection/categories-detail',
+            {
+                id: categoriesItemInfo.itemId,
+                title: categoriesItemInfo.itemTitle
+            });
+        navigationRoute(newRouteURL);
     };
 
     return (
@@ -31,11 +38,11 @@ export const CategoriesDetail = (props) => {
             {
                 getApiState
                     ? <>
-                        <div className={'categories-container-title'}>{categoryInfo.title}</div>
+                        <div className={'all-categories-container-title'}>All Categories</div>
                         <Divider style={{margin: '20 0'}}/>
-                        <div className={'categories-container-content'}>
+                        <div className={'all-categories-container-content'}>
                             {
-                                categoriesPlayList.map((item) => {
+                                allCategoriesList.map((item) => {
                                     return (
                                         <CardItem
                                             key={item.id}
@@ -43,8 +50,8 @@ export const CategoriesDetail = (props) => {
                                             itemTitle={item.name}
                                             itemHoverable={true}
                                             itemSubtitle={''}
-                                            imageURL={item.images[0].url}
-                                            itemClickAction={categoriesPlaylistItemClick}
+                                            imageURL={item.icons[0].url}
+                                            itemClickAction={categoriesItemClick}
                                             itemStyle={{width: 180}}
                                             itemImageClass={'custom-card-categories-img-size'}
                                         >

@@ -23,7 +23,7 @@ export const Home = () => {
 
     const homeAlbumItemClick = (albumItemInfo) => {
         let newRouteURL = createParamRoute(
-            '/playlist/album',
+            '/collection/album',
             {
                 id: albumItemInfo.itemId,
                 name: albumItemInfo.itemTitle,

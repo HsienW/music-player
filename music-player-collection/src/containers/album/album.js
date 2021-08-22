@@ -7,12 +7,12 @@ import './album.scss';
 export const Album = (props) => {
     const {pubSub, pubSubKey} = {...props};
     const songInfo = queryString.parse(location.search);
+
     let [getApiState, changeGetApiState] = useState(false);
     let [albumInfo, changeAlbumInfo] = useState(null);
     let [albumSongList, changeAlbumSongList] = useState([]);
 
     useEffect(() => {
-
         getAlbumSongs(songInfo.id)
             .then((respond) => {
                 changeAlbumInfo(songInfo);
@@ -56,8 +56,9 @@ export const Album = (props) => {
                         />
                         <CustomList
                             listData={albumSongList}
-                            itemClickAction={albumSongItemClick}
                             listStyle={{width: '100%'}}
+                            itemDescription={albumInfo.artist}
+                            itemClickAction={albumSongItemClick}
                         />
                     </>
                     : <div>Loading...</div>

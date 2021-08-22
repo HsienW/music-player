@@ -14,7 +14,7 @@ export const CustomList = (props) => {
             renderItem={item => (
                 <CustomListItem
                     itemId={item.id}
-                    itemName={item.name}
+                    itemTitle={item.name}
                     itemDescription={item.artists[0].name}
                     itemDuration={'00:30'}
                     itemClickAction={itemClickAction}

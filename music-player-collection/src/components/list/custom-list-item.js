@@ -4,7 +4,7 @@ import {List} from 'antd';
 import './custom-list-item.scss';
 
 export const CustomListItem = (props) => {
-    const { itemId, itemName, itemDescription, itemDuration, itemClickAction } = {...props};
+    const { itemId, itemTitle, itemDescription, itemDuration, itemClickAction } = {...props};
 
     const itemClick = () => {
         itemClickAction(props);
@@ -17,7 +17,7 @@ export const CustomListItem = (props) => {
                 onClick={itemClick}
             >
                 <List.Item.Meta
-                    title={itemName}
+                    title={itemTitle}
                     description={itemDescription}
                 />
                 <div>{itemDuration}</div>
@@ -28,7 +28,7 @@ export const CustomListItem = (props) => {
 
 CustomListItem.propTypes = {
     itemId: PropTypes.string.isRequired,
-    itemName: PropTypes.string.isRequired,
+    itemTitle: PropTypes.string.isRequired,
     itemDescription: PropTypes.string.isRequired,
     itemDuration: PropTypes.string.isRequired,
     itemClickAction: PropTypes.func.isRequired,

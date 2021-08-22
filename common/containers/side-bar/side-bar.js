@@ -25,35 +25,35 @@ class SideBar extends HTMLElement {
         this.sideBarUl = document.createElement('ul');
         this.sideBarPortalLi = document.createElement('li');
         this.sideBarSearchLi = document.createElement('li');
-        this.sideBarPlaylistLi = document.createElement('li');
+        this.sideBarCollectionLi = document.createElement('li');
         this.sideBarPortalLink = document.createElement('a');
         this.sideBarSearchLink = document.createElement('a');
-        this.sideBarPlaylistLink = document.createElement('a');
+        this.sideBarCollectionLink = document.createElement('a');
 
         this.sideBarBody.className = 'side-bar';
         this.sideBarUl.className = 'side-bar-menu';
 
         this.sideBarPortalLink.textContent = 'Home';
+        this.sideBarCollectionLink.textContent = 'Collection';
         this.sideBarSearchLink.textContent = 'Search';
-        this.sideBarPlaylistLink.textContent = 'Play list';
 
         this.sideBarUl.setAttribute('id', 'side-bar');
 
         this.sideBarPortalLi.setAttribute('active-rule', '/portal');
-        this.sideBarPlaylistLi.setAttribute('active-rule', '/playlist');
+        this.sideBarCollectionLi.setAttribute('active-rule', '/collection');
         this.sideBarSearchLi.setAttribute('active-rule', '/search');
 
         this.sideBarPortalLink.setAttribute('active-rule', '/portal/home');
-        this.sideBarPlaylistLink.setAttribute('active-rule', '/playlist/all-categories');
+        this.sideBarCollectionLink.setAttribute('active-rule', '/collection/all-categories');
         this.sideBarSearchLink.setAttribute('active-rule', '/search');
 
         this.shadow.appendChild(this.sideBarBody);
         this.sideBarBody.appendChild(this.sideBarUl);
         this.sideBarUl.appendChild(this.sideBarPortalLi);
-        this.sideBarUl.appendChild(this.sideBarPlaylistLi);
+        this.sideBarUl.appendChild(this.sideBarCollectionLi);
         this.sideBarUl.appendChild(this.sideBarSearchLi);
         this.sideBarPortalLi.appendChild(this.sideBarPortalLink);
-        this.sideBarPlaylistLi.appendChild(this.sideBarPlaylistLink);
+        this.sideBarCollectionLi.appendChild(this.sideBarCollectionLink);
         this.sideBarSearchLi.appendChild(this.sideBarSearchLink);
     }
 

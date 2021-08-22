@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { singleAppGlobalState } from '../../common/state/single-app-global-state';
 import { globalActiveListener } from '../../common/listener/global-active-listener';
 import { pubSub, pubSubKey } from '../../common/pub-sub';
-import { PlaylistRootDom } from './root/root';
+import { CollectionRootDom } from './root/root';
 import './public-path';
 
-function renderPlaylistRoot(props) {
+function renderCollectionRoot(props) {
     const { container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey } = props;
     ReactDOM.render(
-        <PlaylistRootDom
+        <CollectionRootDom
             routerBase={routerBase}
             setGlobalState={setGlobalState}
             getGlobalState={getGlobalState}
@@ -17,11 +17,11 @@ function renderPlaylistRoot(props) {
             pubSub={pubSub}
             pubSubKey={pubSubKey}
         />,
-        container ? container.querySelector('#playlist-root') : document.querySelector('#playlist-root')
+        container ? container.querySelector('#collection-root') : document.querySelector('#collection-root')
     );
 }
 
-function renderSinglePlaylistRoot(props) {
+function renderSingleCollectionRoot(props) {
     import ('../../common/containers/loading-spin/loading-spin');
     import ('../../common/containers/side-bar/side-bar');
     import ('../../common/containers/header-bar/header-bar');
@@ -42,7 +42,7 @@ function renderSinglePlaylistRoot(props) {
                     <header-bar-container/>
                 </div>
                 <div className="content-layout">
-                    <PlaylistRootDom
+                    <CollectionRootDom
                         routerBase={routerBase}
                         setGlobalState={setGlobalState}
                         getGlobalState={getGlobalState}
@@ -56,23 +56,23 @@ function renderSinglePlaylistRoot(props) {
                 </div>
             </div>
         </>,
-        container ? container.querySelector('#playlist-root') : document.querySelector('#playlist-root')
+        container ? container.querySelector('#collection-root') : document.querySelector('#collection-root')
     );
 }
 
 if (!window.__POWERED_BY_QIANKUN__) {
-    console.log('playlist 我自己運行了');
+    console.log('collection 我自己運行了');
 
-    const routerBase = '/playlist';
-    const authRedirectURL = `${routerBase}/album`;
+    const routerBase = '/collection';
+    const authRedirectURL = `${routerBase}/all-categories`;
     const { getGlobalState, setGlobalState } = singleAppGlobalState;
     const props = { routerBase, getGlobalState, setGlobalState, pubSub, pubSubKey };
 
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
-    singleAppGlobalState.setGlobalState('init', 'playlist 我自己運行了');
+    singleAppGlobalState.setGlobalState('init', 'collection 我自己運行了');
     globalActiveListener.initAllAction();
 
-    renderSinglePlaylistRoot(props);
+    renderSingleCollectionRoot(props);
 }
 
 /**
@@ -87,12 +87,12 @@ export async function bootstrap() {
  * 每次加載進子專案都會 call mount, 一般 render 也會在這邊 call
  */
 export async function mount(props) {
-    renderPlaylistRoot(props);
+    renderCollectionRoot(props);
 }
 
 /**
  * 每次切換 or 卸載進子專案都會 call unmount, 一般會在這裡銷毀子專案的 instance
  */
 export async function unmount() {
-    ReactDOM.unmountComponentAtNode(document.getElementById('playlist-root'));
+    ReactDOM.unmountComponentAtNode(document.getElementById('collection-root'));
 }
