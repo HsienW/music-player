@@ -1,4 +1,5 @@
 import {loadingSpinStyle} from './loading-spin-style';
+import {pubSub, pubSubKey} from '../../pub-sub';
 
 class LoadingSpin extends HTMLElement {
     constructor() {
@@ -6,6 +7,7 @@ class LoadingSpin extends HTMLElement {
         this.shadow = this.attachShadow({mode: 'open'});
         this.domStyling();
         this.domRender();
+        pubSub.doSubscribe(pubSubKey.common.loading, this.updateDomActiveStyle.bind(this));
     }
 
     domStyling() {
@@ -36,8 +38,13 @@ class LoadingSpin extends HTMLElement {
         this.spinLoad.appendChild(this.loadItemLeft);
     }
 
-    // domEventInit() {
-    // }
+    updateDomActiveStyle(condition, styleName) {
+        if (!this.classList.contains(condition)) {
+            this.classList.add(styleName);
+        } else {
+            this.classList.remove(styleName);
+        }
+    }
 }
 
 customElements.define('loading-spin-container', LoadingSpin);

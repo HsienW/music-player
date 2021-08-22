@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {getPlaylistSongs} from '../../api';
 import {CardItem, CustomList} from '../../components';
 import {formatPlaylistSongList} from '../../../../common/util';
+import {Skeleton} from 'antd';
 import queryString from 'query-string';
 import './playlist.scss';
 
@@ -62,7 +63,7 @@ export const Playlist = (props) => {
                             itemClickAction={playlistItemClick}
                         />
                     </>
-                    : <div>Loading...</div>
+                    : <Skeleton active={true}/>
             }
         </div>
     );

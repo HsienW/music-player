@@ -15,6 +15,6 @@ const getCategoryPlaylist = (categoryId) => {
 export {
     getAllCategories,
     getCategoryPlaylist
-}
+};
 
 

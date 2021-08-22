@@ -4,7 +4,7 @@ import {List} from 'antd';
 import './custom-list-item.scss';
 
 export const CustomListItem = (props) => {
-    const { itemId, itemTitle, itemDescription, itemDuration, itemClickAction } = {...props};
+    const {itemId, itemTitle, itemDescription, itemDuration, itemClickAction} = {...props};
 
     const itemClick = () => {
         itemClickAction(props);

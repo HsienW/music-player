@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {getCategoryPlaylist} from '../../api';
 import {CardItem} from '../../components';
-import {Divider} from 'antd';
+import {Divider, Skeleton} from 'antd';
 import queryString from 'query-string';
-import {createParamRoute, navigationRoute, formatPlaylistSongList} from '../../../../common/util';
+import {createParamRoute, navigationRoute} from '../../../../common/util';
 import './categories-detail.scss';
 
 export const CategoriesDetail = (props) => {
@@ -65,7 +65,7 @@ export const CategoriesDetail = (props) => {
                             }
                         </div>
                     </>
-                    : <div>Loading...</div>
+                    : <Skeleton active={true}/>
             }
         </>
     );

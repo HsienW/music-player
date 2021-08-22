@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {getAlbumSongs} from '../../api';
 import {CardItem, CustomList} from '../../components';
+import {Skeleton} from 'antd';
 import queryString from 'query-string';
 import './album.scss';
 
@@ -61,7 +62,7 @@ export const Album = (props) => {
                             itemClickAction={albumSongItemClick}
                         />
                     </>
-                    : <div>Loading...</div>
+                    : <Skeleton active={true}/>
             }
         </div>
     );

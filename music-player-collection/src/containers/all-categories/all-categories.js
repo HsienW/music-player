@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {getAllCategories} from '../../api';
 import {CardItem} from '../../components';
-import {Divider} from 'antd';
+import {Divider, Skeleton} from 'antd';
 import {createParamRoute, navigationRoute} from '../../../../common/util';
 import './all-categories.scss';
 
@@ -61,7 +61,7 @@ export const AllCategories = (props) => {
                             }
                         </div>
                     </>
-                    : <div>Loading...</div>
+                    : <Skeleton active={true}/>
             }
         </>
     );

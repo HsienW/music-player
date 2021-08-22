@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'antd';
-import { CustomListItem } from './custom-list-item';
+import {List} from 'antd';
+import {CustomListItem} from './custom-list-item';
 
 export const CustomList = (props) => {
-    const { listData, listStyle, itemClickAction } = { ...props };
+    const {listData, listStyle, itemClickAction} = {...props};
 
     return (
         <List

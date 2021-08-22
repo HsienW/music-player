@@ -9,4 +9,4 @@ const getAlbumSongs = (albumId) => {
 
 export {
     getAlbumSongs
-}
+};

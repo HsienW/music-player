@@ -9,7 +9,7 @@ const singleAppGlobalState = (function () {
         return key ? state[key] : state;
     };
 
-    const onStateChange =  (newState, prev) => {
+    const onStateChange = (newState, prev) => {
         console.log('global state change', JSON.stringify(newState), JSON.stringify(prev));
 
         for (const key in newState) {

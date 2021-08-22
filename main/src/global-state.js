@@ -1,4 +1,4 @@
-import { initGlobalState } from 'qiankun';
+import {initGlobalState} from 'qiankun';
 
 const initialState = {
     init: 'init'

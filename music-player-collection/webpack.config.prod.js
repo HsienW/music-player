@@ -5,8 +5,8 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const baseWebpackConfig = require('../common/webpack/webpack.config.base');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { merge } = require('webpack-merge');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const {merge} = require('webpack-merge');
 const path = require('path');
 
 // const isDev = process.env.NODE_ENV === 'development';

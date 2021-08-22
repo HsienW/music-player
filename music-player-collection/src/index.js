@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { singleAppGlobalState } from '../../common/state/single-app-global-state';
-import { globalActiveListener } from '../../common/listener/global-active-listener';
-import { pubSub, pubSubKey } from '../../common/pub-sub';
-import { CollectionRootDom } from './root/root';
+import {singleAppGlobalState} from '../../common/state/single-app-global-state';
+import {globalActiveListener} from '../../common/listener/global-active-listener';
+import {pubSub, pubSubKey} from '../../common/pub-sub';
+import {CollectionRootDom} from './root/root';
 import './public-path';
 
 function renderCollectionRoot(props) {
-    const { container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey } = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
     ReactDOM.render(
         <CollectionRootDom
             routerBase={routerBase}
@@ -28,7 +28,7 @@ function renderSingleCollectionRoot(props) {
     import ('../../common/containers/player-bar/player-bar');
     import ('./root/root.scss');
 
-    const { container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
 
     ReactDOM.render(
         <>
@@ -65,8 +65,8 @@ if (!window.__POWERED_BY_QIANKUN__) {
 
     const routerBase = '/collection';
     const authRedirectURL = `${routerBase}/all-categories`;
-    const { getGlobalState, setGlobalState } = singleAppGlobalState;
-    const props = { routerBase, getGlobalState, setGlobalState, pubSub, pubSubKey };
+    const {getGlobalState, setGlobalState} = singleAppGlobalState;
+    const props = {routerBase, getGlobalState, setGlobalState, pubSub, pubSubKey};
 
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'collection 我自己運行了');

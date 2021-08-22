@@ -1,3 +1,14 @@
+const formatAlbumList = function (data) {
+    return data.map((item) => {
+        if (item.preview_url === null || item.preview_url === undefined) {
+            return
+        }
+        return {
+            ...item,
+        };
+    });
+}
+
 const formatAlbumSongList = function (data) {
     return data.albumSongList.map((item) => {
         return {
@@ -27,6 +38,7 @@ const getSongInPlayListIndex = function (songId) {
 }
 
 export {
+    formatAlbumList,
     formatAlbumSongList,
     getSongInPlayListIndex,
     formatPlaylistSongList

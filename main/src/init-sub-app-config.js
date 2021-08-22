@@ -1,10 +1,10 @@
-import { globalState } from './global-state';
-import { pubSub, pubSubKey } from '../../common/pub-sub';
-import { configSubAppRender } from './config-sub-app-render';
+import {globalState} from './global-state';
+import {pubSub, pubSubKey} from '../../common/pub-sub';
+import {configSubAppRender} from './config-sub-app-render';
 
-const loader = loading => configSubAppRender({ loading });
+const loader = loading => configSubAppRender({loading});
 
-const iniSubAppConfig = function(subAppInfo) {
+const iniSubAppConfig = function (subAppInfo) {
     return subAppInfo.map(item => {
         return {
             ...item,

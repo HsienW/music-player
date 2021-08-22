@@ -1,6 +1,7 @@
 import {navigationRoute} from '../../util';
 import {pubSub, pubSubKey} from '../../pub-sub';
 import {sideBarStyle} from './side-bar-style';
+
 // import {subAppInfo} from '../../../main/src/config-sub-app-info';
 
 class SideBar extends HTMLElement {

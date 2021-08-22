@@ -9,7 +9,7 @@ const getPlaylistSongs = (playlistId) => {
 
 export {
     getPlaylistSongs,
-}
+};
 
 
 
