@@ -1,7 +1,7 @@
 import { getNewReleaseAlbum } from './home/new-release';
-import { getFeaturedAlbum } from './home/featured';
+import { getFeaturedPlaylist } from './home/featured';
 
 export {
     getNewReleaseAlbum,
-    getFeaturedAlbum
+    getFeaturedPlaylist
 };
