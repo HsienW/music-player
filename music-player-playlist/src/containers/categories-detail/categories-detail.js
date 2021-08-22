@@ -1,40 +1,29 @@
 import React, {useState, useEffect} from 'react';
-import {getAllCategories} from '../../api/categories/categories';
+import {getCategoryPlaylist} from '../../api';
 import {CardItem} from '../../components';
 import {Divider} from 'antd';
-// import queryString from 'query-string';
-import './categories.scss';
+import queryString from 'query-string';
+import './categories-detail.scss';
 
-export const Categories = (props) => {
+export const CategoriesDetail = (props) => {
     // const {pubSub, pubSubKey} = {...props};
-
+    const categoryInfo = queryString.parse(location.search);
     let [getApiState, changeGetApiState] = useState(false);
-    let [categoriesList, changeCategoriesList] = useState([]);
+    let [categoriesPlayList, changeCategoriesPlayList] = useState([]);
 
     useEffect(() => {
-        // const songInfo = queryString.parse(location.search);
-
-        getAllCategories()
+        getCategoryPlaylist(categoryInfo.id)
             .then((respond) => {
-                changeCategoriesList(respond['categories']['items']);
+                changeCategoriesPlayList(respond['playlists']['items']);
                 changeGetApiState(true);
             })
             .catch((error) => {
                 console.log(error);
                 changeGetApiState(false);
             });
-    }, [changeCategoriesList]);
+    }, [changeCategoriesPlayList]);
 
-    const categoriesItemClick = () => {
-        // let newRouteURL = createParamRoute(
-        //     '/playlist/album',
-        //     {
-        //         id: albumItemInfo.itemId,
-        //         name: albumItemInfo.itemName,
-        //         image: albumItemInfo.imageURL,
-        //         artist: albumItemInfo.itemArtist
-        //     });
-        // navigationRoute(newRouteURL);
+    const categoriesPlaylistItemClick = (categoriesItemInfo) => {
     };
 
     return (
@@ -42,11 +31,11 @@ export const Categories = (props) => {
             {
                 getApiState
                     ? <>
-                        <div className={'categories-container-title'}>Play Categories</div>
+                        <div className={'categories-container-title'}>{categoryInfo.title}</div>
                         <Divider style={{margin: '20 0'}}/>
                         <div className={'categories-container-content'}>
                             {
-                                categoriesList.map((item) => {
+                                categoriesPlayList.map((item) => {
                                     return (
                                         <CardItem
                                             key={item.id}
@@ -54,8 +43,8 @@ export const Categories = (props) => {
                                             itemTitle={item.name}
                                             itemHoverable={true}
                                             itemSubtitle={''}
-                                            imageURL={item.icons[0].url}
-                                            itemClickAction={categoriesItemClick}
+                                            imageURL={item.images[0].url}
+                                            itemClickAction={categoriesPlaylistItemClick}
                                             itemStyle={{width: 180}}
                                             itemImageClass={'custom-card-categories-img-size'}
                                         >

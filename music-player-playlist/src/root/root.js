@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {Categories} from '../containers/categories/categories';
+import {AllCategories} from '../containers/all-categories/all-categories';
+import {CategoriesDetail} from '../containers/categories-detail/categories-detail';
 import {Album} from '../containers/album/album';
 import './root.scss';
 
@@ -19,8 +20,16 @@ export const PlaylistRootDom = (props) => {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path={`${routerBase}/categories`}>
-                    <Categories
+                <Route path={`${routerBase}/all-categories`}>
+                    <AllCategories
+                        pubSub={pubSub}
+                        pubSubKey={pubSubKey}
+                        getGlobalState={getGlobalState}
+                        setGlobalState={setGlobalState}
+                    />
+                </Route>
+                <Route path={`${routerBase}/categories-detail`}>
+                    <CategoriesDetail
                         pubSub={pubSub}
                         pubSubKey={pubSubKey}
                         getGlobalState={getGlobalState}

@@ -1,4 +1,4 @@
-import {navigationRoute} from '../../util/route';
+import {navigationRoute} from '../../util';
 import {authStyle} from './auth-style';
 
 class Auth extends HTMLElement {

@@ -2,13 +2,14 @@ import SpotifyWebApi from 'spotify-web-api-js';
 
 const spotify = new SpotifyWebApi();
 
-const getNewReleaseAlbum = () => {
+const getPlaylistSongs = (playlistId) => {
     spotify.setAccessToken(JSON.parse(sessionStorage.getItem('user-token')));
-    return spotify.getNewReleases();
+    return spotify.getPlaylistTracks(playlistId);
 };
 
 export {
-    getNewReleaseAlbum
+    getPlaylistSongs,
 }
+
 
 

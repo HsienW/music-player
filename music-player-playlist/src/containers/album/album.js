@@ -1,18 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import {getAlbumSongs} from '../../api/album/album';
+import {getAlbumSongs} from '../../api';
 import {CardItem, CustomList} from '../../components';
 import queryString from 'query-string';
 import './album.scss';
 
 export const Album = (props) => {
     const {pubSub, pubSubKey} = {...props};
-
+    const songInfo = queryString.parse(location.search);
     let [getApiState, changeGetApiState] = useState(false);
     let [albumInfo, changeAlbumInfo] = useState(null);
     let [albumSongList, changeAlbumSongList] = useState([]);
 
     useEffect(() => {
-        const songInfo = queryString.parse(location.search);
 
         getAlbumSongs(songInfo.id)
             .then((respond) => {
@@ -65,5 +64,5 @@ export const Album = (props) => {
             }
         </div>
     );
-}
-;
+};
+

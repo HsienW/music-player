@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getNewReleaseAlbum } from '../../api/home/new-release';
-import { createParamRoute, navigationRoute } from '../../../../common/util/route';
+import { getNewReleaseAlbum } from '../../api';
+import { createParamRoute, navigationRoute } from '../../../../common/util';
 import { CardItem } from '../../components';
 import { Divider } from 'antd';
 import './home.scss';

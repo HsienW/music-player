@@ -1,7 +1,7 @@
 import amplitude from 'amplitudejs';
 import {playerBarStyle} from './player-bar-style';
 import {pubSub, pubSubKey} from '../../pub-sub';
-import {formatAlbumSongList, getSongInPlayListIndex} from '../../util/format';
+import {formatAlbumSongList, getSongInPlayListIndex} from '../../util';
 
 class PlayerBar extends HTMLElement {
     constructor() {
