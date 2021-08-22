@@ -9,6 +9,6 @@ const getNewReleaseAlbum = () => {
 
 export {
     getNewReleaseAlbum
-}
+};
 
 

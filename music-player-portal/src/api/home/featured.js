@@ -9,7 +9,7 @@ const getFeaturedAlbum = () => {
 
 export {
     getFeaturedAlbum,
-}
+};
 
 
 

@@ -1,7 +1,7 @@
-import { registerMicroApps, start, setDefaultMountApp } from 'qiankun';
-import { iniSubAppConfig } from './init-sub-app-config';
-import { subAppInfo } from './config-sub-app-info';
-import { globalActiveListener } from '../../common/listener/global-active-listener';
+import {registerMicroApps, start, setDefaultMountApp} from 'qiankun';
+import {iniSubAppConfig} from './init-sub-app-config';
+import {subAppInfo} from './config-sub-app-info';
+import {globalActiveListener} from '../../common/listener/global-active-listener';
 
 registerMicroApps(
     iniSubAppConfig(subAppInfo),

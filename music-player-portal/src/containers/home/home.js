@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getNewReleaseAlbum } from '../../api';
 import { createParamRoute, navigationRoute } from '../../../../common/util';
 import { CardItem } from '../../components';
-import { Divider } from 'antd';
+import { Divider, Skeleton } from 'antd';
 import './home.scss';
 
 export const Home = () => {
@@ -23,7 +23,7 @@ export const Home = () => {
 
     const homeAlbumItemClick = (albumItemInfo) => {
         let newRouteURL = createParamRoute(
-            '/playlist/album',
+            '/collection/album',
             {
                 id: albumItemInfo.itemId,
                 name: albumItemInfo.itemTitle,
@@ -61,7 +61,7 @@ export const Home = () => {
                             }
                         </div>
                     </>
-                    : <div>Loading...</div>
+                    : <Skeleton active={true}/>
             }
         </>
     );

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { singleAppGlobalState } from '../../common/state/single-app-global-state';
-import { globalActiveListener } from '../../common/listener/global-active-listener';
-import { PortalRootDom } from './root/root';
+import {singleAppGlobalState} from '../../common/state/single-app-global-state';
+import {globalActiveListener} from '../../common/listener/global-active-listener';
+import {PortalRootDom} from './root/root';
 import './public-path';
 
 function renderPortalRoot(props) {
@@ -62,8 +62,8 @@ if (!window.__POWERED_BY_QIANKUN__) {
 
     const routerBase = '/portal';
     const authRedirectURL = `${routerBase}/home`;
-    const { getGlobalState, setGlobalState } = singleAppGlobalState;
-    const props = { routerBase, getGlobalState, setGlobalState };
+    const {getGlobalState, setGlobalState} = singleAppGlobalState;
+    const props = {routerBase, getGlobalState, setGlobalState};
 
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'portal 我自己運行了');

@@ -89,6 +89,7 @@ class HeaderBar extends HTMLElement {
             this.updateDomActiveStyle(this.userDropdownUl, 'hidden', 'hidden');
         }, false);
     }
+
     //
     // itemClick(event) {
     //

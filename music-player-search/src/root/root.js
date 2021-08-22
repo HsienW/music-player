@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import './root.scss';
 
@@ -11,7 +11,7 @@ const SearchPage2 = () => {
 };
 
 export const SearchRootDom = (props) => {
-    const { routerBase, setGlobalState, getGlobalState } = props;
+    const {routerBase, setGlobalState, getGlobalState} = props;
     const defaultValue = getGlobalState('init');
     const [testValue, changeValue] = useState(defaultValue);
 
@@ -19,7 +19,7 @@ export const SearchRootDom = (props) => {
         const newValue = Math.floor(Math.random() * 5) + 1;
         changeValue(newValue);
         console.log(getGlobalState('init'));
-        return handler({ init: newValue });
+        return handler({init: newValue});
     };
 
     console.log(getGlobalState('init'));

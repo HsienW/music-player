@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { singleAppGlobalState } from '../../common/state/single-app-global-state';
-import { globalActiveListener } from '../../common/listener/global-active-listener';
-import { SearchRootDom } from './root/root';
+import {singleAppGlobalState} from '../../common/state/single-app-global-state';
+import {globalActiveListener} from '../../common/listener/global-active-listener';
+import {SearchRootDom} from './root/root';
 import './public-path';
 
 function renderSearchRoot(props) {
-    const { container, routerBase, setGlobalState, getGlobalState, onStateChange } = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
     ReactDOM.render(
         <SearchRootDom
             routerBase={routerBase}
@@ -25,7 +25,7 @@ function renderSingleSearchRoot(props) {
     import ('../../common/containers/player-bar/player-bar');
     import ('./root/root.scss');
 
-    const { container, routerBase, setGlobalState, getGlobalState, onStateChange } = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
 
     ReactDOM.render(
         <>
@@ -60,8 +60,8 @@ if (!window.__POWERED_BY_QIANKUN__) {
 
     const routerBase = '/search';
     const authRedirectURL = `${routerBase}/search-page1`;
-    const { getGlobalState, setGlobalState } = singleAppGlobalState;
-    const props = { routerBase, getGlobalState, setGlobalState };
+    const {getGlobalState, setGlobalState} = singleAppGlobalState;
+    const props = {routerBase, getGlobalState, setGlobalState};
 
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'search 我自己運行了');

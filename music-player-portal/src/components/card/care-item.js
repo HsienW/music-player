@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card } from 'antd';
+import {Card} from 'antd';
 import './card-item.scss';
 
-const { Meta } = Card;
+const {Meta} = Card;
 
 export const CardItem = (props) => {
-    const { itemTitle, itemHoverable, imageURL, itemStyle, itemClickAction, itemImageClass } = {...props};
+    const {itemTitle, itemHoverable, imageURL, itemStyle, itemClickAction, itemImageClass} = {...props};
 
     const itemClick = () => {
         itemClickAction(props);

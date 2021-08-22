@@ -1,3 +1,14 @@
+const formatAlbumList = function (data) {
+    return data.map((item) => {
+        if (item.preview_url === null || item.preview_url === undefined) {
+            return
+        }
+        return {
+            ...item,
+        };
+    });
+}
+
 const formatAlbumSongList = function (data) {
     return data.albumSongList.map((item) => {
         return {
@@ -10,11 +21,25 @@ const formatAlbumSongList = function (data) {
     });
 }
 
+const formatPlaylistSongList = function (data) {
+    return data.map((item) => {
+        if (item.track === null || item.track === undefined) {
+            return
+        }
+        return {
+            ...item,
+            ...item.track
+        };
+    });
+}
+
 const getSongInPlayListIndex = function (songId) {
-    return (item) => item.id  === songId;
+    return (item) => item.id === songId;
 }
 
 export {
+    formatAlbumList,
     formatAlbumSongList,
-    getSongInPlayListIndex
+    getSongInPlayListIndex,
+    formatPlaylistSongList
 }
