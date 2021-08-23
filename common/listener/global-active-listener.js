@@ -19,6 +19,13 @@ const globalActiveListener = (function () {
         }, false);
     }
 
+    operations.initGetAuthListener = function () {
+        window.addEventListener('message',  (event) => {
+            console.log('書書書書書書書書書');
+            console.log(event);
+        }, false);
+    }
+
     //呼叫初始運行後全部監聽的
     const initAllAction = function () {
         for (let key in operations) {
