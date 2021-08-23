@@ -86,7 +86,16 @@ class Auth extends HTMLElement {
         const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${process.env.AUTH_WINDOW_ENV}&response_type=token`;
         const authSpotify = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
 
-        authSpotify.postMessage('test', '*');
+        console.log('怪怪怪怪怪怪怪怪');
+        console.log(authOriginURL);
+        console.log(process.env.AUTH_WINDOW_ENV);
+
+        setTimeout(() => {
+            console.log('ccccccccccccccccc');
+            // const token = authSpotify.window.location.hash.substring(101);
+            authSpotify.opener.postMessage(JSON.parse(JSON.stringify(authSpotify)), authOriginURL);
+            // authSpotify.close();
+        },4000);
 
         // console.log('怪怪怪怪怪怪怪怪');
         // console.log(authOriginURL);

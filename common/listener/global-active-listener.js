@@ -22,7 +22,7 @@ const globalActiveListener = (function () {
     operations.initGetAuthListener = function () {
         window.addEventListener('message',  (event) => {
             console.log('書書書書書書書書書');
-            console.log(event);
+            console.log(event.data);
         }, false);
     }
 
