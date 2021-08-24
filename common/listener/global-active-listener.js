@@ -20,9 +20,12 @@ const globalActiveListener = (function () {
     }
 
     operations.initGetAuthListener = function () {
-        window.addEventListener('message',  (event) => {
-            console.log('書書書書書書書書書');
-            console.log(event.data);
+        window.addEventListener('message', (event) => {
+            if(event.data.action === 'auth-spotify') {
+                sessionStorage.setItem('user-account', JSON.stringify(event.data.account));
+                sessionStorage.setItem('user-name', JSON.stringify(event.data.userName));
+                sessionStorage.setItem('user-token', JSON.stringify(event.data.token));
+            }
         }, false);
     }
 
