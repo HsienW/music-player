@@ -4,6 +4,7 @@ import {AllCategories} from '../containers/all-categories/all-categories';
 import {CategoriesDetail} from '../containers/categories-detail/categories-detail';
 import {Playlist} from '../containers/playlist/playlist';
 import {Album} from '../containers/album/album';
+import {Artist} from '../containers/artist/artist';
 import './root.scss';
 
 export const CollectionRootDom = (props) => {
@@ -47,6 +48,14 @@ export const CollectionRootDom = (props) => {
                 </Route>
                 <Route path={`${routerBase}/album`}>
                     <Album
+                        pubSub={pubSub}
+                        pubSubKey={pubSubKey}
+                        getGlobalState={getGlobalState}
+                        setGlobalState={setGlobalState}
+                    />
+                </Route>
+                <Route path={`${routerBase}/artist`}>
+                    <Artist
                         pubSub={pubSub}
                         pubSubKey={pubSubKey}
                         getGlobalState={getGlobalState}

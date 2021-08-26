@@ -45,7 +45,7 @@ export const Genre = () => {
         console.log(key);
     };
 
-    const searchResultAlbumItemClick = (albumItemInfo) => {
+    const albumItemClick = (albumItemInfo) => {
         let newRouteURL = createParamRoute(
             '/collection/album',
             {
@@ -53,6 +53,18 @@ export const Genre = () => {
                 name: albumItemInfo.itemTitle,
                 image: albumItemInfo.imageURL,
                 artist: albumItemInfo.itemSubtitle
+            });
+        navigationRoute(newRouteURL);
+    };
+
+    const artistItemClick = (artistItemInfo) => {
+        let newRouteURL = createParamRoute(
+            '/collection/artist',
+            {
+                id: artistItemInfo.itemId,
+                name: artistItemInfo.itemTitle,
+                image: artistItemInfo.imageURL,
+                artist: artistItemInfo.itemSubtitle
             });
         navigationRoute(newRouteURL);
     };
@@ -82,7 +94,7 @@ export const Genre = () => {
                                                 itemHoverable={true}
                                                 itemSubtitle={item.artists[0].name}
                                                 imageURL={item.images[0].url}
-                                                itemClickAction={searchResultAlbumItemClick}
+                                                itemClickAction={albumItemClick}
                                                 itemStyle={{width: 180}}
                                                 itemImageClass={'custom-card-home-img-size'}
                                             >
@@ -104,7 +116,7 @@ export const Genre = () => {
                                                 itemHoverable={true}
                                                 itemSubtitle={item.name}
                                                 imageURL={item.images[0].url}
-                                                itemClickAction={searchResultAlbumItemClick}
+                                                itemClickAction={artistItemClick}
                                                 itemStyle={{width: 180}}
                                                 itemImageClass={'custom-card-home-img-size'}
                                             >
@@ -126,7 +138,7 @@ export const Genre = () => {
                                                 itemHoverable={true}
                                                 itemSubtitle={item.artists[0].name}
                                                 imageURL={item.album.images[0].url}
-                                                itemClickAction={searchResultAlbumItemClick}
+                                                itemClickAction={artistItemClick}
                                                 itemStyle={{width: 180}}
                                                 itemImageClass={'custom-card-home-img-size'}
                                             >
