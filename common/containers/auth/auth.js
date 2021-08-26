@@ -77,26 +77,30 @@ class Auth extends HTMLElement {
 
     login() {
         const account = this.querySelector('#input-account').value;
-        // const userInfo = {
-        //     account: account ? account : 'default',
-        //     userName: account ? account : 'default',
-        // };
+        const userInfo = {
+            account: account ? account : 'default',
+            userName: account ? account : 'default',
+        };
         const authOriginURL = window.location.origin;
         const authRedirectURL = JSON.parse(sessionStorage.getItem('auth-redirect-url'));
-        const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${process.env.AUTH_CLIENT_ID}&response_type=token`;
+        const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${authOriginURL}${authRedirectURL}&response_type=token`;
         const authSpotify = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
 
-        setTimeout(() => {
-            const userInfo = {
-                action: 'auth-spotify',
-                account: account ? account : 'default',
-                userName: account ? account : 'default',
-                token: authSpotify.location.hash.substring(14)
-            }
-            authSpotify.opener.postMessage(userInfo, authOriginURL);
-            authSpotify.close();
-            navigationRoute(authRedirectURL);
-        },2000);
+        console.log('ccccccccccccccccc');
+        console.log(authOriginURL);
+        console.log(authRedirectURL);
+
+        // setTimeout(() => {
+        //     const userInfo = {
+        //         action: 'auth-spotify',
+        //         account: account ? account : 'default',
+        //         userName: account ? account : 'default',
+        //         token: authSpotify.location.hash.substring(14)
+        //     }
+        //     authSpotify.opener.postMessage(userInfo, authOriginURL);
+        //     authSpotify.close();
+        //     navigationRoute(authRedirectURL);
+        // },3000);
 
         // console.log('怪怪怪怪怪怪怪怪');
         // console.log(authOriginURL);
@@ -106,16 +110,16 @@ class Auth extends HTMLElement {
 
         // authSpotify.contentWindow.postMessage('test', '*')
 
-        // const getAuth = setInterval(() => {
-        //     const token = authSpotify.window.location.hash.substring(14);
-        //     if (token !== undefined && token !== null) {
-        //         sessionStorage.setItem('user-info', JSON.stringify(userInfo));
-        //         sessionStorage.setItem('user-token', JSON.stringify(token));
-        //         authSpotify.close();
-        //         navigationRoute(authRedirectURL);
-        //         clearInterval(getAuth);
-        //     }
-        // }, 1500);
+        const getAuth = setInterval(() => {
+            const token = authSpotify.window.location.hash.substring(14);
+            if (token !== undefined && token !== null) {
+                sessionStorage.setItem('user-info', JSON.stringify(userInfo));
+                sessionStorage.setItem('user-token', JSON.stringify(token));
+                authSpotify.close();
+                navigationRoute(authRedirectURL);
+                clearInterval(getAuth);
+            }
+        }, 1500);
 
         // const getSpotifyToken = (authURL) => {
         //     return new Promise((resolve, reject) => {

@@ -19,15 +19,15 @@ const globalActiveListener = (function () {
         }, false);
     }
 
-    operations.initGetAuthListener = function () {
-        window.addEventListener('message', (event) => {
-            if(event.data.action === 'auth-spotify') {
-                sessionStorage.setItem('user-account', JSON.stringify(event.data.account));
-                sessionStorage.setItem('user-name', JSON.stringify(event.data.userName));
-                sessionStorage.setItem('user-token', JSON.stringify(event.data.token));
-            }
-        }, false);
-    }
+    // operations.initGetAuthListener = function () {
+    //     window.addEventListener('message', (event) => {
+    //         if(event.data.action === 'auth-spotify') {
+    //             sessionStorage.setItem('user-account', JSON.stringify(event.data.account));
+    //             sessionStorage.setItem('user-name', JSON.stringify(event.data.userName));
+    //             sessionStorage.setItem('user-token', JSON.stringify(event.data.token));
+    //         }
+    //     }, false);
+    // }
 
     //呼叫初始運行後全部監聽的
     const initAllAction = function () {
