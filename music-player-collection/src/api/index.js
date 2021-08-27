@@ -1,7 +1,7 @@
 import { getAlbumSongs } from './album/album';
 import { getAllCategories,  getCategoryPlaylist } from './categories/categories';
 import { getPlaylistSongs } from './playlist/playlist';
-import { getArtistInfo, getArtistTopSong } from './artist/artist';
+import { getArtistInfo, getArtistTopSong, getArtistAlbums } from './artist/artist';
 
 export {
     getAlbumSongs,
@@ -9,5 +9,6 @@ export {
     getCategoryPlaylist,
     getPlaylistSongs,
     getArtistInfo,
-    getArtistTopSong
+    getArtistTopSong,
+    getArtistAlbums
 };

@@ -31,12 +31,15 @@ export const Album = (props) => {
     };
 
     const albumSongItemClick = (songItemInfo) => {
-        let clickAlbumSongsData = {
+        console.log('是是是是是是是是是是是是是是是是是')
+        console.log(albumInfo)
+        console.log(albumSongList)
+        let clickSongsData = {
             songInfo: songItemInfo,
             albumInfo: albumInfo,
             albumSongList: albumSongList
         };
-        pubSub.doPublish(pubSubKey.common.playSong, clickAlbumSongsData);
+        pubSub.doPublish(pubSubKey.common.playSong, clickSongsData);
     };
 
     return (

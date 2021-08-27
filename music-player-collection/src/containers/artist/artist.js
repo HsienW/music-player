@@ -1,36 +1,68 @@
 import React, {useState, useEffect} from 'react';
-import {getArtistInfo, getArtistTopSong} from '../../api';
-import {CardItem, CustomList} from '../../components';
-import {Skeleton} from 'antd';
+import {getArtistInfo, getArtistTopSong, getArtistAlbums} from '../../api';
+import {CircularCardItem, CustomList} from '../../components';
+import {Skeleton, Divider} from 'antd';
 import queryString from 'query-string';
 import './artist.scss';
+import PropTypes from "prop-types";
 
 export const Artist = (props) => {
     const {pubSub, pubSubKey} = {...props};
     const artistData = queryString.parse(location.search);
 
-    let [getApiState, changeGetApiState] = useState(false);
+    let [getArtistInfoApiState, changeGetArtistInfoApiState] = useState(false);
+    let [getArtistTopSongApiState, changeGetArtistTopSongApiState] = useState(false);
+    let [getArtistAlbumsApiState, changeGetArtistAlbumsApiState] = useState(false);
     let [artistInfo, changeArtistInfo] = useState(null);
-    let [artistInfoList, changeArtistInfoList] = useState([]);
+    let [artistTopSongList, changeArtistTopSongList] = useState([]);
+    let [artistAlbumsList, changeArtistAlbumsList] = useState([]);
 
     useEffect(() => {
-        getArtistTopSong(artistData.id)
+        getArtistInfo(artistData.id)
             .then((respond) => {
-                // artistInfo(songInfo);
-                console.log('bbbbbbbbbbbbbbbbbbb');
-                console.log(respond);
-                // changeArtistInfo(respond['items']);
-                changeGetApiState(true);
+                changeArtistInfo(respond);
+                changeGetArtistInfoApiState(true);
             })
             .catch((error) => {
                 console.log(error);
-                changeGetApiState(false);
+                changeGetArtistInfoApiState(false);
             });
-    }, [changeArtistInfo, changeArtistInfoList]);
 
-    // const cardItemClick = () => {
-    //     console.log('click');
-    // };
+        getArtistTopSong(artistData.id)
+            .then((respond) => {
+                changeArtistTopSongList(respond['tracks']);
+                changeGetArtistTopSongApiState(true);
+            })
+            .catch((error) => {
+                console.log(error);
+                changeGetArtistTopSongApiState(false);
+            });
+
+        getArtistAlbums(artistData.id)
+            .then((respond) => {
+                changeArtistAlbumsList(respond['items']);
+                changeGetArtistAlbumsApiState(true);
+            })
+            .catch((error) => {
+                console.log(error);
+                changeGetArtistAlbumsApiState(false);
+            });
+    }, [changeArtistInfo, changeArtistTopSongList, changeArtistAlbumsList]);
+
+    const circularCardItemClick = () => {
+        console.log('click');
+    };
+
+    const topSongItemClick = (songItemInfo) => {
+        console.log('點了點了點了點了點了點了');
+        console.log(songItemInfo);
+        let clickSongsData = {
+            songInfo: songItemInfo,
+            albumInfo: songItemInfo.itemData.album,
+            albumSongList: artistTopSongList
+        };
+        pubSub.doPublish(pubSubKey.common.playSong, clickSongsData);
+    };
     //
     // const albumSongItemClick = (songItemInfo) => {
     //     let clickAlbumSongsData = {
@@ -41,15 +73,39 @@ export const Artist = (props) => {
     //     pubSub.doPublish(pubSubKey.common.playSong, clickAlbumSongsData);
     // };
 
+
     return (
         <div className={'artist-container'}>
             {
-                getApiState
-                    ? <></>
+                getArtistInfoApiState
+                    ? <CircularCardItem
+                        itemId={artistInfo.id}
+                        itemTitle={artistInfo.name}
+                        itemSubtitle={`followers ${artistInfo.followers.total}`}
+                        imageURL={artistInfo.images[0].url}
+                        itemClickAction={circularCardItemClick}
+                        itemStyle={{width: 300, height: 300}}
+                    />
+                    : <Skeleton active={true}/>
+            }
+            {
+                getArtistTopSongApiState
+                    ?
+                    <>
+                        <div className={'home-container-title'}>Top Songs</div>
+                        <Divider style={{margin: '20 0'}}/>
+                        <CustomList
+                            listData={artistTopSongList}
+                            listStyle={{width: '100%'}}
+                            itemDescription={artistInfo.name}
+                            itemClickAction={topSongItemClick}
+                        />
+                    </>
                     : <Skeleton active={true}/>
             }
         </div>
     );
 };
+
 
 

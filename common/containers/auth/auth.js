@@ -21,7 +21,9 @@ class Auth extends HTMLElement {
         this.authPage = document.createElement('div');
         this.authFormViewport = document.createElement('div');
         this.authFormTitle = document.createElement('div');
-        this.authFormSubtitle = document.createElement('p');
+        this.authFormSubtitle = document.createElement('div');
+        this.authFormSubtitleAccount = document.createElement('div');
+        this.authFormSubtitlePassWord = document.createElement('div');
         this.authForm = document.createElement('div');
         this.authInputAccount = document.createElement('input');
         this.authInputPassword = document.createElement('input');
@@ -33,15 +35,17 @@ class Auth extends HTMLElement {
         this.authFormViewport.className = 'form';
         this.authFormTitle.className = 'form-title';
         this.authFormSubtitle.className = 'form-sub-title';
+        this.authFormSubtitleAccount.className = 'form-sub-title auth-text';
+        this.authFormSubtitlePassWord.className = 'form-sub-title auth-text';
         this.authInputAccount.className = 'input';
         this.authInputPassword.className = 'input';
         this.authLoginButton.className = 'button';
         this.authDescription.className = 'description';
         this.authLoginButton.innerHTML = 'Login';
         this.authFormTitle.textContent = 'Music Player Demo'
-        this.authFormSubtitle.textContent = 'If you don\'t have spotify auth, can use \n' +
-            'account:  yke89039@eoopy.com\n' +
-            'password:  demo123456'
+        this.authFormSubtitle.textContent = 'If you don\'t have spotify authorization, can use'
+        this.authFormSubtitleAccount.textContent = 'account: hpl18888@cuoly.com';
+        this.authFormSubtitlePassWord.textContent = 'password: music-demo12345678';
         this.authDescription.textContent = 'This app only for demo, non-commercial use'
 
         this.authInputAccount.setAttribute('type', 'text');
@@ -59,6 +63,8 @@ class Auth extends HTMLElement {
         this.authFormViewport.appendChild(this.authForm);
         this.authForm.appendChild(this.authFormTitle);
         this.authForm.appendChild(this.authFormSubtitle);
+        this.authForm.appendChild(this.authFormSubtitleAccount);
+        this.authForm.appendChild(this.authFormSubtitlePassWord);
         this.authForm.appendChild(this.authInputAccount);
         this.authForm.appendChild(this.authInputPassword);
         this.authForm.appendChild(this.authLoginButton);
@@ -86,10 +92,6 @@ class Auth extends HTMLElement {
         const authURL = `https://accounts.spotify.com/authorize?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${authOriginURL}${authRedirectURL}&response_type=token`;
         const authSpotify = window.open(authURL, 'spotifyAuth', 'width=400, height=600, left=200, top=200');
 
-        console.log('ccccccccccccccccc');
-        console.log(authOriginURL);
-        console.log(authRedirectURL);
-
         // setTimeout(() => {
         //     const userInfo = {
         //         action: 'auth-spotify',
@@ -102,14 +104,6 @@ class Auth extends HTMLElement {
         //     navigationRoute(authRedirectURL);
         // },3000);
 
-        // console.log('怪怪怪怪怪怪怪怪');
-        // console.log(authOriginURL);
-        // console.log(authRedirectURL);
-        // console.log(authURL);
-        // console.log(JSON.stringify(authURL));
-
-        // authSpotify.contentWindow.postMessage('test', '*')
-
         const getAuth = setInterval(() => {
             const token = authSpotify.window.location.hash.substring(14);
             if (token !== undefined && token !== null) {
@@ -119,7 +113,7 @@ class Auth extends HTMLElement {
                 navigationRoute(authRedirectURL);
                 clearInterval(getAuth);
             }
-        }, 1500);
+        }, 1000);
 
         // const getSpotifyToken = (authURL) => {
         //     return new Promise((resolve, reject) => {

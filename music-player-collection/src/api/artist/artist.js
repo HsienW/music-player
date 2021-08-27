@@ -12,7 +12,12 @@ const getArtistTopSong = (artistId) => {
     return spotify.getArtistTopTracks(artistId, 'from_token');
 };
 
+const getArtistAlbums = (artistId) => {
+    spotify.setAccessToken(JSON.parse(sessionStorage.getItem('user-token')));
+    return spotify.getArtistAlbums(artistId);
+};
 export {
     getArtistInfo,
-    getArtistTopSong
+    getArtistTopSong,
+    getArtistAlbums
 };

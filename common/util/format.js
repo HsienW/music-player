@@ -16,7 +16,7 @@ const formatAlbumSongList = function (data) {
             artist: data.albumInfo.artist,
             album: data.albumInfo.name,
             url: item.preview_url,
-            cover_art_url: data.albumInfo.image
+            cover_art_url: data.albumInfo.images[0].url ? data.albumInfo.images[0].url : data.albumInfo.image
         };
     });
 }

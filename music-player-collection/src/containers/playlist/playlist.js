@@ -32,12 +32,12 @@ export const Playlist = (props) => {
     };
 
     const playlistItemClick = (songItemInfo) => {
-        let clickAlbumSongsData = {
+        let clickSongsData = {
             songInfo: songItemInfo,
             albumInfo: playlistInfo,
             albumSongList: playlistSongList
         };
-        pubSub.doPublish(pubSubKey.common.playSong, clickAlbumSongsData);
+        pubSub.doPublish(pubSubKey.common.playSong, clickSongsData);
     };
 
     return (

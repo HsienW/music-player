@@ -21,8 +21,6 @@ export const Genre = () => {
     const onSearch = useCallback(async (key) => {
         getSearch(key)
             .then((respond) => {
-                console.log('有嗎有嗎有嗎有嗎有嗎有嗎有嗎');
-                console.log(respond);
                 changeSearchResultAlbums(respond['albums']['items']);
                 changeSearchResultArtists(respond['artists']['items']);
                 changeSearchResultSongs(respond['tracks']['items']);
