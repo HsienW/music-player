@@ -88,6 +88,18 @@ export const Genre = () => {
         navigationRoute(newRouteURL);
     };
 
+    const songItemClick = (songItemInfo) => {
+        let newRouteURL = createParamRoute(
+            '/collection/album',
+            {
+                id: songItemInfo.itemAlbum.id,
+                name: songItemInfo.itemAlbum.name,
+                image: songItemInfo.imageURL,
+                artist: songItemInfo.itemSubtitle
+            });
+        navigationRoute(newRouteURL);
+    };
+
     return (
         <>
             <div className={'search-container-title'}>
@@ -158,9 +170,10 @@ export const Genre = () => {
                                                 itemHoverable={true}
                                                 itemSubtitle={item.artists[0].name}
                                                 imageURL={item.album.images[0].url}
-                                                itemClickAction={artistItemClick}
+                                                itemClickAction={songItemClick}
                                                 itemStyle={{width: 180}}
                                                 itemImageClass={'custom-card-home-img-size'}
+                                                itemAlbum={item.album}
                                             >
                                             </CardItem>
                                         );
