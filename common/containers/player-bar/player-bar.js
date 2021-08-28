@@ -1,7 +1,7 @@
 import amplitude from 'amplitudejs';
 import {playerBarStyle} from './player-bar-style';
 import {pubSub, pubSubKey} from '../../pub-sub';
-import {formatAlbumSongList, getSongInPlayListIndex} from '../../util';
+import {formatPlaySongAlbumList, getSongInPlayListIndex} from '../../util';
 
 class PlayerBar extends HTMLElement {
     constructor() {
@@ -23,9 +23,6 @@ class PlayerBar extends HTMLElement {
     }
 
     domRender() {
-        console.log('看看看看看看看看看看看看看看看看看看看看看');
-        console.log(this.amplitude);
-
         this.playerBarBody = document.createElement('div');
         this.detailArea = document.createElement('div');
         this.detailSongImage = document.createElement('img');
@@ -151,7 +148,6 @@ class PlayerBar extends HTMLElement {
                 },
                 play: () => {
                     console.log("播放11111111111111111111111");
-                    console.log(this);
                     // 播放後切換顯示歌曲資訊
                     const songMetaData = this.amplitude.getActiveSongMetadata();
                     this.updateDomImgDisplay(this.detailSongImage, songMetaData.cover_art_url);
@@ -194,8 +190,6 @@ class PlayerBar extends HTMLElement {
         }, false);
 
         this.controlPlay.addEventListener('click', () => {
-            console.log("播放播放播放播放播放");
-
             this.amplitude.play();
         }, false);
 
@@ -276,13 +270,13 @@ class PlayerBar extends HTMLElement {
     }
 
     playSong() {
-        let clickAlbumSongsInfo = Array.prototype.slice.call(arguments)[0][0];
-        let currentAlbumSongList = formatAlbumSongList(clickAlbumSongsInfo);
-        let currentSongInListIndex = currentAlbumSongList.findIndex(getSongInPlayListIndex(clickAlbumSongsInfo.songInfo.itemId));
+        let clickPlaySongAlbumInfo = Array.prototype.slice.call(arguments)[0][0];
+        let currentPlaySongAlbumList = formatPlaySongAlbumList(clickPlaySongAlbumInfo);
+        let currentSongInListIndex = currentPlaySongAlbumList.findIndex(getSongInPlayListIndex(clickPlaySongAlbumInfo.songInfo.itemId));
 
         this.amplitude.stop();
         this.amplitude.pause();
-        this.updatePlayList(currentAlbumSongList);
+        this.updatePlayList(currentPlaySongAlbumList);
         this.playerConfig();
 
         this.amplitude.playSongAtIndex(currentSongInListIndex);

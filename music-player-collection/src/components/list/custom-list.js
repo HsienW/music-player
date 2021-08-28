@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {List} from 'antd';
 import {CustomListItem} from './custom-list-item';
+import {CircularCardItem} from "../circular-card/circular-card-item";
 
 export const CustomList = (props) => {
     const {listData, listStyle, itemClickAction} = {...props};
+
+    console.log('看看看看看看看');
+    console.log(props);
 
     return (
         <List
@@ -27,6 +31,6 @@ export const CustomList = (props) => {
 
 CustomList.propTypes = {
     listData: PropTypes.array.isRequired,
-    itemClickAction: PropTypes.func.isRequired,
+    itemClickAction: PropTypes.func.isRequired
 };
 

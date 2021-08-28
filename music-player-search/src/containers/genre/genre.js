@@ -1,6 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {getSearch} from '../../api';
 import {createParamRoute, navigationRoute} from '../../../../common/util';
+import {filteredEmptyImage, filteredSongEmptyImage} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {Divider, Skeleton, Input, Tabs} from 'antd';
 import './genre.scss';
@@ -21,9 +22,9 @@ export const Genre = () => {
     const onSearch = useCallback(async (key) => {
         getSearch(key)
             .then((respond) => {
-                changeSearchResultAlbums(respond['albums']['items']);
-                changeSearchResultArtists(respond['artists']['items']);
-                changeSearchResultSongs(respond['tracks']['items']);
+                changeSearchResultAlbums(filteredEmptyImage(respond['albums']['items']));
+                changeSearchResultArtists(filteredEmptyImage(respond['artists']['items']));
+                changeSearchResultSongs(filteredSongEmptyImage(respond['tracks']['items']));
                 changeSearchApiState(true);
                 changeSearchResultAlbumsState(true);
                 changeSearchResultArtistsState(true);
