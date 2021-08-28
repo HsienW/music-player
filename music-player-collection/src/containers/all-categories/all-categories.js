@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import {createParamRoute, navigationRoute} from '../../../../common/util';
 import {getAllCategories} from '../../api';
 import {CardItem} from '../../components';
 import {Divider, Skeleton} from 'antd';
-import {createParamRoute, navigationRoute} from '../../../../common/util';
 import './all-categories.scss';
 
 export const AllCategories = (props) => {

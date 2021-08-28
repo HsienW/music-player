@@ -89,6 +89,10 @@ const authStyle = `
          color: #4CAF50;
          text-decoration: none;
     }
+    
+    .form .auth-text {
+         text-align: center;
+    }
         
     .container {
          position: relative;

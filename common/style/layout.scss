@@ -1,4 +1,5 @@
 @import './variable.scss';
+@import './mixin.scss';
 
 .main-layout {
   width: 100vw;
@@ -33,6 +34,7 @@
   height: calc(100vh - 164px);
   min-width: calc(1024px - 250px);
   overflow-y: auto;
+  //@include scrollbar;
 }
 
 .content-layout::-webkit-scrollbar-track {
@@ -61,4 +63,3 @@
   height: 100%;
   //box-sizing: border-box;
 }
-

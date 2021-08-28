@@ -46,7 +46,7 @@ class SideBar extends HTMLElement {
 
         this.sideBarPortalLink.setAttribute('active-rule', '/portal/home');
         this.sideBarCollectionLink.setAttribute('active-rule', '/collection/all-categories');
-        this.sideBarSearchLink.setAttribute('active-rule', '/search');
+        this.sideBarSearchLink.setAttribute('active-rule', '/search/genre');
 
         this.shadow.appendChild(this.sideBarBody);
         this.sideBarBody.appendChild(this.sideBarUl);

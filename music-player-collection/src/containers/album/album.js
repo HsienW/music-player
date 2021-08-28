@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {getAlbumSongs} from '../../api';
 import {CardItem, CustomList} from '../../components';
+import {filteredEmptySong} from '../../../../common/util';
 import {Skeleton} from 'antd';
 import queryString from 'query-string';
 import './album.scss';
@@ -17,7 +18,7 @@ export const Album = (props) => {
         getAlbumSongs(songInfo.id)
             .then((respond) => {
                 changeAlbumInfo(songInfo);
-                changeAlbumSongList(respond['items']);
+                changeAlbumSongList(filteredEmptySong(respond['items']));
                 changeGetApiState(true);
             })
             .catch((error) => {
@@ -31,12 +32,15 @@ export const Album = (props) => {
     };
 
     const albumSongItemClick = (songItemInfo) => {
-        let clickAlbumSongsData = {
+        console.log('是是是是是是是是是是是是是是是是是')
+        console.log(albumInfo)
+        console.log(albumSongList)
+        let clickSongsData = {
             songInfo: songItemInfo,
             albumInfo: albumInfo,
             albumSongList: albumSongList
         };
-        pubSub.doPublish(pubSubKey.common.playSong, clickAlbumSongsData);
+        pubSub.doPublish(pubSubKey.common.playSong, clickSongsData);
     };
 
     return (

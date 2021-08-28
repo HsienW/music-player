@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {getNewReleaseAlbum, getFeaturedPlaylist} from '../../api';
 import {createParamRoute, navigationRoute} from '../../../../common/util';
+import {filteredEmptyImage} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {Divider, Skeleton} from 'antd';
 import './home.scss';
@@ -14,7 +15,7 @@ export const Home = () => {
     useEffect(() => {
         getNewReleaseAlbum()
             .then((respond) => {
-                changeNewReleaseAlbumList(respond['albums']['items']);
+                changeNewReleaseAlbumList(filteredEmptyImage(respond['albums']['items']));
                 changeGetNewReleaseApiState(true);
             })
             .catch((error) => {
@@ -24,7 +25,7 @@ export const Home = () => {
 
         getFeaturedPlaylist()
             .then((respond) => {
-                changeFeaturedPlaylistList(respond['playlists']['items']);
+                changeFeaturedPlaylistList(filteredEmptyImage(respond['playlists']['items']));
                 changeGetFeaturedApiState(true);
             })
             .catch((error) => {
@@ -60,34 +61,6 @@ export const Home = () => {
     return (
         <>
             {
-                getNewReleaseApiState
-                    ? <>
-                        <div className={'home-container-title'}>New Release</div>
-                        <Divider style={{margin: '20 0'}}/>
-                        <div className={'home-container-content'}>
-                            {
-                                newReleaseAlbumList.map((item) => {
-                                    return (
-                                        <CardItem
-                                            key={item.id}
-                                            itemId={item.id}
-                                            itemTitle={item.name}
-                                            itemHoverable={true}
-                                            itemSubtitle={item.artists[0].name}
-                                            imageURL={item.images[0].url}
-                                            itemClickAction={homeNewReleaseAlbumItemClick}
-                                            itemStyle={{width: 180}}
-                                            itemImageClass={'custom-card-home-img-size'}
-                                        >
-                                        </CardItem>
-                                    );
-                                })
-                            }
-                        </div>
-                    </>
-                    : <Skeleton active={true}/>
-            }
-            {
                 getFeaturedApiState
                     ? <>
                         <div className={'home-container-title'}>Featured</div>
@@ -104,6 +77,34 @@ export const Home = () => {
                                             itemSubtitle={item.owner.display_name}
                                             imageURL={item.images[0].url}
                                             itemClickAction={homeFeaturedPlaylistItemClick}
+                                            itemStyle={{width: 180}}
+                                            itemImageClass={'custom-card-home-img-size'}
+                                        >
+                                        </CardItem>
+                                    );
+                                })
+                            }
+                        </div>
+                    </>
+                    : <Skeleton active={true}/>
+            }
+            {
+                getNewReleaseApiState
+                    ? <>
+                        <div className={'home-container-title'}>New Release</div>
+                        <Divider style={{margin: '20 0'}}/>
+                        <div className={'home-container-content'}>
+                            {
+                                newReleaseAlbumList.map((item) => {
+                                    return (
+                                        <CardItem
+                                            key={item.id}
+                                            itemId={item.id}
+                                            itemTitle={item.name}
+                                            itemHoverable={true}
+                                            itemSubtitle={item.artists[0].name}
+                                            imageURL={item.images[0].url}
+                                            itemClickAction={homeNewReleaseAlbumItemClick}
                                             itemStyle={{width: 180}}
                                             itemImageClass={'custom-card-home-img-size'}
                                         >
