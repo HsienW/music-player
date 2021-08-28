@@ -4,7 +4,6 @@ const createParamRoute = function (route, paramObject) {
     navigationURL.pathname = route;
     navigationURL.search = searchParams;
     return navigationURL.href;
-
 }
 
 const navigationRoute = function (route) {

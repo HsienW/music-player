@@ -1,15 +1,17 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {getSearch} from '../../api';
 import {createParamRoute, navigationRoute} from '../../../../common/util';
 import {filteredEmptyImage, filteredSongEmptyImage} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {Divider, Skeleton, Input, Tabs} from 'antd';
+import queryString from 'query-string';
 import './genre.scss';
 
 const {Search} = Input;
 const {TabPane} = Tabs;
 
 export const Genre = () => {
+    let [searchKey, changeSearchKey] = useState('');
     let [getSearchApiState, changeSearchApiState] = useState(false);
     let [searchResultAlbumsState, changeSearchResultAlbumsState] = useState(false);
     let [searchResultArtistsState, changeSearchResultArtistsState] = useState(false);
@@ -19,26 +21,44 @@ export const Genre = () => {
     let [searchResultArtists, changeSearchResultArtists] = useState([]);
     let [searchResultSongs, changeSearchResultSongs] = useState([]);
 
-    const onSearch = useCallback(async (key) => {
-        getSearch(key)
-            .then((respond) => {
-                changeSearchResultAlbums(filteredEmptyImage(respond['albums']['items']));
-                changeSearchResultArtists(filteredEmptyImage(respond['artists']['items']));
-                changeSearchResultSongs(filteredSongEmptyImage(respond['tracks']['items']));
-                changeSearchApiState(true);
-                changeSearchResultAlbumsState(true);
-                changeSearchResultArtistsState(true);
-                changeSearchResultSongsState(true);
-            })
-            .catch((error) => {
-                console.log(error);
-                changeSearchApiState(false);
-                changeSearchResultAlbumsState(false);
-                changeSearchResultArtistsState(false);
-                changeSearchResultSongsState(false);
-            });
+    const doSearch = (key) => {
+        if (key) {
+            getSearch(key)
+                .then((respond) => {
+                    changeSearchKey(key);
+                    changeSearchResultAlbums(filteredEmptyImage(respond['albums']['items']));
+                    changeSearchResultArtists(filteredEmptyImage(respond['artists']['items']));
+                    changeSearchResultSongs(filteredSongEmptyImage(respond['tracks']['items']));
+                    changeSearchResultAlbumsState(true);
+                    changeSearchResultArtistsState(true);
+                    changeSearchResultSongsState(true);
+                    changeSearchApiState(true);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    changeSearchResultAlbumsState(false);
+                    changeSearchResultArtistsState(false);
+                    changeSearchResultSongsState(false);
+                    changeSearchApiState(false);
+                });
+        }
+    }
 
-    }, [changeSearchResultAlbums, changeSearchResultArtists, changeSearchResultSongs]);
+    useEffect(() => {
+        const searchKey = queryString.parse(location.search);
+        if (searchKey.query) {
+            doSearch(searchKey.query);
+        }
+    }, [changeSearchKey, changeSearchResultAlbums, changeSearchResultArtists, changeSearchResultSongs, changeSearchApiState]);
+
+    const onSearchInput = useCallback(async (key) => {
+        let newRouteURL = createParamRoute(
+            '/search/genre',
+            {query: key});
+        navigationRoute(newRouteURL);
+
+        doSearch(key)
+    }, [changeSearchKey, changeSearchResultAlbums, changeSearchResultArtists, changeSearchResultSongs, changeSearchApiState]);
 
     const callback = (key) => {
         console.log(key);
@@ -73,7 +93,8 @@ export const Genre = () => {
             <div className={'search-container-title'}>
                 <Search
                     placeholder="Search for what you want..."
-                    onSearch={onSearch}
+                    onSearch={onSearchInput}
+                    defaultValue={searchKey}
                     style={{width: '40%', minWidth: '200px'}}
                 />
             </div>
