@@ -55,8 +55,6 @@ export const Artist = (props) => {
     };
 
     const artistTopSongItemClick = (songItemInfo) => {
-        console.log('點了點了點了點了點了點了');
-        console.log(songItemInfo);
         let clickSongsData = {
             songInfo: songItemInfo,
             albumInfo: songItemInfo.itemData.album,

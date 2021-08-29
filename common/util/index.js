@@ -2,6 +2,7 @@ import {filteredEmptyImage, filteredEmptySong, formatPlaySongAlbumList, getSongI
 import {createParamRoute, navigationRoute} from './route';
 import {millisToMinutesAndSeconds} from './time';
 import {filteredSongEmptyFormatChecker} from './format-checker';
+import {authLoginChecker} from './auth-checker';
 
 export {
     filteredEmptyImage,
@@ -13,5 +14,6 @@ export {
     createParamRoute,
     navigationRoute,
     millisToMinutesAndSeconds,
-    filteredSongEmptyFormatChecker
+    filteredSongEmptyFormatChecker,
+    authLoginChecker
 };

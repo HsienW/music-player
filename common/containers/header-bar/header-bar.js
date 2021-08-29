@@ -1,4 +1,5 @@
 import {headerBarStyle} from './header-bar-style';
+import {pubSub, pubSubKey} from '../../pub-sub';
 
 class HeaderBar extends HTMLElement {
     constructor() {
@@ -31,6 +32,8 @@ class HeaderBar extends HTMLElement {
         this.userDropdownLogoutLi = document.createElement('li');
         this.userDropdownSettingLink = document.createElement('a');
         this.userDropdownLogoutLink = document.createElement('a');
+        this.userDropdownSettingIcon = document.createElement('img');
+        this.userDropdownLogoutLIcon = document.createElement('img');
 
         this.headerBarBody.className = 'header-bar';
         this.logoArea.className = 'logo-area';
@@ -42,6 +45,8 @@ class HeaderBar extends HTMLElement {
         this.userDropdown.className = 'user-setting-dropdown';
         this.userDropdownButton.className = 'user-setting-icon button';
         this.userDropdownUl.className = 'menu hidden';
+        this.userDropdownSettingIcon.className = 'icon';
+        this.userDropdownLogoutLIcon.className = 'icon';
 
         this.logoText.textContent = 'Music Player';
         this.userName.textContent = 'Default User';
@@ -51,6 +56,8 @@ class HeaderBar extends HTMLElement {
 
         this.userImage.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/user.svg');
         this.userDropdownButton.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/down-arrow.svg');
+        this.userDropdownSettingIcon.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/settings.svg');
+        this.userDropdownLogoutLIcon.setAttribute('src', 'https://music-player-demo-assets.s3.amazonaws.com/icon/logout.svg');
 
         this.shadow.appendChild(this.headerBarBody);
         this.headerBarBody.appendChild(this.logoArea);
@@ -63,7 +70,9 @@ class HeaderBar extends HTMLElement {
         this.userDropdown.appendChild(this.userDropdownUl);
         this.userDropdownUl.appendChild(this.userDropdownSettingLi);
         this.userDropdownUl.appendChild(this.userDropdownLogoutLi);
+        this.userDropdownSettingLi.appendChild(this.userDropdownSettingIcon);
         this.userDropdownSettingLi.appendChild(this.userDropdownSettingLink);
+        this.userDropdownLogoutLi.appendChild(this.userDropdownLogoutLIcon);
         this.userDropdownLogoutLi.appendChild(this.userDropdownLogoutLink);
     }
 
@@ -75,11 +84,6 @@ class HeaderBar extends HTMLElement {
         }
     }
 
-    // getUserInfo() {
-    //     this.userInfo = JSON.parse(sessionStorage.getItem('user-info'));
-    //     this.userName.textContent = this.userInfo.userName;
-    // }
-    //
     domEventInit() {
         this.userDropdownButton.addEventListener('mouseover', () => {
             this.updateDomActiveStyle(this.userDropdownUl, 'hidden', 'hidden');
@@ -87,6 +91,11 @@ class HeaderBar extends HTMLElement {
 
         this.userDropdownUl.addEventListener('mouseleave', () => {
             this.updateDomActiveStyle(this.userDropdownUl, 'hidden', 'hidden');
+        }, false);
+
+        this.userDropdownLogoutLi.addEventListener('click', () => {
+            console.log('點了登出');
+            pubSub.doPublish(pubSubKey.user.loggingOut);
         }, false);
     }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {singleAppGlobalState} from '../../common/state/single-app-global-state';
 import {globalActiveListener} from '../../common/listener/global-active-listener';
+import {userDataMediator} from '../../common/mediator/user-data-mediator';
 import {PortalRootDom} from './root/root';
 import './public-path';
 
@@ -68,6 +69,7 @@ if (!window.__POWERED_BY_QIANKUN__) {
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'portal 我自己運行了');
     globalActiveListener.initAllAction();
+    userDataMediator.callAction('userDataMediatorInitSubscribe');
 
     renderSinglePortalRoot(props);
 }

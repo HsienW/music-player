@@ -7,9 +7,6 @@ import {CircularCardItem} from "../circular-card/circular-card-item";
 export const CustomList = (props) => {
     const {listData, listStyle, itemClickAction} = {...props};
 
-    console.log('看看看看看看看');
-    console.log(props);
-
     return (
         <List
             style={listStyle}
