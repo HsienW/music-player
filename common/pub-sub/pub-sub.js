@@ -14,6 +14,9 @@ const pubSub = (function () {
         const key = Array.prototype.shift.call(arguments);
         const callbacks = subscriberList[key];
 
+        console.log(subscriberList);
+        console.log(callbacks);
+
         if (!callbacks || callbacks.length === 0) {
             return false;
         }

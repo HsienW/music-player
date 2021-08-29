@@ -4,7 +4,6 @@ import {pubSub} from '../pub-sub';
 import {pubSubKey} from '../pub-sub';
 
 const globalActiveListener = (function () {
-
     const operations = {};
 
     operations.initOnloadListener = function () {

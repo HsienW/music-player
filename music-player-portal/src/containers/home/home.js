@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {getNewReleaseAlbum, getFeaturedPlaylist} from '../../api';
 import {createParamRoute, navigationRoute} from '../../../../common/util';
-import {filteredEmptyImage} from '../../../../common/util';
+import {filteredEmptyImage, authLoginChecker} from '../../../../common/util';
 import {CardItem} from '../../components';
+import {decorator} from '../../../../common/decorator/decorator';
 import {Divider, Skeleton} from 'antd';
 import './home.scss';
 
-export const Home = () => {
+const HomeContainer = () => {
     let [getNewReleaseApiState, changeGetNewReleaseApiState] = useState(false);
     let [newReleaseAlbumList, changeNewReleaseAlbumList] = useState([]);
     let [getFeaturedApiState, changeGetFeaturedApiState] = useState(false);
@@ -118,5 +119,7 @@ export const Home = () => {
             }
         </>
     );
-};
+}
+
+export const Home = decorator.before(HomeContainer, authLoginChecker);
 

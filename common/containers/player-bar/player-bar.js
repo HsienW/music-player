@@ -142,12 +142,12 @@ class PlayerBar extends HTMLElement {
                     this.updateInputBarDisplay(this.progressBar, initTime, songTime, playedTime);
                 },
                 prev: () => {
-                    console.log("上一首111111");
+                    console.log("上一首");
                     // 上一首等於重新播放, 切換顯示暫停按鈕
                     this.updateDomDisplayStyle(this.controlPlay, this.controlPause, 'hidden');
                 },
                 play: () => {
-                    console.log("播放11111111111111111111111");
+                    console.log("播放");
                     // 播放後切換顯示歌曲資訊
                     const songMetaData = this.amplitude.getActiveSongMetadata();
                     this.updateDomImgDisplay(this.detailSongImage, songMetaData.cover_art_url);
@@ -157,16 +157,16 @@ class PlayerBar extends HTMLElement {
                     this.updateDomDisplayStyle(this.controlPlay, this.controlPause, 'hidden');
                 },
                 pause: () => {
-                    console.log("暫停111111");
+                    console.log("暫停");
                     // 暫停後切換顯示播放按鈕
                     this.updateDomDisplayStyle(this.controlPause, this.controlPlay, 'hidden');
                 },
                 stop: () => {
-                    console.log("停止111111");
+                    console.log("停止");
                     this.updateDomDisplayStyle(this.controlPause, this.controlPlay, 'hidden');
                 },
                 next: () => {
-                    console.log("下一首111111");
+                    console.log("下一首");
                     // 下一首等於重新播放, 切換顯示暫停按鈕
                     this.updateDomDisplayStyle(this.controlPlay, this.controlPause, 'hidden');
                 }

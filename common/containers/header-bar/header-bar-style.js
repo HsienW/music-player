@@ -57,7 +57,7 @@ const headerBarStyle = `
    }
         
    .user-setting-icon {
-        width: 14px;
+        width: 16px;
         height: 14px;
         cursor: pointer;
         padding: 4px 10px 0;
@@ -107,6 +107,9 @@ const headerBarStyle = `
         padding: 10px 20px;
         cursor: pointer;
         white-space: nowrap;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
    }
         
    .user-setting-dropdown>.menu li:hover {
@@ -123,6 +126,13 @@ const headerBarStyle = `
         padding: 0;
         border-bottom: 1px solid #d9d9d9;
    }
+   
+   .icon {
+        width: 16px;
+        height: 16px;
+        padding: 0 10px 0 0;
+        filter: invert(33%) sepia(3%) saturate(0%) hue-rotate(339deg) brightness(93%) contrast(79%);
+    }
 `
 export {
     headerBarStyle

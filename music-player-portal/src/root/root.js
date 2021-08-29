@@ -8,14 +8,6 @@ const Login = () => {
     return <auth-container/>;
 };
 
-// const Home = () => {
-//     return <h2>Portal Home</h2>;
-// };
-
-const PortalPage2 = () => {
-    return <h2>Portal Page 2</h2>;
-};
-
 export const PortalRootDom = (props) => {
     const {routerBase, setGlobalState, getGlobalState} = props;
     const defaultValue = getGlobalState('init');
@@ -36,9 +28,6 @@ export const PortalRootDom = (props) => {
                 </Route>
                 <Route path={`${routerBase}/home`}>
                     <Home/>
-                </Route>
-                <Route path={`${routerBase}/portal-page2`}>
-                    <PortalPage2/>
                 </Route>
             </Switch>
         </BrowserRouter>

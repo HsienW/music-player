@@ -32,9 +32,6 @@ export const Album = (props) => {
     };
 
     const albumSongItemClick = (songItemInfo) => {
-        console.log('是是是是是是是是是是是是是是是是是')
-        console.log(albumInfo)
-        console.log(albumSongList)
         let clickSongsData = {
             songInfo: songItemInfo,
             albumInfo: albumInfo,

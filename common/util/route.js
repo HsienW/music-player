@@ -17,5 +17,5 @@ const navigationRoute = function (route) {
 
 export {
     createParamRoute,
-    navigationRoute
+    navigationRoute,
 }
