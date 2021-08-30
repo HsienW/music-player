@@ -9,7 +9,7 @@ const Login = () => {
 };
 
 export const PortalRootDom = (props) => {
-    const {routerBase, setGlobalState, getGlobalState} = props;
+    const {routerBase, setGlobalState, getGlobalState, pubSub, pubSubKey} = props;
     const defaultValue = getGlobalState('init');
     const [testValue, changeValue] = useState(defaultValue);
 
@@ -27,7 +27,10 @@ export const PortalRootDom = (props) => {
                     <Login/>
                 </Route>
                 <Route path={`${routerBase}/home`}>
-                    <Home/>
+                    <Home
+                        pubSub={pubSub}
+                        pubSubKey={pubSubKey}
+                    />
                 </Route>
             </Switch>
         </BrowserRouter>

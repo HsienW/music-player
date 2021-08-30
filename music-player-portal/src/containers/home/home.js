@@ -7,7 +7,8 @@ import {decorator} from '../../../../common/decorator/decorator';
 import {Divider, Skeleton} from 'antd';
 import './home.scss';
 
-const HomeContainer = () => {
+const HomeContainer = (props) => {
+    const {pubSub, pubSubKey} = {...props};
     let [getNewReleaseApiState, changeGetNewReleaseApiState] = useState(false);
     let [newReleaseAlbumList, changeNewReleaseAlbumList] = useState([]);
     let [getFeaturedApiState, changeGetFeaturedApiState] = useState(false);
@@ -35,18 +36,6 @@ const HomeContainer = () => {
             });
     }, [changeNewReleaseAlbumList, changeFeaturedPlaylistList]);
 
-    const homeNewReleaseAlbumItemClick = (albumItemInfo) => {
-        let newRouteURL = createParamRoute(
-            '/collection/album',
-            {
-                id: albumItemInfo.itemId,
-                name: albumItemInfo.itemTitle,
-                image: albumItemInfo.imageURL,
-                artist: albumItemInfo.itemSubtitle
-            });
-        navigationRoute(newRouteURL);
-    };
-
     const homeFeaturedPlaylistItemClick = (categoriesItemInfo) => {
         let newRouteURL = createParamRoute(
             '/collection/playlist',
@@ -55,6 +44,19 @@ const HomeContainer = () => {
                 name: categoriesItemInfo.itemTitle,
                 image: categoriesItemInfo.imageURL,
                 artist: categoriesItemInfo.itemSubtitle
+            });
+        navigationRoute(newRouteURL);
+        pubSub.doPublish(pubSubKey.route.routeChange, '/collection/playlist');
+    };
+
+    const homeNewReleaseAlbumItemClick = (albumItemInfo) => {
+        let newRouteURL = createParamRoute(
+            '/collection/album',
+            {
+                id: albumItemInfo.itemId,
+                name: albumItemInfo.itemTitle,
+                image: albumItemInfo.imageURL,
+                artist: albumItemInfo.itemSubtitle
             });
         navigationRoute(newRouteURL);
     };

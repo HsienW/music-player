@@ -14,6 +14,21 @@ const pubSubKey = {
         loggingOut: '[user] logging-out',
         loggingSuccess: '[user] logging-out-success',
         loggingFail: '[user] logging-out-fail',
+    },
+    auth: {
+        logging: '[auth] logging',
+        loginSuccess: '[auth] login-success',
+        loginFail: '[auth] login-fail',
+        loggingOut: '[auth] logging-out',
+        loggingSuccess: '[auth] logging-out-success',
+        loggingFail: '[auth] logging-out-fail',
+    },
+    player: {
+        songPlay: '[player] song-play',
+        clearPlay: '[player] clear-all-play',
+    },
+    route: {
+        routeChange: '[common] route-change',
     }
 }
 

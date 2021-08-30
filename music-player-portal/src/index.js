@@ -7,7 +7,7 @@ import {PortalRootDom} from './root/root';
 import './public-path';
 
 function renderPortalRoot(props) {
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
     const authRedirectURL = `${routerBase}/home`;
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     ReactDOM.render(
@@ -16,6 +16,8 @@ function renderPortalRoot(props) {
             setGlobalState={setGlobalState}
             getGlobalState={getGlobalState}
             onStateChange={onStateChange}
+            pubSub={pubSub}
+            pubSubKey={pubSubKey}
         />,
         container ? container.querySelector('#portal-root') : document.querySelector('#portal-root')
     );

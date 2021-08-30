@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {getCategoryPlaylist} from '../../api';
 import {createParamRoute, navigationRoute} from '../../../../common/util';
 import {filteredEmptyImage} from '../../../../common/util';
-import {filteredSongEmptyFormatChecker} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {Divider, Skeleton} from 'antd';
 import queryString from 'query-string';

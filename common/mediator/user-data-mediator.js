@@ -1,6 +1,7 @@
 /** Handle user data action when the app is running  **/
 
 import {pubSub, pubSubKey} from '../pub-sub';
+import {navigationRoute} from '../util';
 
 const userDataMediator = (function () {
     const operations = {};
@@ -11,6 +12,9 @@ const userDataMediator = (function () {
 
     operations.logout = function () {
         console.log('收到登出推送');
+        sessionStorage.removeItem('user-info');
+        sessionStorage.removeItem('user-token');
+        navigationRoute('/portal/login');
     }
 
     //處理呼叫參數的介面
