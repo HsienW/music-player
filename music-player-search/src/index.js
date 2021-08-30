@@ -2,18 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {singleAppGlobalState} from '../../common/state/single-app-global-state';
 import {globalActiveListener} from '../../common/listener/global-active-listener';
-import {userDataMediator} from '../../common/mediator/user-data-mediator';
+import {globalActiveMediator} from '../../common/mediator/global-active-mediator';
 import {SearchRootDom} from './root/root';
 import './public-path';
 
 function renderSearchRoot(props) {
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
     ReactDOM.render(
         <SearchRootDom
             routerBase={routerBase}
             setGlobalState={setGlobalState}
             getGlobalState={getGlobalState}
             onStateChange={onStateChange}
+            pubSub={pubSub}
+            pubSubKey={pubSubKey}
         />, container ? container.querySelector('#search-root') : document.querySelector('#search-root')
     );
 }
@@ -67,7 +69,7 @@ if (!window.__POWERED_BY_QIANKUN__) {
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'search 我自己運行了');
     globalActiveListener.initAllAction();
-    userDataMediator.callAction('userDataMediatorInitSubscribe');
+    globalActiveMediator.callAction('initGlobalMediatorSubscribe');
 
     renderSingleSearchRoot(props);
 }

@@ -4,7 +4,7 @@ import {BrowserRouter, Switch, Route, Link} from 'react-router-dom';
 import './root.scss';
 
 export const SearchRootDom = (props) => {
-    const {routerBase, setGlobalState, getGlobalState} = props;
+    const {routerBase, setGlobalState, getGlobalState, pubSub, pubSubKey} = props;
     // const defaultValue = getGlobalState('init');
     // const [testValue, changeValue] = useState(defaultValue);
     //
@@ -19,7 +19,10 @@ export const SearchRootDom = (props) => {
         <BrowserRouter>
             <Switch>
                 <Route path={`${routerBase}/genre`}>
-                    <Genre/>
+                    <Genre
+                        pubSub={pubSub}
+                        pubSubKey={pubSubKey}
+                    />
                 </Route>
             </Switch>
         </BrowserRouter>

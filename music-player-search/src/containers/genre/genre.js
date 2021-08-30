@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {getSearch} from '../../api';
-import {createParamRoute, navigationRoute} from '../../../../common/util';
+import {createParamRoute} from '../../../../common/util';
 import {filteredEmptyImage, filteredSongEmptyImage} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {Divider, Skeleton, Input, Tabs} from 'antd';
@@ -10,7 +10,8 @@ import './genre.scss';
 const {Search} = Input;
 const {TabPane} = Tabs;
 
-export const Genre = () => {
+export const Genre = (props) => {
+    const {pubSub, pubSubKey} = {...props};
     let [searchKey, changeSearchKey] = useState('');
     let [getSearchApiState, changeSearchApiState] = useState(false);
     let [searchResultAlbumsState, changeSearchResultAlbumsState] = useState(false);
@@ -42,7 +43,7 @@ export const Genre = () => {
                     changeSearchApiState(false);
                 });
         }
-    }
+    };
 
     useEffect(() => {
         const searchKey = queryString.parse(location.search);
@@ -54,10 +55,12 @@ export const Genre = () => {
     const onSearchInput = useCallback(async (key) => {
         let newRouteURL = createParamRoute(
             '/search/genre',
-            {query: key});
-        navigationRoute(newRouteURL);
+            {query: key}
+        );
+        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
 
-        doSearch(key)
+        doSearch(key);
+
     }, [changeSearchKey, changeSearchResultAlbums, changeSearchResultArtists, changeSearchResultSongs, changeSearchApiState]);
 
     const callback = (key) => {
@@ -73,7 +76,7 @@ export const Genre = () => {
                 image: albumItemInfo.imageURL,
                 artist: albumItemInfo.itemSubtitle
             });
-        navigationRoute(newRouteURL);
+        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
     };
 
     const artistItemClick = (artistItemInfo) => {
@@ -85,7 +88,7 @@ export const Genre = () => {
                 image: artistItemInfo.imageURL,
                 artist: artistItemInfo.itemSubtitle
             });
-        navigationRoute(newRouteURL);
+        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
     };
 
     const songItemClick = (songItemInfo) => {
@@ -97,7 +100,7 @@ export const Genre = () => {
                 image: songItemInfo.imageURL,
                 artist: songItemInfo.itemSubtitle
             });
-        navigationRoute(newRouteURL);
+        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
     };
 
     return (

@@ -2,8 +2,6 @@ import {navigationRoute} from '../../util';
 import {pubSub, pubSubKey} from '../../pub-sub';
 import {sideBarStyle} from './side-bar-style';
 
-// import {subAppInfo} from '../../../main/src/config-sub-app-info';
-
 class SideBar extends HTMLElement {
     constructor() {
         super();
@@ -12,7 +10,7 @@ class SideBar extends HTMLElement {
         this.domRender();
         this.domEventInit();
         pubSub.doSubscribe(pubSubKey.common.windowOnload, this.updateDomActiveStyle.bind(this));
-        pubSub.doSubscribe(pubSubKey.common.routeChange, this.updateDomActiveStyle.bind(this));
+        pubSub.doSubscribe(pubSubKey.common.urlChange, this.updateDomActiveStyle.bind(this));
     }
 
     domStyling() {

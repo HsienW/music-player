@@ -14,7 +14,7 @@ const globalActiveListener = (function () {
 
     operations.initRouteChangeListener = function () {
         window.addEventListener('popstate', () => {
-            pubSub.doPublish(pubSubKey.common.routeChange);
+            pubSub.doPublish(pubSubKey.common.urlChange);
         }, false);
     }
 

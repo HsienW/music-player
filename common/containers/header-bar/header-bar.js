@@ -95,14 +95,10 @@ class HeaderBar extends HTMLElement {
 
         this.userDropdownLogoutLi.addEventListener('click', () => {
             console.log('點了登出');
-            pubSub.doPublish(pubSubKey.user.loggingOut);
+            pubSub.doPublish(pubSubKey.auth.loggingOut);
         }, false);
     }
 
-    //
-    // itemClick(event) {
-    //
-    // }
 }
 
 customElements.define('header-bar-container', HeaderBar);

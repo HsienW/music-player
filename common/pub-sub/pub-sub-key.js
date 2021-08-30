@@ -3,17 +3,9 @@
 const pubSubKey = {
     common: {
         windowOnload: '[common] window-onload',
-        routeChange: '[common] route-change',
+        urlChange: '[common] url-change',
         playSong: '[common] play-song',
         loading: '[common] loading',
-    },
-    user: {
-        logging: '[user] logging',
-        loginSuccess: '[user] login-success',
-        loginFail: '[user] login-fail',
-        loggingOut: '[user] logging-out',
-        loggingSuccess: '[user] logging-out-success',
-        loggingFail: '[user] logging-out-fail',
     },
     auth: {
         logging: '[auth] logging',
@@ -28,7 +20,7 @@ const pubSubKey = {
         clearPlay: '[player] clear-all-play',
     },
     route: {
-        routeChange: '[common] route-change',
+        routeNavigation: '[common] route-navigation',
     }
 }
 

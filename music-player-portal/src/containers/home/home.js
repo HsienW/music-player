@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {getNewReleaseAlbum, getFeaturedPlaylist} from '../../api';
-import {createParamRoute, navigationRoute} from '../../../../common/util';
+import {createParamRoute} from '../../../../common/util';
 import {filteredEmptyImage, authLoginChecker} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {decorator} from '../../../../common/decorator/decorator';
@@ -45,8 +45,7 @@ const HomeContainer = (props) => {
                 image: categoriesItemInfo.imageURL,
                 artist: categoriesItemInfo.itemSubtitle
             });
-        navigationRoute(newRouteURL);
-        pubSub.doPublish(pubSubKey.route.routeChange, '/collection/playlist');
+        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
     };
 
     const homeNewReleaseAlbumItemClick = (albumItemInfo) => {
@@ -58,7 +57,7 @@ const HomeContainer = (props) => {
                 image: albumItemInfo.imageURL,
                 artist: albumItemInfo.itemSubtitle
             });
-        navigationRoute(newRouteURL);
+        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
     };
 
     return (

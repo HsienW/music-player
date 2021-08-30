@@ -2,8 +2,7 @@ import {registerMicroApps, start, setDefaultMountApp} from 'qiankun';
 import {iniSubAppConfig} from './init-sub-app-config';
 import {subAppInfo} from './config-sub-app-info';
 import {globalActiveListener} from '../../common/listener/global-active-listener';
-import {routeMediator} from '../../common/mediator/route-mediator';
-import {userDataMediator} from '../../common/mediator/user-data-mediator';
+import {globalActiveMediator} from '../../common/mediator/global-active-mediator';
 
 registerMicroApps(
     iniSubAppConfig(subAppInfo),
@@ -29,5 +28,4 @@ registerMicroApps(
 setDefaultMountApp('/portal/login');
 start();
 globalActiveListener.initAllAction();
-routeMediator.callAction('routeMediatorInitSubscribe');
-userDataMediator.callAction('userDataMediatorInitSubscribe');
+globalActiveMediator.callAction('initGlobalMediatorSubscribe');
