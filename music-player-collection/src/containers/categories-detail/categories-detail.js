@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {getCategoryPlaylist} from '../../api';
-import {createParamRoute, navigationRoute} from '../../../../common/util';
+import {createParamRoute} from '../../../../common/util';
 import {filteredEmptyImage} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {Divider, Skeleton} from 'antd';
@@ -8,7 +8,7 @@ import queryString from 'query-string';
 import './categories-detail.scss';
 
 export const CategoriesDetail = (props) => {
-    // const {pubSub, pubSubKey} = {...props};
+    const {observer, observerKey} = {...props};
     const categoryInfo = queryString.parse(location.search);
 
     let [getApiState, changeGetApiState] = useState(false);
@@ -35,7 +35,7 @@ export const CategoriesDetail = (props) => {
                 image: categoriesItemInfo.imageURL,
                 artist: categoriesItemInfo.itemSubtitle
             });
-        navigationRoute(newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     return (

@@ -1,14 +1,14 @@
 /** Actively Mediator when the app is running notice handler **/
 
-import {pubSub, pubSubKey} from '../pub-sub';
+import {observer, observerKey} from '../observer';
 import {navigationRoute} from '../util';
 
 const globalActiveMediator = (function () {
     const operations = {};
 
     operations.initGlobalMediatorSubscribe = function () {
-        pubSub.doSubscribe(pubSubKey.route.routeNavigation, operations.routeNavigation)
-        pubSub.doSubscribe(pubSubKey.auth.loggingOut, operations.logout);
+        observer.doSubscribe(observerKey.route.routeNavigation, operations.routeNavigation)
+        observer.doSubscribe(observerKey.auth.loggingOut, operations.logout);
     }
 
     operations.routeNavigation = function (route) {

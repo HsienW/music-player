@@ -7,7 +7,7 @@ import queryString from 'query-string';
 import './album.scss';
 
 export const Album = (props) => {
-    const {pubSub, pubSubKey} = {...props};
+    const {observer, observerKey} = {...props};
     const songInfo = queryString.parse(location.search);
 
     let [getApiState, changeGetApiState] = useState(false);
@@ -37,7 +37,7 @@ export const Album = (props) => {
             albumInfo: albumInfo,
             albumSongList: albumSongList
         };
-        pubSub.doPublish(pubSubKey.common.playSong, clickSongsData);
+        observer.doPublish(observerKey.common.playSong, clickSongsData);
     };
 
     return (

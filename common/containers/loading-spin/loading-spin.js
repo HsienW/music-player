@@ -1,5 +1,5 @@
 import {loadingSpinStyle} from './loading-spin-style';
-import {pubSub, pubSubKey} from '../../pub-sub';
+import {observer, observerKey} from '../../observer';
 
 class LoadingSpin extends HTMLElement {
     constructor() {
@@ -7,7 +7,7 @@ class LoadingSpin extends HTMLElement {
         this.shadow = this.attachShadow({mode: 'open'});
         this.domStyling();
         this.domRender();
-        pubSub.doSubscribe(pubSubKey.common.loading, this.updateDomActiveStyle.bind(this));
+        observer.doSubscribe(observerKey.common.loading, this.updateDomActiveStyle.bind(this));
     }
 
     domStyling() {

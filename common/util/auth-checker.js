@@ -1,8 +1,8 @@
-import {navigationRoute} from './route';
+import {observer, observerKey} from '../observer';
 
 const authLoginChecker = function () {
     if(!JSON.parse(sessionStorage.getItem('user-token'))) {
-        navigationRoute('/portal/login');
+        observer.doPublish(observerKey.route.routeNavigation, '/portal/login');
     }
 }
 

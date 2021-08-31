@@ -1,20 +1,19 @@
 /** Actively listener when the app is running **/
 
-import {pubSub} from '../pub-sub';
-import {pubSubKey} from '../pub-sub';
+import {observer, observerKey} from '../observer';
 
 const globalActiveListener = (function () {
     const operations = {};
 
     operations.initOnloadListener = function () {
         window.addEventListener('load', () => {
-            pubSub.doPublish(pubSubKey.common.windowOnload);
+            observer.doPublish(observerKey.common.windowOnload);
         }, false);
     }
 
     operations.initRouteChangeListener = function () {
         window.addEventListener('popstate', () => {
-            pubSub.doPublish(pubSubKey.common.urlChange);
+            observer.doPublish(observerKey.common.urlChange);
         }, false);
     }
 

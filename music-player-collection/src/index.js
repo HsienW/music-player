@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 import {singleAppGlobalState} from '../../common/state/single-app-global-state';
 import {globalActiveListener} from '../../common/listener/global-active-listener';
 import {globalActiveMediator} from '../../common/mediator/global-active-mediator';
-import {pubSub, pubSubKey} from '../../common/pub-sub';
+import {observer, observerKey} from '../../common/observer';
 import {CollectionRootDom} from './root/root';
 import './public-path';
 
 function renderCollectionRoot(props) {
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, observer, observerKey} = props;
     ReactDOM.render(
         <CollectionRootDom
             routerBase={routerBase}
             setGlobalState={setGlobalState}
             getGlobalState={getGlobalState}
             onStateChange={onStateChange}
-            pubSub={pubSub}
-            pubSubKey={pubSubKey}
+            observer={observer}
+            observerKey={observerKey}
         />,
         container ? container.querySelector('#collection-root') : document.querySelector('#collection-root')
     );
@@ -67,7 +67,7 @@ if (!window.__POWERED_BY_QIANKUN__) {
     const routerBase = '/collection';
     const authRedirectURL = `${routerBase}/all-categories`;
     const {getGlobalState, setGlobalState} = singleAppGlobalState;
-    const props = {routerBase, getGlobalState, setGlobalState, pubSub, pubSubKey};
+    const props = {routerBase, getGlobalState, setGlobalState, observer, observerKey};
 
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'collection 我自己運行了');

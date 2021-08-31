@@ -1,5 +1,5 @@
 import {navigationRoute} from '../../util';
-import {pubSub, pubSubKey} from '../../pub-sub';
+import {observer, observerKey} from '../../observer';
 import {sideBarStyle} from './side-bar-style';
 
 class SideBar extends HTMLElement {
@@ -9,8 +9,8 @@ class SideBar extends HTMLElement {
         this.domStyling();
         this.domRender();
         this.domEventInit();
-        pubSub.doSubscribe(pubSubKey.common.windowOnload, this.updateDomActiveStyle.bind(this));
-        pubSub.doSubscribe(pubSubKey.common.urlChange, this.updateDomActiveStyle.bind(this));
+        observer.doSubscribe(observerKey.common.windowOnload, this.updateDomActiveStyle.bind(this));
+        observer.doSubscribe(observerKey.common.urlChange, this.updateDomActiveStyle.bind(this));
     }
 
     domStyling() {
