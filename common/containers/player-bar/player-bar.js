@@ -1,6 +1,6 @@
 import amplitude from 'amplitudejs';
 import {playerBarStyle} from './player-bar-style';
-import {pubSub, pubSubKey} from '../../pub-sub';
+import {observer, observerKey} from '../../observer';
 import {formatPlaySongAlbumList, getSongInPlayListIndex} from '../../util';
 
 class PlayerBar extends HTMLElement {
@@ -13,7 +13,7 @@ class PlayerBar extends HTMLElement {
         this.domRender();
         this.domEventInit();
         this.playerConfig();
-        pubSub.doSubscribe(pubSubKey.common.playSong, this.playSong.bind(this));
+        observer.doSubscribe(observerKey.common.playSong, this.playSong.bind(this));
     }
 
     domStyling() {

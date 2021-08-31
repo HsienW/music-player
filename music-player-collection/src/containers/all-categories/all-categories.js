@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {createParamRoute, navigationRoute} from '../../../../common/util';
+import {createParamRoute} from '../../../../common/util';
 import {getAllCategories} from '../../api';
 import {CardItem} from '../../components';
 import {Divider, Skeleton} from 'antd';
 import './all-categories.scss';
 
 export const AllCategories = (props) => {
-    // const {pubSub, pubSubKey} = {...props};
+    const {observer, observerKey} = {...props};
 
     let [getApiState, changeGetApiState] = useState(false);
     let [allCategoriesList, changeAllCategoriesList] = useState([]);
@@ -30,7 +30,7 @@ export const AllCategories = (props) => {
                 id: categoriesItemInfo.itemId,
                 title: categoriesItemInfo.itemTitle
             });
-        navigationRoute(newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     return (

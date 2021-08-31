@@ -1,5 +1,5 @@
 import {globalState} from './global-state';
-import {pubSub, pubSubKey} from '../../common/pub-sub';
+import {observer, observerKey} from '../../common/observer';
 import {configSubAppRender} from './config-sub-app-render';
 
 const loader = loading => configSubAppRender({loading});
@@ -13,8 +13,8 @@ const iniSubAppConfig = function (subAppInfo) {
             props: {
                 routerBase: item.activeRule, // 設定每個子專案的基本 router
                 getGlobalState: globalState.getGlobalState, // 設定每個子專案的 getGlobalState
-                pubSub: pubSub, // 設定每個子專案 global 的發布訂閱機制
-                pubSubKey: pubSubKey // 設定每個子專案 global 的發布訂閱主題
+                observer: observer, // 設定每個子專案 global 的發布訂閱機制
+                observerKey: observerKey // 設定每個子專案 global 的發布訂閱主題
             }
         };
     });

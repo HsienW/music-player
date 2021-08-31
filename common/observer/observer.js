@@ -1,6 +1,6 @@
-/** Pub/Sub pattern **/
+/** Observer pattern use Pub/Sub action to handler **/
 
-const pubSub = (function () {
+const observer = (function () {
     const subscriberList = {};
 
     const doSubscribe = function (key, callback) {
@@ -51,5 +51,5 @@ const pubSub = (function () {
 })();
 
 export {
-    pubSub
+    observer
 }

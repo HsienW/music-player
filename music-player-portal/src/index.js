@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {singleAppGlobalState} from '../../common/state/single-app-global-state';
 import {globalActiveListener} from '../../common/listener/global-active-listener';
-import {userDataMediator} from '../../common/mediator/user-data-mediator';
+import {globalActiveMediator} from '../../common/mediator/global-active-mediator';
+import {observer, observerKey} from '../../common/observer';
 import {PortalRootDom} from './root/root';
 import './public-path';
 
 function renderPortalRoot(props) {
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, observer, observerKey} = props;
     const authRedirectURL = `${routerBase}/home`;
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     ReactDOM.render(
@@ -16,6 +17,8 @@ function renderPortalRoot(props) {
             setGlobalState={setGlobalState}
             getGlobalState={getGlobalState}
             onStateChange={onStateChange}
+            observer={observer}
+            observerKey={observerKey}
         />,
         container ? container.querySelector('#portal-root') : document.querySelector('#portal-root')
     );
@@ -28,7 +31,7 @@ function renderSinglePortalRoot(props) {
     import ('../../common/containers/player-bar/player-bar');
     import ('./root/root.scss');
 
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange} = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, observer, observerKey} = props;
 
     ReactDOM.render(
         <>
@@ -47,6 +50,8 @@ function renderSinglePortalRoot(props) {
                         setGlobalState={setGlobalState}
                         getGlobalState={getGlobalState}
                         onStateChange={onStateChange}
+                        observer={observer}
+                        observerKey={observerKey}
                     />
                 </div>
                 <div className="footer-layout">
@@ -64,12 +69,12 @@ if (!window.__POWERED_BY_QIANKUN__) {
     const routerBase = '/portal';
     const authRedirectURL = `${routerBase}/home`;
     const {getGlobalState, setGlobalState} = singleAppGlobalState;
-    const props = {routerBase, getGlobalState, setGlobalState};
+    const props = {routerBase, getGlobalState, setGlobalState, observer, observerKey};
 
     sessionStorage.setItem('auth-redirect-url', JSON.stringify(authRedirectURL));
     singleAppGlobalState.setGlobalState('init', 'portal 我自己運行了');
     globalActiveListener.initAllAction();
-    userDataMediator.callAction('userDataMediatorInitSubscribe');
+    globalActiveMediator.callAction('initGlobalMediatorSubscribe');
 
     renderSinglePortalRoot(props);
 }

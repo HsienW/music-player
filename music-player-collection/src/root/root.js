@@ -8,7 +8,7 @@ import {Artist} from '../containers/artist/artist';
 import './root.scss';
 
 export const CollectionRootDom = (props) => {
-    const {routerBase, setGlobalState, getGlobalState, pubSub, pubSubKey} = props;
+    const {routerBase, setGlobalState, getGlobalState, observer, observerKey} = props;
     // const defaultValue = getGlobalState('init');
     // const [testValue, changeValue] = useState(defaultValue);
     //
@@ -24,42 +24,42 @@ export const CollectionRootDom = (props) => {
             <Switch>
                 <Route path={`${routerBase}/all-categories`}>
                     <AllCategories
-                        pubSub={pubSub}
-                        pubSubKey={pubSubKey}
                         getGlobalState={getGlobalState}
                         setGlobalState={setGlobalState}
+                        observer={observer}
+                        observerKey={observerKey}
                     />
                 </Route>
                 <Route path={`${routerBase}/categories-detail`}>
                     <CategoriesDetail
-                        pubSub={pubSub}
-                        pubSubKey={pubSubKey}
                         getGlobalState={getGlobalState}
                         setGlobalState={setGlobalState}
+                        observer={observer}
+                        observerKey={observerKey}
                     />
                 </Route>
                 <Route path={`${routerBase}/playlist`}>
                     <Playlist
-                        pubSub={pubSub}
-                        pubSubKey={pubSubKey}
                         getGlobalState={getGlobalState}
                         setGlobalState={setGlobalState}
+                        observer={observer}
+                        observerKey={observerKey}
                     />
                 </Route>
                 <Route path={`${routerBase}/album`}>
                     <Album
-                        pubSub={pubSub}
-                        pubSubKey={pubSubKey}
                         getGlobalState={getGlobalState}
                         setGlobalState={setGlobalState}
+                        observer={observer}
+                        observerKey={observerKey}
                     />
                 </Route>
                 <Route path={`${routerBase}/artist`}>
                     <Artist
-                        pubSub={pubSub}
-                        pubSubKey={pubSubKey}
                         getGlobalState={getGlobalState}
                         setGlobalState={setGlobalState}
+                        observer={observer}
+                        observerKey={observerKey}
                     />
                 </Route>
             </Switch>

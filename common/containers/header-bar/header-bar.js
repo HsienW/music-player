@@ -1,5 +1,5 @@
 import {headerBarStyle} from './header-bar-style';
-import {pubSub, pubSubKey} from '../../pub-sub';
+import {observer, observerKey} from '../../observer';
 
 class HeaderBar extends HTMLElement {
     constructor() {
@@ -95,14 +95,10 @@ class HeaderBar extends HTMLElement {
 
         this.userDropdownLogoutLi.addEventListener('click', () => {
             console.log('點了登出');
-            pubSub.doPublish(pubSubKey.user.loggingOut);
+            observer.doPublish(observerKey.auth.loggingOut);
         }, false);
     }
 
-    //
-    // itemClick(event) {
-    //
-    // }
 }
 
 customElements.define('header-bar-container', HeaderBar);

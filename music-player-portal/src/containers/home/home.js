@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {getNewReleaseAlbum, getFeaturedPlaylist} from '../../api';
-import {createParamRoute, navigationRoute} from '../../../../common/util';
+import {createParamRoute} from '../../../../common/util';
 import {filteredEmptyImage, authLoginChecker} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {decorator} from '../../../../common/decorator/decorator';
 import {Divider, Skeleton} from 'antd';
 import './home.scss';
 
-const HomeContainer = () => {
+const HomeContainer = (props) => {
+    const {observer, observerKey} = {...props};
+
     let [getNewReleaseApiState, changeGetNewReleaseApiState] = useState(false);
     let [newReleaseAlbumList, changeNewReleaseAlbumList] = useState([]);
     let [getFeaturedApiState, changeGetFeaturedApiState] = useState(false);
@@ -35,18 +37,6 @@ const HomeContainer = () => {
             });
     }, [changeNewReleaseAlbumList, changeFeaturedPlaylistList]);
 
-    const homeNewReleaseAlbumItemClick = (albumItemInfo) => {
-        let newRouteURL = createParamRoute(
-            '/collection/album',
-            {
-                id: albumItemInfo.itemId,
-                name: albumItemInfo.itemTitle,
-                image: albumItemInfo.imageURL,
-                artist: albumItemInfo.itemSubtitle
-            });
-        navigationRoute(newRouteURL);
-    };
-
     const homeFeaturedPlaylistItemClick = (categoriesItemInfo) => {
         let newRouteURL = createParamRoute(
             '/collection/playlist',
@@ -56,7 +46,19 @@ const HomeContainer = () => {
                 image: categoriesItemInfo.imageURL,
                 artist: categoriesItemInfo.itemSubtitle
             });
-        navigationRoute(newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
+    };
+
+    const homeNewReleaseAlbumItemClick = (albumItemInfo) => {
+        let newRouteURL = createParamRoute(
+            '/collection/album',
+            {
+                id: albumItemInfo.itemId,
+                name: albumItemInfo.itemTitle,
+                image: albumItemInfo.imageURL,
+                artist: albumItemInfo.itemSubtitle
+            });
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     return (
