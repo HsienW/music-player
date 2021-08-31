@@ -8,7 +8,8 @@ import {Divider, Skeleton} from 'antd';
 import './home.scss';
 
 const HomeContainer = (props) => {
-    const {pubSub, pubSubKey} = {...props};
+    const {observer, observerKey} = {...props};
+
     let [getNewReleaseApiState, changeGetNewReleaseApiState] = useState(false);
     let [newReleaseAlbumList, changeNewReleaseAlbumList] = useState([]);
     let [getFeaturedApiState, changeGetFeaturedApiState] = useState(false);
@@ -45,7 +46,7 @@ const HomeContainer = (props) => {
                 image: categoriesItemInfo.imageURL,
                 artist: categoriesItemInfo.itemSubtitle
             });
-        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     const homeNewReleaseAlbumItemClick = (albumItemInfo) => {
@@ -57,7 +58,7 @@ const HomeContainer = (props) => {
                 image: albumItemInfo.imageURL,
                 artist: albumItemInfo.itemSubtitle
             });
-        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     return (

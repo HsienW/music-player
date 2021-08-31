@@ -11,7 +11,8 @@ const {Search} = Input;
 const {TabPane} = Tabs;
 
 export const Genre = (props) => {
-    const {pubSub, pubSubKey} = {...props};
+    const {observer, observerKey} = {...props};
+
     let [searchKey, changeSearchKey] = useState('');
     let [getSearchApiState, changeSearchApiState] = useState(false);
     let [searchResultAlbumsState, changeSearchResultAlbumsState] = useState(false);
@@ -57,7 +58,7 @@ export const Genre = (props) => {
             '/search/genre',
             {query: key}
         );
-        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
 
         doSearch(key);
 
@@ -76,7 +77,7 @@ export const Genre = (props) => {
                 image: albumItemInfo.imageURL,
                 artist: albumItemInfo.itemSubtitle
             });
-        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     const artistItemClick = (artistItemInfo) => {
@@ -88,7 +89,7 @@ export const Genre = (props) => {
                 image: artistItemInfo.imageURL,
                 artist: artistItemInfo.itemSubtitle
             });
-        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     const songItemClick = (songItemInfo) => {
@@ -100,7 +101,7 @@ export const Genre = (props) => {
                 image: songItemInfo.imageURL,
                 artist: songItemInfo.itemSubtitle
             });
-        pubSub.doPublish(pubSubKey.route.routeNavigation, newRouteURL);
+        observer.doPublish(observerKey.route.routeNavigation, newRouteURL);
     };
 
     return (

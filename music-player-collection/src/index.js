@@ -29,7 +29,7 @@ function renderSingleCollectionRoot(props) {
     import ('../../common/containers/player-bar/player-bar');
     import ('./root/root.scss');
 
-    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, pubSub, pubSubKey} = props;
+    const {container, routerBase, setGlobalState, getGlobalState, onStateChange, observer, observerKey} = props;
 
     ReactDOM.render(
         <>
@@ -48,8 +48,8 @@ function renderSingleCollectionRoot(props) {
                         setGlobalState={setGlobalState}
                         getGlobalState={getGlobalState}
                         onStateChange={onStateChange}
-                        pubSub={pubSub}
-                        pubSubKey={pubSubKey}
+                        observer={observer}
+                        observerKey={observerKey}
                     />
                 </div>
                 <div className="footer-layout">
