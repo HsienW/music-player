@@ -7,7 +7,7 @@
     "build": "npm run clean && cross-env webpack --config=webpack.config.prod.js",
     "start": "cross-env webpack-dev-server --watch --config=webpack.config.dev.js",
     "clean": "rimraf dist/*",
-    "test": "jest --watchAll --verbose",
+    "test": "jest --watchAll",
     "test-coverage": "jest --watchAll --verbose --coverage"
   },
   "author": "Hsien W Wei",
@@ -37,6 +37,7 @@
     "@testing-library/react-hooks": "3.2.1",
     "@types/prop-types": "15.7.3",
     "babel-eslint": "10.1.0",
+    "babel-jest": "25.4.0",
     "babel-loader": "8.1.0",
     "babel-plugin-import": "1.13.3",
     "cache-loader": "4.1.0",

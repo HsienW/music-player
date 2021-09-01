@@ -4,7 +4,12 @@ import {createParamRoute} from '../../../../common/util';
 import {filteredEmptyImage, authLoginChecker} from '../../../../common/util';
 import {CardItem} from '../../components';
 import {decorator} from '../../../../common/decorator/decorator';
-import {Divider, Skeleton} from 'antd';
+// import {Divider, Skeleton} from 'antd';
+
+
+import Divider from 'antd/lib/divider';
+import Skeleton from 'antd/lib/skeleton';
+
 import './home.scss';
 
 const HomeContainer = (props) => {
