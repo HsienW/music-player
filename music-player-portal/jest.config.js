@@ -1,6 +1,6 @@
 module.exports = {
     verbose: true,
-    testEnvironment: 'node',
+    testEnvironment: 'jest-environment-node',
     collectCoverageFrom: [
         '!<rootDir>/src/registerServiceWorker.js',
         '!<rootDir>/src/serviceWorker.js',

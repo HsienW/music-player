@@ -122,8 +122,5 @@ const HomeContainer = (props) => {
     );
 };
 
-export {
-    HomeContainer
-};
 export const Home = decorator.before(HomeContainer, authLoginChecker);
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
-import {decorator} from '../../../../../common/decorator/decorator';
-import {HomeContainer} from '../home';
+import {render} from '@testing-library/react';
+import {Home} from '../home';
+// import {decorator} from '../../../../../common/decorator/decorator';
 
+const authLoginChecker = jest.fn(() => {});
 
 jest.mock('antd', () => {
     const antd = jest.requireActual('antd');
@@ -21,18 +22,9 @@ jest.mock('antd', () => {
 });
 
 describe('home container testing', () => {
-
-    const spy = jest.spyOn(decorator, 'before');
-
     it('should render container title into dom', () => {
-
-        const home = new HomeContainer().render();
-        expect(spy).toBeCalledWith('Rendering Todos...');
-        // render(spy.before(<HomeContainer/>));
-        // render(<Home/>);
-        // const homeContainerTitle = screen.getByText('Featured');
-        // expect(getByTestId('display_count').textContent).toBe('點了0下');
-        // expect(homeContainerTitle).toBeInTheDocument();
+        const {getByTestId} = render(Home);
+        expect(getByTestId('home-container-title').textContent).toBe('Featured');
     });
 });
 
