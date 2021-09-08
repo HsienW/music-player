@@ -8,6 +8,7 @@
 /dist
 /tmp
 /out-tsc
+/music-player-portal
 
 # dependencies
 /node_modules
