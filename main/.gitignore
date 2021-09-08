@@ -8,6 +8,7 @@
 /dist
 /tmp
 /out-tsc
+/main
 /music-player-main
 
 # dependencies
