@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {getArtistInfo, getArtistTopSong, getArtistAlbums} from '../../api';
 import {CardItem, CircularCardItem, CustomList} from '../../components';
-import {createParamRoute, filteredEmptyImage, filteredEmptySong} from '../../../../common/util';
+import {authLoginChecker, createParamRoute, filteredEmptyImage, filteredEmptySong} from '../../../../common/util';
+import {decorator} from '../../../../common/decorator/decorator';
 import {Skeleton, Divider} from 'antd';
 import queryString from 'query-string';
 import './artist.scss';
 
-export const Artist = (props) => {
+export const ArtistContainer = (props) => {
     const {observer, observerKey} = {...props};
     const artistData = queryString.parse(location.search);
 
@@ -60,7 +61,7 @@ export const Artist = (props) => {
             albumInfo: songItemInfo.itemData.album,
             albumSongList: artistTopSongList
         };
-        observer.doPublish(observerKey.common.playSong, clickSongsData);
+        observer.doPublish(observerKey.player.songPlay, clickSongsData);
     };
 
     const artistAlbumItemClick = (categoriesItemInfo) => {
@@ -135,5 +136,4 @@ export const Artist = (props) => {
     );
 };
 
-
-
+export const Artist = decorator.before(ArtistContainer, authLoginChecker);

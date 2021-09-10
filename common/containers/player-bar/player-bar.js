@@ -13,7 +13,8 @@ class PlayerBar extends HTMLElement {
         this.domRender();
         this.domEventInit();
         this.playerConfig();
-        observer.doSubscribe(observerKey.common.playSong, this.playSong.bind(this));
+        observer.doSubscribe(observerKey.player.songPlay, this.playSong.bind(this));
+        observer.doSubscribe(observerKey.player.clearAllPlay, this.playClear.bind(this));
     }
 
     domStyling() {
@@ -150,7 +151,7 @@ class PlayerBar extends HTMLElement {
                     console.log("播放");
                     // 播放後切換顯示歌曲資訊
                     const songMetaData = this.amplitude.getActiveSongMetadata();
-                    this.updateDomImgDisplay(this.detailSongImage, songMetaData.cover_art_url);
+                    this.updateDomImgDisplayStyle(this.detailSongImage, 'remove', 'hidden', songMetaData.cover_art_url);
                     this.updateDomTextContent(this.detailSongName, songMetaData.name);
                     this.updateDomTextContent(this.detailArtistName, songMetaData.artist);
                     // 播放後切換顯示暫停按鈕
@@ -250,8 +251,8 @@ class PlayerBar extends HTMLElement {
         target.textContent = value;
     }
 
-    updateDomImgDisplay(target, value) {
-        target.classList.remove('hidden');
+    updateDomImgDisplayStyle(target, updateAction, styleName, value) {
+        target.classList[updateAction](styleName);
         target.setAttribute('src', value);
     }
 
@@ -280,6 +281,14 @@ class PlayerBar extends HTMLElement {
         this.playerConfig();
 
         this.amplitude.playSongAtIndex(currentSongInListIndex);
+    }
+
+    playClear() {
+        this.amplitude.stop();
+        this.amplitude.pause();
+        this.updateDomImgDisplayStyle(this.detailSongImage, 'add', 'hidden', '');
+        this.updateDomTextContent(this.detailSongName, '');
+        this.updateDomTextContent(this.detailArtistName, '');
     }
 }
 

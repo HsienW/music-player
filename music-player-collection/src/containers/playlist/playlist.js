@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {getPlaylistSongs} from '../../api';
 import {CardItem, CustomList} from '../../components';
-import {filteredPlaylistSongList} from '../../../../common/util';
+import {authLoginChecker, filteredPlaylistSongList} from '../../../../common/util';
+import {decorator} from '../../../../common/decorator/decorator';
 import {Skeleton} from 'antd';
 import queryString from 'query-string';
 import './playlist.scss';
 
-export const Playlist = (props) => {
+export const PlaylistContainer = (props) => {
     const {observer, observerKey} = {...props};
     const listInfo = queryString.parse(location.search);
 
@@ -37,7 +38,7 @@ export const Playlist = (props) => {
             albumInfo: playlistInfo,
             albumSongList: playlistSongList
         };
-        observer.doPublish(observerKey.common.playSong, clickSongsData);
+        observer.doPublish(observerKey.player.songPlay, clickSongsData);
     };
 
     return (
@@ -69,3 +70,4 @@ export const Playlist = (props) => {
     );
 };
 
+export const Playlist = decorator.before(PlaylistContainer, authLoginChecker);

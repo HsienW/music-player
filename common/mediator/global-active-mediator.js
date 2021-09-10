@@ -19,6 +19,7 @@ const globalActiveMediator = (function () {
     operations.logout = function () {
         sessionStorage.removeItem('user-info');
         sessionStorage.removeItem('user-token');
+        observer.doPublish(observerKey.player.clearAllPlay);
         navigationRoute('/portal/login');
     }
 
