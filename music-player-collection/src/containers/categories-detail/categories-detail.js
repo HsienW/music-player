@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {getCategoryPlaylist} from '../../api';
-import {createParamRoute} from '../../../../common/util';
+import {authLoginChecker, createParamRoute} from '../../../../common/util';
 import {filteredEmptyImage} from '../../../../common/util';
 import {CardItem} from '../../components';
+import {decorator} from '../../../../common/decorator/decorator';
 import {Divider, Skeleton} from 'antd';
 import queryString from 'query-string';
 import './categories-detail.scss';
 
-export const CategoriesDetail = (props) => {
+export const CategoriesDetailContainer = (props) => {
     const {observer, observerKey} = {...props};
     const categoryInfo = queryString.parse(location.search);
 
@@ -72,4 +73,4 @@ export const CategoriesDetail = (props) => {
     );
 };
 
-
+export const CategoriesDetail = decorator.before(CategoriesDetailContainer, authLoginChecker);

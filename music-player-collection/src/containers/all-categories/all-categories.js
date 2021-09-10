@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {createParamRoute} from '../../../../common/util';
+import {authLoginChecker, createParamRoute} from '../../../../common/util';
 import {getAllCategories} from '../../api';
 import {CardItem} from '../../components';
+import {decorator} from '../../../../common/decorator/decorator';
 import {Divider, Skeleton} from 'antd';
 import './all-categories.scss';
 
-export const AllCategories = (props) => {
+export const AllCategoriesContainer = (props) => {
     const {observer, observerKey} = {...props};
 
     let [getApiState, changeGetApiState] = useState(false);
@@ -67,3 +68,4 @@ export const AllCategories = (props) => {
     );
 };
 
+export const AllCategories = decorator.before(AllCategoriesContainer, authLoginChecker);

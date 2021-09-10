@@ -1,8 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {getSearch} from '../../api';
-import {createParamRoute} from '../../../../common/util';
+import {authLoginChecker, createParamRoute} from '../../../../common/util';
 import {filteredEmptyImage, filteredSongEmptyImage} from '../../../../common/util';
 import {CardItem} from '../../components';
+import {decorator} from '../../../../common/decorator/decorator';
 import {Divider, Skeleton, Input, Tabs} from 'antd';
 import queryString from 'query-string';
 import './genre.scss';
@@ -10,7 +11,7 @@ import './genre.scss';
 const {Search} = Input;
 const {TabPane} = Tabs;
 
-export const Genre = (props) => {
+export const GenreContainer = (props) => {
     const {observer, observerKey} = {...props};
 
     let [searchKey, changeSearchKey] = useState('');
@@ -191,3 +192,5 @@ export const Genre = (props) => {
         </>
     );
 };
+
+export const Genre = decorator.before(GenreContainer, authLoginChecker);
