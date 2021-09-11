@@ -21,48 +21,50 @@ export const CollectionRootDom = (props) => {
 
     return (
         <BrowserRouter>
-            <Switch>
-                <Route path={`${routerBase}/all-categories`}>
-                    <AllCategories
-                        getGlobalState={getGlobalState}
-                        setGlobalState={setGlobalState}
-                        observer={observer}
-                        observerKey={observerKey}
-                    />
-                </Route>
-                <Route path={`${routerBase}/categories-detail`}>
-                    <CategoriesDetail
-                        getGlobalState={getGlobalState}
-                        setGlobalState={setGlobalState}
-                        observer={observer}
-                        observerKey={observerKey}
-                    />
-                </Route>
-                <Route path={`${routerBase}/playlist`}>
-                    <Playlist
-                        getGlobalState={getGlobalState}
-                        setGlobalState={setGlobalState}
-                        observer={observer}
-                        observerKey={observerKey}
-                    />
-                </Route>
-                <Route path={`${routerBase}/album`}>
-                    <Album
-                        getGlobalState={getGlobalState}
-                        setGlobalState={setGlobalState}
-                        observer={observer}
-                        observerKey={observerKey}
-                    />
-                </Route>
-                <Route path={`${routerBase}/artist`}>
-                    <Artist
-                        getGlobalState={getGlobalState}
-                        setGlobalState={setGlobalState}
-                        observer={observer}
-                        observerKey={observerKey}
-                    />
-                </Route>
-            </Switch>
+            <div id='collection-roo-dom'>
+                <Switch>
+                    <Route path={`${routerBase}/all-categories`}>
+                        <AllCategories
+                            getGlobalState={getGlobalState}
+                            setGlobalState={setGlobalState}
+                            observer={observer}
+                            observerKey={observerKey}
+                        />
+                    </Route>
+                    <Route path={`${routerBase}/categories-detail`}>
+                        <CategoriesDetail
+                            getGlobalState={getGlobalState}
+                            setGlobalState={setGlobalState}
+                            observer={observer}
+                            observerKey={observerKey}
+                        />
+                    </Route>
+                    <Route path={`${routerBase}/playlist`}>
+                        <Playlist
+                            getGlobalState={getGlobalState}
+                            setGlobalState={setGlobalState}
+                            observer={observer}
+                            observerKey={observerKey}
+                        />
+                    </Route>
+                    <Route path={`${routerBase}/album`}>
+                        <Album
+                            getGlobalState={getGlobalState}
+                            setGlobalState={setGlobalState}
+                            observer={observer}
+                            observerKey={observerKey}
+                        />
+                    </Route>
+                    <Route path={`${routerBase}/artist`}>
+                        <Artist
+                            getGlobalState={getGlobalState}
+                            setGlobalState={setGlobalState}
+                            observer={observer}
+                            observerKey={observerKey}
+                        />
+                    </Route>
+                </Switch>
+            </div>
         </BrowserRouter>
     );
 };

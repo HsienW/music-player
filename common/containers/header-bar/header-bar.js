@@ -94,7 +94,6 @@ class HeaderBar extends HTMLElement {
         }, false);
 
         this.userDropdownLogoutLi.addEventListener('click', () => {
-            console.log('點了登出');
             observer.doPublish(observerKey.auth.loggingOut);
         }, false);
     }

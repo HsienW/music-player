@@ -17,14 +17,16 @@ export const SearchRootDom = (props) => {
 
     return (
         <BrowserRouter>
-            <Switch>
-                <Route path={`${routerBase}/genre`}>
-                    <Genre
-                        observer={observer}
-                        observerKey={observerKey}
-                    />
-                </Route>
-            </Switch>
+            <div id='search-root-dom'>
+                <Switch>
+                    <Route path={`${routerBase}/genre`}>
+                        <Genre
+                            observer={observer}
+                            observerKey={observerKey}
+                        />
+                    </Route>
+                </Switch>
+            </div>
         </BrowserRouter>
     );
 };
