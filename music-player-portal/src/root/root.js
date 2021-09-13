@@ -22,17 +22,19 @@ export const PortalRootDom = (props) => {
 
     return (
         <BrowserRouter>
-            <Switch>
-                <Route path={`${routerBase}/login`}>
-                    <Login/>
-                </Route>
-                <Route path={`${routerBase}/home`}>
-                    <Home
-                        observer={observer}
-                        observerKey={observerKey}
-                    />
-                </Route>
-            </Switch>
+            <div id='portal-root-dom'>
+                <Switch>
+                    <Route path={`${routerBase}/login`}>
+                        <Login/>
+                    </Route>
+                    <Route path={`${routerBase}/home`}>
+                        <Home
+                            observer={observer}
+                            observerKey={observerKey}
+                        />
+                    </Route>
+                </Switch>
+            </div>
         </BrowserRouter>
     );
 };

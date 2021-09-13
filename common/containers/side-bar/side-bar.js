@@ -76,7 +76,9 @@ class SideBar extends HTMLElement {
     }
 }
 
-customElements.define('side-bar-container', SideBar);
+if (!customElements.get('side-bar-container')) {
+    customElements.define('side-bar-container', SideBar);
+}
 
 export {
     SideBar

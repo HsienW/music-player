@@ -47,7 +47,9 @@ class LoadingSpin extends HTMLElement {
     }
 }
 
-customElements.define('loading-spin-container', LoadingSpin);
+if (!customElements.get('loading-spin-container')) {
+    customElements.define('loading-spin-container', LoadingSpin);
+}
 
 export {
     LoadingSpin

@@ -1,5 +1,6 @@
 import {navigationRoute} from '../../util';
 import {authStyle} from './auth-style';
+// import {observer, observerKey} from '../../observer';
 
 class Auth extends HTMLElement {
     constructor() {
@@ -8,6 +9,7 @@ class Auth extends HTMLElement {
         this.domStyling();
         this.domRender();
         this.domEventInit();
+        // observer.doSubscribe(observerKey.auth.loginSuccess, this.updateDomActiveStyle.bind(this));
     }
 
     domStyling() {
@@ -81,6 +83,10 @@ class Auth extends HTMLElement {
         this.authLoginButton.addEventListener('click', this.login.bind(this.authForm), false);
     }
 
+    // updateDomActiveStyle() {
+    //     this.classList.add('hidden');
+    // }
+
     login() {
         const account = this.querySelector('#input-account').value;
         const userInfo = {
@@ -111,6 +117,7 @@ class Auth extends HTMLElement {
                 sessionStorage.setItem('user-token', JSON.stringify(token));
                 authSpotify.close();
                 navigationRoute(authRedirectURL);
+                // observer.doPublish(observerKey.auth.loginSuccess);
                 clearInterval(getAuth);
             }
         }, 1000);
@@ -137,7 +144,9 @@ class Auth extends HTMLElement {
     }
 }
 
-customElements.define('auth-container', Auth);
+if (!customElements.get('auth-container')) {
+    customElements.define('auth-container', Auth);
+}
 
 export {
     Auth

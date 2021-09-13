@@ -65,7 +65,7 @@ if (!window.__POWERED_BY_QIANKUN__) {
     console.log('search 我自己運行了');
 
     const routerBase = '/search';
-    const authRedirectURL = `${routerBase}/search-page1`;
+    const authRedirectURL = `${routerBase}/genre`;
     const {getGlobalState, setGlobalState} = singleAppGlobalState;
     const props = {routerBase, getGlobalState, setGlobalState, observer, observerKey};
 
