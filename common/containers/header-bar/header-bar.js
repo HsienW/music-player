@@ -100,7 +100,9 @@ class HeaderBar extends HTMLElement {
 
 }
 
-customElements.define('header-bar-container', HeaderBar);
+if (!customElements.get('header-bar-container')) {
+    customElements.define('header-bar-container', HeaderBar);
+}
 
 export {
     HeaderBar

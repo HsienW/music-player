@@ -9,7 +9,6 @@
   "author": "Hsien W Wei",
   "license": "ISC",
   "dependencies": {
-    "amplitudejs": "5.3.2",
-    "spotify-web-api-js": "1.5.1"
+    "amplitudejs": "5.3.2"
   }
 }
